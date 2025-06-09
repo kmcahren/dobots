@@ -1,10 +1,11 @@
+
 import { AppHeader } from "@/components/layout/AppHeader";
 import { BottomNavigationBar } from "@/components/layout/BottomNavigationBar";
 import { FloatingActionButton } from "@/components/layout/FloatingActionButton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ChevronLeft, User, Bell, CreditCardIcon, Shield } from "lucide-react";
+import { ChevronLeft, User, Bell, CreditCardIcon, Shield, Cog } from "lucide-react";
 
 
 export const metadata = {
@@ -14,16 +15,16 @@ export const metadata = {
 
 export default function SettingsPage() {
   const settingsOptions = [
-    { title: "Profile", description: "Update your personal information.", icon: User, href: "/dashboard/settings/profile" },
-    { title: "Notifications", description: "Manage your notification preferences.", icon: Bell, href: "/dashboard/settings/notifications" },
-    { title: "Payment Methods", description: "Configure your payment options.", icon: CreditCardIcon, href: "/dashboard/settings/payment-methods" },
-    { title: "Security & Privacy", description: "Manage account security and privacy settings.", icon: Shield, href: "/dashboard/settings/security" },
+    { title: "Profile", description: "Update personal info, profile picture, and preferences.", icon: User, href: "/dashboard/settings/profile" },
+    { title: "Notifications", description: "Manage how and when you receive notifications.", icon: Bell, href: "/dashboard/settings/notifications" },
+    { title: "Payment Methods", description: "Add or remove payment cards.", icon: CreditCardIcon, href: "/dashboard/settings/payment-methods" },
+    { title: "Security & Privacy", description: "Manage password, 2FA, and view legal policies.", icon: Shield, href: "/dashboard/settings/security" },
   ];
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <AppHeader />
-      <main className="flex-grow container mx-auto px-2 sm:px-4 py-6 md:py-8 mb-16 md:mb-0">
+      {/* AppHeader and BottomNavigationBar are part of DashboardLayout or individual page layout */}
+      <main className="flex-grow container mx-auto px-2 sm:px-4 py-6 md:py-8">
         <div className="flex items-center mb-6">
           <Button variant="outline" size="icon" asChild className="mr-4">
             <Link href="/dashboard">
@@ -36,36 +37,43 @@ export default function SettingsPage() {
         
         <div className="grid gap-6 md:grid-cols-2">
           {settingsOptions.map(option => (
-            <Card key={option.title} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="flex flex-row items-center space-x-4 pb-2">
-                <option.icon className="w-8 h-8 text-primary"/>
+            <Card key={option.title} className="hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 bg-card rounded-xl border">
+              <CardHeader className="flex flex-row items-center space-x-4 pb-3 pt-5">
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <option.icon className="w-6 h-6 text-primary"/>
+                </div>
                 <div>
                   <CardTitle className="font-headline text-lg">{option.title}</CardTitle>
-                  <CardDescription>{option.description}</CardDescription>
+                  <CardDescription className="text-xs leading-snug">{option.description}</CardDescription>
                 </div>
               </CardHeader>
-              <CardContent>
-                <Button variant="outline" asChild className="w-full sm:w-auto">
+              <CardContent className="pt-2 pb-4 px-5">
+                <Button variant="outline" asChild className="w-full sm:w-auto border-primary text-primary hover:bg-primary/10 hover:text-primary">
                   <Link href={option.href}>Manage {option.title}</Link>
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle className="font-headline">Admin Configuration</CardTitle>
-            <CardDescription>For app administrators: manage setup items, field choices, and payment processor plugins.</CardDescription>
+        
+        <Card className="mt-8 shadow-lg rounded-xl border">
+          <CardHeader className="flex flex-row items-center space-x-4 pb-3 pt-5">
+            <div className="p-3 bg-muted rounded-lg">
+              <Cog className="w-6 h-6 text-muted-foreground"/>
+            </div>
+            <div>
+              <CardTitle className="font-headline text-lg">Admin Configuration</CardTitle>
+              <CardDescription className="text-xs leading-snug">For app administrators: manage setup items, field choices, and payment processor plugins.</CardDescription>
+            </div>
           </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground mb-4">This section is typically restricted to users with administrative privileges.</p>
-            <Button variant="default" disabled>Access Admin Panel (Admin Only)</Button>
+          <CardContent className="pt-2 pb-4 px-5">
+            <p className="text-sm text-muted-foreground mb-3">This section is typically restricted to users with administrative privileges.</p>
+            <Button variant="secondary" disabled>Access Admin Panel (Admin Only)</Button>
           </CardContent>
         </Card>
 
       </main>
-      <FloatingActionButton />
-      <BottomNavigationBar />
+      {/* FloatingActionButton and BottomNavigationBar are rendered by parent layout or globally */}
     </div>
   );
 }
