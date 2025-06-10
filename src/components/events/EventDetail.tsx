@@ -201,27 +201,27 @@ export function EventDetail({ eventId }: { eventId: string }) {
 
         <div className="pt-4 border-t">
             <p className="font-medium text-foreground mb-3">Attendance Status</p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
-                <div className="flex items-center p-3 bg-green-50 rounded-md border border-green-200">
-                    <CheckCircle2 className="w-5 h-5 mr-2 text-green-600 flex-shrink-0" />
-                    <div>
-                        <p className="font-semibold text-green-700">{attending}</p>
-                        <p className="text-xs text-green-600">Attending</p>
+            <div className="flex flex-row justify-between items-start gap-2 md:gap-4 text-sm">
+                <div className="flex flex-col items-center text-center p-3 bg-green-50 rounded-lg border border-green-200 shadow-sm flex-1">
+                    <div className="flex items-center mb-1">
+                        <CheckCircle2 className="w-5 h-5 mr-1.5 text-green-600 flex-shrink-0" />
+                        <span className="text-lg font-semibold text-green-700">{attending}</span>
                     </div>
+                    <span className="text-xs text-green-600">Attending</span>
                 </div>
-                <div className="flex items-center p-3 bg-gray-50 rounded-md border border-gray-200">
-                    <HelpCircle className="w-5 h-5 mr-2 text-gray-500 flex-shrink-0" />
-                    <div>
-                        <p className="font-semibold text-gray-600">{unconfirmed}</p>
-                        <p className="text-xs text-gray-500">Unconfirmed</p>
+                <div className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-lg border border-gray-200 shadow-sm flex-1">
+                     <div className="flex items-center mb-1">
+                        <HelpCircle className="w-5 h-5 mr-1.5 text-gray-500 flex-shrink-0" />
+                        <span className="text-lg font-semibold text-gray-600">{unconfirmed}</span>
                     </div>
+                    <span className="text-xs text-gray-500">Unconfirmed</span>
                 </div>
-                <div className="flex items-center p-3 bg-red-50 rounded-md border border-red-200">
-                    <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0" />
-                    <div>
-                        <p className="font-semibold text-red-700">{cancelled}</p>
-                        <p className="text-xs text-red-600">Declined</p>
+                <div className="flex flex-col items-center text-center p-3 bg-red-50 rounded-lg border border-red-200 shadow-sm flex-1">
+                    <div className="flex items-center mb-1">
+                        <XCircle className="w-5 h-5 mr-1.5 text-red-600 flex-shrink-0" />
+                        <span className="text-lg font-semibold text-red-700">{cancelled}</span>
                     </div>
+                    <span className="text-xs text-red-600">Declined</span>
                 </div>
             </div>
         </div>
@@ -263,3 +263,4 @@ export function EventDetail({ eventId }: { eventId: string }) {
     </Card>
   );
 }
+
