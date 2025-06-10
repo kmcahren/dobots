@@ -35,6 +35,7 @@ const mockPaymentMethods: PaymentMethod[] = [
 export default function PaymentMethodsPage() {
   const { toast } = useToast();
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>(mockPaymentMethods);
+  // methodToRemove state is kept for handleRemoveMethod, though dialog display is per-item.
   const [methodToRemove, setMethodToRemove] = useState<PaymentMethod | null>(null);
 
   const handleAddNewMethod = () => {
@@ -52,7 +53,7 @@ export default function PaymentMethodsPage() {
       title: "Payment Method Removed",
       description: "The selected payment method has been removed.",
     });
-    setMethodToRemove(null);
+    setMethodToRemove(null); // Clear the 'method to remove' state
   };
 
   const handleSetDefault = (methodId: string) => {
@@ -105,11 +106,27 @@ export default function PaymentMethodsPage() {
                            Set as Default
                          </Button>
                       )}
-                      <AlertDialogTrigger asChild>
-                        <Button variant="destructive" size="sm" onClick={() => setMethodToRemove(method)} className="flex-1 sm:flex-auto">
-                          <Trash2 className="mr-1.5 h-3.5 w-3.5" /> Remove
-                        </Button>
-                      </AlertDialogTrigger>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="destructive" size="sm" className="flex-1 sm:flex-auto" onClick={() => setMethodToRemove(method)}>
+                            <Trash2 className="mr-1.5 h-3.5 w-3.5" /> Remove
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                            <AlertDialogHeader>
+                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                This action cannot be undone. This will permanently remove your {method.type} ending in {method.last4}.
+                            </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleRemoveMethod(method.id)}>
+                                Continue
+                            </AlertDialogAction>
+                            </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </div>
                   </li>
                 ))}
@@ -124,22 +141,6 @@ export default function PaymentMethodsPage() {
           </Button>
         </div>
         
-        <AlertDialog open={!!methodToRemove} onOpenChange={(open) => !open && setMethodToRemove(null)}>
-            <AlertDialogContent>
-                <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                    This action cannot be undone. This will permanently remove your {methodToRemove?.type} ending in {methodToRemove?.last4}.
-                </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                <AlertDialogCancel onClick={() => setMethodToRemove(null)}>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={() => methodToRemove && handleRemoveMethod(methodToRemove.id)}>
-                    Continue
-                </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
       </main>
     </div>
   );
