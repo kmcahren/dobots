@@ -2,7 +2,18 @@ export interface User {
   id: string;
   name: string;
   avatarUrl?: string;
-  phoneNumber: string;
+  phoneNumber: string; // Required for app users / login
+  email?: string; // Optional for app users
+  notes?: string; // Optional for app users
+}
+
+export interface Contact {
+  id: string; // Auto-generated on save
+  name: string;
+  phoneNumber?: string;
+  email?: string;
+  avatarUrl?: string;
+  notes?: string;
 }
 
 export interface Group {

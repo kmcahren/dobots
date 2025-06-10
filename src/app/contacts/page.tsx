@@ -1,3 +1,4 @@
+
 // This page is accessed via the bottom navigation "Contact" icon.
 // It's for viewing text messages and links to reports.
 import { AppHeader } from "@/components/layout/AppHeader";
@@ -6,7 +7,7 @@ import { FloatingActionButton } from "@/components/layout/FloatingActionButton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Users, MessageSquare, FileText, MoreHorizontal, Search } from "lucide-react";
+import { Users, MessageSquare, FileText, MoreHorizontal, Search, PlusCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 // Mock Data for contacts/messages/reports
@@ -19,7 +20,7 @@ const mockContactItems = [
 
 export const metadata = {
   title: 'Contacts & Messages - DOIT',
-  description: 'View your messages and shared reports.',
+  description: 'View your messages and shared reports. Manage your contacts.',
 };
 
 export default function ContactsPage() {
@@ -30,9 +31,16 @@ export default function ContactsPage() {
       <main className="flex-grow container mx-auto px-2 sm:px-4 py-6 md:py-8 mb-16 md:mb-0">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
             <h1 className="text-2xl font-bold font-headline">Contacts & Messages</h1>
-            <div className="relative w-full sm:w-auto">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input type="search" placeholder="Search messages or contacts..." className="pl-9 w-full sm:w-64" />
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+                <div className="relative flex-grow sm:flex-grow-0">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input type="search" placeholder="Search messages or contacts..." className="pl-9 w-full sm:w-64" />
+                </div>
+                <Button asChild>
+                    <Link href="/contacts/new">
+                        <PlusCircle className="mr-2 h-4 w-4" /> New Contact
+                    </Link>
+                </Button>
             </div>
         </div>
         
