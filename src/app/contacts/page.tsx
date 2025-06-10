@@ -34,9 +34,9 @@ export default function ContactsPage() {
             <div className="flex items-center gap-2 w-full sm:w-auto">
                 <div className="relative flex-grow sm:flex-grow-0">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                    <Input type="search" placeholder="Search messages or contacts..." className="pl-9 w-full sm:w-64" />
+                    <Input type="search" placeholder="Search messages or contacts..." className="pl-9 w-full sm:w-64 h-9" />
                 </div>
-                <Button asChild>
+                <Button asChild size="sm">
                     <Link href="/contacts/new">
                         <PlusCircle className="mr-2 h-4 w-4" /> New Contact
                     </Link>
@@ -51,26 +51,26 @@ export default function ContactsPage() {
                 <p className="text-muted-foreground">Your contact interactions will appear here.</p>
             </div>
         ) : (
-            <div className="space-y-4">
+            <div className="space-y-3">
             {itemsToShow.map(item => (
                 <Card key={item.id} className={`shadow-sm hover:shadow-md transition-shadow ${item.unread ? 'border-primary border-l-4' : ''}`}>
-                    <CardContent className="p-4 flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-3 flex-grow min-w-0">
-                            {item.type === "message" ? <MessageSquare className="h-6 w-6 text-primary flex-shrink-0" /> : <FileText className="h-6 w-6 text-accent flex-shrink-0" />}
+                    <CardContent className="p-3 flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2.5 flex-grow min-w-0">
+                            {item.type === "message" ? <MessageSquare className="h-5 w-5 text-primary flex-shrink-0" /> : <FileText className="h-5 w-5 text-accent flex-shrink-0" />}
                             <div className="flex-grow min-w-0">
                                 <p className="font-semibold text-sm truncate">{item.from}</p>
                                 <p className="text-xs text-muted-foreground truncate">{item.preview}</p>
                             </div>
                         </div>
-                        <div className="flex flex-col items-end flex-shrink-0 ml-auto">
-                            <span className="text-xs text-muted-foreground mb-1">{item.date}</span>
+                        <div className="flex flex-col items-end flex-shrink-0 ml-auto text-right">
+                            <span className="text-[11px] text-muted-foreground mb-1">{item.date}</span>
                             {item.type === "report" && item.reportUrl && (
-                                <Button variant="link" size="sm" asChild className="h-auto p-0 text-accent">
+                                <Button variant="link" size="xs" asChild className="h-auto p-0 text-accent text-[11px]">
                                     <Link href={item.reportUrl}>View Report</Link>
                                 </Button>
                             )}
                              {item.type === "message" && (
-                                <Button variant="outline" size="sm" asChild className="h-auto px-2 py-1 text-xs">
+                                <Button variant="outline" size="xs" asChild className="h-auto px-1.5 py-0.5 text-[11px]">
                                     <Link href={`/contacts/message/${item.id}`}>View</Link>
                                 </Button>
                             )}
@@ -82,7 +82,7 @@ export default function ContactsPage() {
         )}
 
         {mockContactItems.length > 25 && (
-            <div className="text-center mt-8">
+            <div className="text-center mt-6">
             <Button variant="outline" className="text-primary border-primary hover:bg-primary/10">
                 <MoreHorizontal className="mr-2 h-4 w-4" /> Load More
             </Button>
@@ -94,3 +94,4 @@ export default function ContactsPage() {
     </div>
   );
 }
+
