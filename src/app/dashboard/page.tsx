@@ -1,3 +1,4 @@
+
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EventsList } from "@/components/dashboard/EventsList";
@@ -12,18 +13,18 @@ export default function DashboardPage() {
     <div className="space-y-6">
       <DashboardHeaderProfile />
       <Tabs defaultValue="events" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 gap-1 p-1 h-auto rounded-lg bg-muted">
-          <TabsTrigger value="events" className="flex-col md:flex-row h-14 md:h-10 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md">
-            <CalendarDays className="h-5 w-5 mb-1 md:mb-0 md:mr-2" /> Events
+        <TabsList className="grid w-full grid-cols-4 gap-1 p-1 h-auto rounded-lg bg-muted">
+          <TabsTrigger value="events" className="flex flex-row items-center justify-center h-12 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md px-2 text-xs sm:text-sm">
+            <CalendarDays className="h-4 w-4 mr-2" /> Events
           </TabsTrigger>
-          <TabsTrigger value="notifications" className="flex-col md:flex-row h-14 md:h-10 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md">
-            <BellRing className="h-5 w-5 mb-1 md:mb-0 md:mr-2" /> Notifications
+          <TabsTrigger value="notifications" className="flex flex-row items-center justify-center h-12 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md px-2 text-xs sm:text-sm">
+            <BellRing className="h-4 w-4 mr-2" /> Notifications
           </TabsTrigger>
-          <TabsTrigger value="shares" className="flex-col md:flex-row h-14 md:h-10 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md">
-            <Share2 className="h-5 w-5 mb-1 md:mb-0 md:mr-2" /> Shares
+          <TabsTrigger value="shares" className="flex flex-row items-center justify-center h-12 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md px-2 text-xs sm:text-sm">
+            <Share2 className="h-4 w-4 mr-2" /> Shares
           </TabsTrigger>
-          <TabsTrigger value="payments" className="flex-col md:flex-row h-14 md:h-10 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md">
-            <CreditCard className="h-5 w-5 mb-1 md:mb-0 md:mr-2" /> Payments
+          <TabsTrigger value="payments" className="flex flex-row items-center justify-center h-12 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md px-2 text-xs sm:text-sm">
+            <CreditCard className="h-4 w-4 mr-2" /> Payments
           </TabsTrigger>
         </TabsList>
         
