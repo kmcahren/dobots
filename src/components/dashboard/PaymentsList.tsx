@@ -1,3 +1,4 @@
+
 "use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -5,6 +6,7 @@ import Link from "next/link";
 import { CreditCard, CheckCircle, AlertTriangle, MoreHorizontal, CircleDollarSign } from "lucide-react";
 import type { PaymentItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { format, parseISO } from "date-fns"; // Import format and parseISO
 
 const mockPayments: PaymentItem[] = [
   { id: "p1", title: "U12 Team Jersey Fee", price: 25.00, currency: "USD", status: "paid", requesterId: "user1", createdAt: "2024-08-10T11:00:00Z", dueDate: "2024-08-01" },
@@ -56,8 +58,8 @@ export function PaymentsList() {
           </CardHeader>
           <CardContent className="text-sm space-y-1">
             <p className="text-muted-foreground">Requested by: User {payment.requesterId.slice(-3)}</p>
-            {payment.dueDate && <p className="text-muted-foreground">Due Date: {new Date(payment.dueDate).toLocaleDateString()}</p>}
-            <p className="text-muted-foreground">Created: {new Date(payment.createdAt).toLocaleDateString()}</p>
+            {payment.dueDate && <p className="text-muted-foreground">Due Date: {format(parseISO(payment.dueDate), 'P')}</p>}
+            <p className="text-muted-foreground">Created: {format(parseISO(payment.createdAt), 'P')}</p>
           </CardContent>
           <CardFooter className="bg-muted/30 p-3">
             {payment.status === 'pending' ? (
@@ -83,3 +85,4 @@ export function PaymentsList() {
     </div>
   );
 }
+
