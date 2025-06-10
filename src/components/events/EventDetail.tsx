@@ -11,7 +11,7 @@ import {
 import Link from 'next/link';
 import type { EventItem, RsvpStatus } from '@/lib/types'; 
 import { Badge } from '@/components/ui/badge';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Added useEffect
 import { useToast } from "@/hooks/use-toast";
 import { format, parseISO } from 'date-fns';
 
@@ -43,10 +43,21 @@ const mockEventData: EventItem = {
 };
 
 export function EventDetail({ eventId }: { eventId: string }) {
-  // In a real app, fetch event by eventId. Using mock data for now.
   const event = mockEventData; 
   const { toast } = useToast();
   const [userRsvpStatus, setUserRsvpStatus] = useState<RsvpStatus | undefined>(event.currentUserRsvpStatus);
+
+  const [clientFormattedStartTime, setClientFormattedStartTime] = useState<string>("");
+  const [clientFormattedEndTime, setClientFormattedEndTime] = useState<string>("");
+
+  useEffect(() => {
+    if (event.startDate) {
+      setClientFormattedStartTime(format(parseISO(event.startDate), "p"));
+    }
+    if (event.endDate) {
+      setClientFormattedEndTime(format(parseISO(event.endDate), "p"));
+    }
+  }, [event.startDate, event.endDate]);
 
   const handleCancelEvent = () => {
     if(confirm("Are you sure you want to cancel this event? This action cannot be undone.")) {
@@ -64,18 +75,9 @@ export function EventDetail({ eventId }: { eventId: string }) {
       title: "RSVP Updated",
       description: `You have ${status === 'attending' ? 'confirmed attendance' : 'declined'} for "${event.title}".`,
     });
-    // In a real app, update backend here
   };
   
-  const parsedStartDate = parseISO(event.startDate);
-  const formattedStartDate = format(parsedStartDate, "EEEE, MMMM d, yyyy");
-  const formattedStartTime = format(parsedStartDate, "p"); // 'p' is for localized time, e.g., 9:00 AM
-
-  let formattedEndTime = '';
-  if (event.endDate) {
-    const parsedEndDate = parseISO(event.endDate);
-    formattedEndTime = format(parsedEndDate, "p");
-  }
+  const formattedStartDate = event.startDate ? format(parseISO(event.startDate), "EEEE, MMMM d, yyyy") : "Date TBD";
 
   const totalInvited = event.inviteesCount || 0;
   const attending = event.attendingMembersCount || 0;
@@ -147,7 +149,10 @@ export function EventDetail({ eventId }: { eventId: string }) {
             <div>
               <p className="font-medium text-foreground">Date & Time</p>
               <p className="text-muted-foreground">{formattedStartDate}</p>
-              <p className="text-muted-foreground">{formattedStartTime} {formattedEndTime && ` - ${formattedEndTime}`}</p>
+              <p className="text-muted-foreground">
+                {clientFormattedStartTime || "Loading time..."} 
+                {clientFormattedEndTime && clientFormattedStartTime ? ` - ${clientFormattedEndTime}` : (!clientFormattedStartTime && clientFormattedEndTime ? clientFormattedEndTime : "")}
+              </p>
             </div>
           </div>
           <div className="flex items-start">
@@ -270,3 +275,5 @@ export function EventDetail({ eventId }: { eventId: string }) {
     </Card>
   );
 }
+
+
