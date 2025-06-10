@@ -33,7 +33,7 @@ export interface EventItem {
   dataAiHint?: string;
   inviteesCount?: number;
   attendingMembersCount?: number;
-  cancelledMembersCount?: number; // Added for detailed counts
+  cancelledMembersCount?: number; 
   isUserHost?: boolean;
   isCalendarSynced?: boolean;
 }
@@ -48,9 +48,12 @@ export interface NotificationItem {
   hideVotes?: boolean;
   creatorId: string;
   groupId?: string;
-  // Stats like vote counts, responses would be part of this or fetched separately
   status?: 'active' | 'closed';
-  responsesCount?: number;
+  totalRecipientsCount?: number; // Total people this notification was sent/relevant to
+  yesResponsesCount?: number;    // Count of 'yes' or affirmative responses
+  noResponsesCount?: number;     // Count of 'no' or negative responses
+  // responsesCount can be deprecated or used if yes/no is not applicable, e.g. for surveys with many options
+  responsesCount?: number; // Generic total responses, kept for potential other uses
   userChoice?: string | string[]; // For multiple choice
 }
 
