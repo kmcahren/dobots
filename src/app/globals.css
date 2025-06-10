@@ -18,7 +18,7 @@ body {
     --popover: 0 0% 100%; /* White */
     --popover-foreground: 0 0% 10%; /* Near Black */
 
-    --primary: 217 91% 60%; /* Vibrant Blue */
+    --primary: 270 60% 50%; /* Royal Purple */
     --primary-foreground: 0 0% 100%; /* White */
 
     --secondary: 220 10% 95%; /* Light Gray */
@@ -35,73 +35,72 @@ body {
 
     --border: 220 10% 88%; /* Light Gray Border */
     --input: 220 10% 92%; /* Slightly Off-white Input Background */
-    --ring: 217 91% 65%; /* Lighter Primary Blue for Focus Rings */
+    --ring: 270 60% 55%; /* Lighter Royal Purple for Focus Rings */
 
-    --chart-1: 217 91% 60%; /* Blue */
-    --chart-2: 140 60% 45%; /* Green */
-    --chart-3: 25 95% 55%;  /* Orange */
-    --chart-4: 0 84% 60%;   /* Red */
-    --chart-5: 170 70% 40%; /* Teal */
+    --chart-1: 270 60% 50%; /* Royal Purple */
+    --chart-2: 140 60% 45%; /* Engaging Green */
+    --chart-3: 25 95% 55%;  /* Bright Orange */
+    --chart-4: 217 91% 60%; /* Vibrant Blue */
+    --chart-5: 0 84% 60%;   /* Vivid Red */
     
     --radius: 0.5rem;
 
-    /* Sidebar specific colors - can be adjusted if sidebar is heavily used */
-    /* Keeping sidebar fairly neutral to fit the white theme */
+    /* Sidebar specific colors */
     --sidebar-background: 0 0% 98%; /* Almost White */
     --sidebar-foreground: 0 0% 20%; /* Dark Gray Text */
-    --sidebar-primary: 217 91% 55%; /* Sidebar Primary Action (slightly darker blue) */
+    --sidebar-primary: 270 60% 45%; /* Sidebar Primary Action (slightly darker purple) */
     --sidebar-primary-foreground: 0 0% 100%; /* White */
     --sidebar-accent: 220 10% 92%; /* Light Gray for hover/active items */
     --sidebar-accent-foreground: 0 0% 10%; /* Dark Text on Accent */
     --sidebar-border: 220 10% 85%; /* Light Gray Border */
-    --sidebar-ring: 217 91% 60%; /* Blue for Focus */
+    --sidebar-ring: 270 60% 55%; /* Purple for Focus */
   }
 
   .dark {
-    --background: 0 0% 8%; /* Very Dark Gray / Near Black */
+    --background: 270 5% 10%; /* Dark Purple Tint Background */
     --foreground: 0 0% 95%; /* Near White */
 
-    --card: 0 0% 12%; /* Dark Gray */
+    --card: 270 5% 15%; /* Dark Purple Tint Card */
     --card-foreground: 0 0% 95%; /* Near White */
 
-    --popover: 0 0% 12%; /* Dark Gray */
+    --popover: 270 5% 15%; /* Dark Purple Tint Popover */
     --popover-foreground: 0 0% 95%; /* Near White */
 
-    --primary: 217 91% 60%; /* Vibrant Blue (same as light) */
+    --primary: 270 70% 65%; /* Lighter/Saturated Royal Purple */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 0 0% 20%; /* Medium Dark Gray */
+    --secondary: 270 5% 20%; /* Medium Dark Gray with Purple Tint */
     --secondary-foreground: 0 0% 85%; /* Lighter Gray */
 
-    --muted: 0 0% 15%; /* Dark Gray for Muted Background */
+    --muted: 270 5% 18%; /* Dark Gray for Muted Background with Purple Tint */
     --muted-foreground: 0 0% 60%; /* Medium Gray for Muted Text */
 
-    --accent: 140 60% 45%; /* Engaging Green (same as light) */
+    --accent: 140 65% 55%; /* Lighter/Saturated Green */
     --accent-foreground: 0 0% 100%; /* White */
 
     --destructive: 0 75% 55%; /* Slightly less vibrant Red for dark */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 25%; /* Darker Border */
-    --input: 0 0% 20%; /* Dark Input Background */
-    --ring: 217 91% 60%; /* Vibrant Blue for Focus Rings */
+    --border: 270 5% 25%; /* Darker Border with Purple Tint */
+    --input: 270 5% 20%; /* Dark Input Background with Purple Tint */
+    --ring: 270 70% 70%; /* Lighter Royal Purple for Focus Rings (Dark) */
 
-    /* Chart colors can be the same or adjusted for dark mode visibility */
-    --chart-1: 217 91% 60%;
-    --chart-2: 140 60% 45%;
-    --chart-3: 25 95% 55%;
-    --chart-4: 0 75% 55%;
-    --chart-5: 170 70% 40%;
+    /* Chart colors for dark mode */
+    --chart-1: 270 70% 65%; /* Royal Purple (Dark) */
+    --chart-2: 140 65% 55%; /* Green (Dark) */
+    --chart-3: 25 90% 60%;  /* Orange (Dark) */
+    --chart-4: 217 85% 65%; /* Blue (Dark) */
+    --chart-5: 0 75% 55%;   /* Red (Dark) */
 
     /* Sidebar specific colors for dark theme */
-    --sidebar-background: 0 0% 10%; /* Dark Background for Sidebar */
+    --sidebar-background: 270 5% 12%; /* Dark Background for Sidebar, subtle purple tint */
     --sidebar-foreground: 0 0% 90%; /* Light Text */
-    --sidebar-primary: 217 91% 60%; /* Blue for Primary Actions */
+    --sidebar-primary: 270 70% 65%; /* Purple for Primary Actions */
     --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 0 0% 20%; /* Darker Accent for Hover/Active */
+    --sidebar-accent: 270 5% 22%; /* Darker Accent for Hover/Active with Purple Tint */
     --sidebar-accent-foreground: 0 0% 95%; /* Light Text on Accent */
-    --sidebar-border: 0 0% 22%; /* Dark Border */
-    --sidebar-ring: 217 91% 60%; /* Blue for Focus */
+    --sidebar-border: 270 5% 24%; /* Dark Border with Purple Tint */
+    --sidebar-ring: 270 70% 70%; /* Purple for Focus */
   }
 }
 
