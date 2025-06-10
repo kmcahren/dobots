@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { CalendarDays, MapPin, Users, UserCircle, FileText, DollarSign, XCircle, CheckSquare, Link as LinkIcon, Edit } from 'lucide-react';
+import { CalendarDays, MapPin, Users, UserCircle, FileText, DollarSign, XCircle, CheckSquare, Link as LinkIcon, Edit, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import type { EventItem } from '@/lib/types'; // Assuming EventItem type is defined
 import { Badge } from '@/components/ui/badge';
@@ -23,6 +23,7 @@ const mockEventData: EventItem = {
   registrationFee: 150,
   maxParticipants: 60,
   imageUrl: "https://placehold.co/1200x400.png",
+  eventLinkUrl: "https://example.com/summer-soccer-camp-details",
   dataAiHint: "youth soccer camp",
   isUserHost: true, // Assume current user is the host for demo purposes
   isCalendarSynced: false,
@@ -115,6 +116,22 @@ export function EventDetail({ eventId }: { eventId: string }) {
               <div>
                 <p className="font-medium text-foreground">Capacity</p>
                 <p className="text-muted-foreground">Up to {event.maxParticipants} participants</p>
+              </div>
+            </div>
+          )}
+          {event.eventLinkUrl && (
+            <div className="flex items-start md:col-span-2">
+              <LinkIcon className="w-5 h-5 mr-3 mt-0.5 text-muted-foreground flex-shrink-0" />
+              <div>
+                <p className="font-medium text-foreground">Event Link</p>
+                <a 
+                  href={event.eventLinkUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-primary hover:underline flex items-center"
+                >
+                  View Event Page <ExternalLink className="ml-1.5 h-4 w-4" />
+                </a>
               </div>
             </div>
           )}

@@ -50,6 +50,7 @@ const eventFormSchema = z.object({
   reminderTiming: z.enum(["none", "1hour", "2hours", "1day"]).default("1day").optional(),
   allowComments: z.boolean().default(true).optional(),
   imageUrl: z.string().url("Must be a valid URL.").optional(),
+  eventLinkUrl: z.string().url("Must be a valid URL for the event link.").optional().or(z.literal('')), // Allow empty string
 });
 
 type EventFormValues = z.infer<typeof eventFormSchema>;
@@ -59,6 +60,8 @@ const defaultValues: Partial<EventFormValues> = {
   sendInvite: true,
   allowComments: true,
   reminderTiming: "1day",
+  imageUrl: "",
+  eventLinkUrl: "",
 };
 
 export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id?: string} }) {
@@ -89,6 +92,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
       // Convert dates to ISO strings or desired format for backend
       startDate: data.startDate.toISOString(),
       endDate: data.endDate.toISOString(),
+      eventLinkUrl: data.eventLinkUrl === "" ? undefined : data.eventLinkUrl, // Set to undefined if empty
     };
 
     // Simulate API call
@@ -264,7 +268,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
                 {selectedMembers.map((member) => (
                   <div key={member.id} className="flex items-center justify-between p-2 rounded-md hover:bg-muted/50 transition-colors">
                     <div className="flex items-center space-x-3">
-                      <Image src={member.avatarUrl || `https://placehold.co/40x40.png?text=${member.name.substring(0,2)}`} alt={member.name} width={32} height={32} className="rounded-full" />
+                      <Image src={member.avatarUrl || `https://placehold.co/40x40.png?text=${member.name.substring(0,2)}`} alt={member.name} width={32} height={32} className="rounded-full" data-ai-hint="user avatar"/>
                       <span className="text-sm">{member.name}</span>
                     </div>
                     <Checkbox
@@ -342,6 +346,21 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
                     <Input placeholder="https://example.com/image.png" {...field} />
                   </FormControl>
                   {field.value && <img src={field.value} alt="Preview" className="mt-2 rounded-md max-h-40 object-cover" data-ai-hint="event banner" />}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="eventLinkUrl"
+              render={({ field }) => (
+                <FormItem className="md:col-span-2">
+                  <FormLabel>Event Link URL (Optional)</FormLabel>
+                  <FormControl>
+                    <Input placeholder="https://example.com/event-details" {...field} />
+                  </FormControl>
+                  <FormDescription>Provide an external link for more event information, if any.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

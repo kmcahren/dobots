@@ -29,6 +29,7 @@ export interface EventItem {
   reminderTiming?: '1day' | '2hours' | '1hour' | '30mins' | 'none';
   allowComments?: boolean;
   imageUrl?: string;
+  eventLinkUrl?: string; // New field for external event link
   dataAiHint?: string;
   inviteesCount?: number;
   attendingMembersCount?: number;
