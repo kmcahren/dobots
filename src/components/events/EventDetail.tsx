@@ -13,6 +13,7 @@ import type { EventItem, RsvpStatus } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
+import { format, parseISO } from 'date-fns';
 
 // Dummy data for a single event - replace with actual data fetching
 const mockEventData: EventItem = {
@@ -66,9 +67,15 @@ export function EventDetail({ eventId }: { eventId: string }) {
     // In a real app, update backend here
   };
   
-  const formattedStartDate = new Date(event.startDate).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  const formattedStartTime = new Date(event.startDate).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
-  const formattedEndTime = event.endDate ? new Date(event.endDate).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' }) : '';
+  const parsedStartDate = parseISO(event.startDate);
+  const formattedStartDate = format(parsedStartDate, "EEEE, MMMM d, yyyy");
+  const formattedStartTime = format(parsedStartDate, "p"); // 'p' is for localized time, e.g., 9:00 AM
+
+  let formattedEndTime = '';
+  if (event.endDate) {
+    const parsedEndDate = parseISO(event.endDate);
+    formattedEndTime = format(parsedEndDate, "p");
+  }
 
   const totalInvited = event.inviteesCount || 0;
   const attending = event.attendingMembersCount || 0;
@@ -263,4 +270,3 @@ export function EventDetail({ eventId }: { eventId: string }) {
     </Card>
   );
 }
-
