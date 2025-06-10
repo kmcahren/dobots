@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BellRing, MoreHorizontal, CheckCircle2, AlertCircle, XCircle, HelpCircle, Users } from "lucide-react"; 
 import type { NotificationItem } from "@/lib/types";
+import { parseISO } from 'date-fns'; // Import parseISO
 
 const mockNotifications: NotificationItem[] = [
   { 
@@ -89,7 +90,7 @@ export function NotificationsList() {
               {notification.description && <CardDescription className="pt-1">{notification.description}</CardDescription>}
             </CardHeader>
             <CardContent className="text-sm space-y-2">
-              {notification.dueDate && <p className="text-muted-foreground">Due Date: {new Date(notification.dueDate).toLocaleDateString()}</p>}
+              {notification.dueDate && <p className="text-muted-foreground">Due Date: {parseISO(notification.dueDate).toLocaleDateString()}</p>}
               <div className="flex items-center text-muted-foreground space-x-1 pt-1">
                 <Users className="h-4 w-4 mr-0 flex-shrink-0" />
                 <span className="text-xs">{totalRecipients} Recipients</span>
@@ -119,3 +120,4 @@ export function NotificationsList() {
     </div>
   );
 }
+
