@@ -33,6 +33,7 @@ export interface EventItem {
   dataAiHint?: string;
   inviteesCount?: number;
   attendingMembersCount?: number;
+  cancelledMembersCount?: number; // Added for detailed counts
   isUserHost?: boolean;
   isCalendarSynced?: boolean;
 }
