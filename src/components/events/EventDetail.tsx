@@ -69,7 +69,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
     <Card className="overflow-hidden shadow-xl rounded-xl">
       <CardHeader className="p-0 relative">
         {event.imageUrl && (
-          <div className="relative h-56 md:h-72">
+          <div className="relative h-40 md:h-56"> {/* Reduced height */}
             <Image src={event.imageUrl} alt={event.title} layout="fill" objectFit="cover" data-ai-hint={event.dataAiHint} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           </div>
