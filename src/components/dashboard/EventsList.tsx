@@ -4,11 +4,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import type { EventItem } from "@/lib/types";
-import { CalendarDays, MapPin, Users, MoreHorizontal, CheckCircle2, HelpCircle, XCircle } from "lucide-react";
-import { parseISO, format, isThisWeek, isPast, startOfWeek, endOfWeek, subWeeks, isWithinInterval } from "date-fns";
+import type { EventItem, RsvpStatus } from "@/lib/types";
+import { CalendarDays, MapPin, Users, MoreHorizontal, CheckCircle2, HelpCircle, XCircle, Check, X, ThumbsUp, ThumbsDown } from "lucide-react";
+import { parseISO, format, isThisWeek, isPast, startOfWeek, endOfWeek, subWeeks, isWithinInterval, isFuture } from "date-fns";
+import { Badge } from "@/components/ui/badge";
 
-// Helper function to get a date string relative to today for mocking
 const getMockDateString = (daysOffset: number, hour: number = 10): string => {
   const date = new Date();
   date.setDate(date.getDate() + daysOffset);
@@ -16,13 +16,13 @@ const getMockDateString = (daysOffset: number, hour: number = 10): string => {
   return date.toISOString();
 };
 
-// Dummy data for now - using ISO strings for startDate
+// Dummy data - ensure isUserHost and currentUserRsvpStatus are included
 const mockEvents: EventItem[] = [
-  { id: "1", title: "Team Practice Session", startDate: getMockDateString(1, 10), endDate: getMockDateString(1, 12), location: "Main Community Field, Sportsville", groupName: "U12 Soccer Stars", inviteesCount: 20, attendingMembersCount: 15, cancelledMembersCount: 2, hostName: "Coach John", description: "Focus on passing drills and game strategy. Bring water!", imageUrl: "https://placehold.co/600x400.png", dataAiHint: "soccer practice", hostUserId: "user1" },
-  { id: "2", title: "Club Committee Meeting", startDate: getMockDateString(0, 14), endDate: getMockDateString(0, 15), location: "Town Hall Room 3, Downtown", groupName: "Photography Club", inviteesCount: 15, attendingMembersCount: 10, cancelledMembersCount: 1, hostName: "Sarah M.", description: "Discuss upcoming exhibition and budget.", imageUrl: "https://placehold.co/600x400.png", dataAiHint: "club meeting", hostUserId: "user2" },
-  { id: "3", title: "Championship Game Day", startDate: getMockDateString(-7, 15), endDate: getMockDateString(-7, 17), location: "Away Team Stadium, Rival Town", groupName: "Varsity Basketball Team", inviteesCount: 50, attendingMembersCount: 45, cancelledMembersCount: 0, hostName: "Coach Miller", description: "The big game! Let's bring home the trophy.", hostUserId: "user3" },
-  { id: "4", title: "Annual Fundraiser Gala", startDate: getMockDateString(-10, 18), endDate: getMockDateString(-10, 22), location: "Grand Ballroom Downtown, Metro City", groupName: "Charity Org Volunteers", inviteesCount: 100, attendingMembersCount: 80, cancelledMembersCount: 5, hostName: "Mrs. Gable", description: "Evening of giving and celebration.", imageUrl: "https://placehold.co/600x400.png", dataAiHint: "gala event", hostUserId: "user4" },
-  { id: "5", title: "Weekend Coding Workshop", startDate: getMockDateString(-20, 9), endDate: getMockDateString(-18, 17), location: "Tech Hub Co-working, Innovation Drive", groupName: "Developers United", inviteesCount: 25, attendingMembersCount: 18, cancelledMembersCount: 3, hostName: "Alex P.", description: "Deep dive into new JavaScript frameworks.", hostUserId: "user5" },
+  { id: "1", title: "Team Practice Session", startDate: getMockDateString(1, 10), endDate: getMockDateString(1, 12), location: "Main Community Field, Sportsville", groupName: "U12 Soccer Stars", inviteesCount: 20, attendingMembersCount: 15, cancelledMembersCount: 2, hostName: "Coach John", description: "Focus on passing drills and game strategy.", imageUrl: "https://placehold.co/600x400.png", dataAiHint: "soccer practice", hostUserId: "user1", isUserHost: false, currentUserRsvpStatus: 'unconfirmed' },
+  { id: "2", title: "Club Committee Meeting", startDate: getMockDateString(0, 14), endDate: getMockDateString(0, 15), location: "Town Hall Room 3, Downtown", groupName: "Photography Club", inviteesCount: 15, attendingMembersCount: 10, cancelledMembersCount: 1, hostName: "Sarah M.", description: "Discuss upcoming exhibition and budget.", hostUserId: "user2", isUserHost: true, currentUserRsvpStatus: 'unconfirmed' },
+  { id: "3", title: "Championship Game Day", startDate: getMockDateString(-7, 15), endDate: getMockDateString(-7, 17), location: "Away Team Stadium, Rival Town", groupName: "Varsity Basketball Team", inviteesCount: 50, attendingMembersCount: 45, cancelledMembersCount: 0, hostName: "Coach Miller", description: "The big game! Let's bring home the trophy.", hostUserId: "user3", isUserHost: false, currentUserRsvpStatus: 'attending' },
+  { id: "4", title: "Annual Fundraiser Gala", startDate: getMockDateString(-10, 18), endDate: getMockDateString(-10, 22), location: "Grand Ballroom Downtown, Metro City", groupName: "Charity Org Volunteers", inviteesCount: 100, attendingMembersCount: 80, cancelledMembersCount: 5, hostName: "Mrs. Gable", description: "Evening of giving and celebration.", imageUrl: "https://placehold.co/600x400.png", dataAiHint: "gala event", hostUserId: "user4", isUserHost: false, currentUserRsvpStatus: 'declined' },
+  { id: "5", title: "Weekend Coding Workshop", startDate: getMockDateString(-20, 9), endDate: getMockDateString(-18, 17), location: "Tech Hub Co-working, Innovation Drive", groupName: "Developers United", inviteesCount: 25, attendingMembersCount: 18, cancelledMembersCount: 3, hostName: "Alex P.", description: "Deep dive into new JavaScript frameworks.", hostUserId: "user5", isUserHost: true, currentUserRsvpStatus: 'unconfirmed' },
 ];
 
 const groupEventsByTimeframe = (events: EventItem[]) => {
@@ -30,7 +30,7 @@ const groupEventsByTimeframe = (events: EventItem[]) => {
     "This Week": [],
     "Last Week": [],
     "Previous Weeks": [],
-    // "Upcoming": [], // For future events beyond this week, if needed
+    "Upcoming": [], 
   };
   const now = new Date();
   const startOfThisWeekMonday = startOfWeek(now, { weekStartsOn: 1 });
@@ -49,27 +49,42 @@ const groupEventsByTimeframe = (events: EventItem[]) => {
       } else if (eventDate < startOfLastWeekMonday) {
         grouped["Previous Weeks"].push(event);
       } else { 
-        // This case handles past events that are newer than last week but not this week (e.g. event on Sunday, today is Monday)
-        // Or if logic needs adjustment for edge cases around week boundaries. For simplicity, putting them in "Previous Weeks".
         grouped["Previous Weeks"].push(event);
       }
     }
-    // else if (isFuture(eventDate)) { // Add this block if "Upcoming" category is desired
-    //   grouped["Upcoming"].push(event);
-    // }
+     else if (isFuture(eventDate)) { 
+       grouped["Upcoming"].push(event);
+     }
   });
+  // Sort events within each group by date, most recent first for past, soonest first for upcoming/this week
+  for (const key in grouped) {
+    if (key === "Upcoming" || key === "This Week") {
+        grouped[key].sort((a, b) => parseISO(a.startDate).getTime() - parseISO(b.startDate).getTime());
+    } else {
+        grouped[key].sort((a, b) => parseISO(b.startDate).getTime() - parseISO(a.startDate).getTime());
+    }
+  }
   return grouped;
+};
+
+const handleRsvpClick = (action: 'confirm' | 'decline', eventTitle: string) => {
+  alert(`RSVP action: ${action} for event "${eventTitle}". This would update backend in a real app.`);
 };
 
 
 export function EventsList() {
-  const eventsToShow = mockEvents.slice(0, 25); // Max 25 records
+  const eventsToShow = mockEvents.slice(0, 25); 
   const groupedEvents = groupEventsByTimeframe(eventsToShow);
+
+  const timeframesOrder = ["Upcoming", "This Week", "Last Week", "Previous Weeks"];
 
   return (
     <div className="space-y-8">
-      {Object.entries(groupedEvents).map(([timeframe, eventsInTimeframe]) => (
-        eventsInTimeframe.length > 0 && (
+      {timeframesOrder.map(timeframe => {
+        const eventsInTimeframe = groupedEvents[timeframe];
+        if (!eventsInTimeframe || eventsInTimeframe.length === 0) return null;
+
+        return (
           <section key={timeframe}>
             <h2 className="text-2xl font-semibold font-headline mb-4 text-foreground/90">{timeframe}</h2>
             <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -89,8 +104,32 @@ export function EventsList() {
                        </div>
                     )}
                     <CardHeader className="pb-3">
-                      <CardTitle className="font-headline text-lg leading-tight">{event.title}</CardTitle>
-                      <CardDescription className="text-xs">{event.groupName} - Hosted by {event.hostName}</CardDescription>
+                      <div className="flex justify-between items-start gap-2">
+                        <div className="flex-grow">
+                            <CardTitle className="font-headline text-lg leading-tight group-hover:text-primary transition-colors">
+                                <Link href={`/dashboard/events/${event.id}`} className="hover:underline focus:outline-none focus:ring-1 focus:ring-primary rounded-sm">
+                                    {event.title}
+                                </Link>
+                            </CardTitle>
+                            <CardDescription className="text-xs">{event.groupName} - Hosted by {event.hostName}</CardDescription>
+                        </div>
+                        {!event.isUserHost && event.currentUserRsvpStatus === 'unconfirmed' && (
+                           <div className="flex gap-1 flex-shrink-0">
+                            <Button size="icon" variant="outline" className="h-7 w-7 bg-green-50 hover:bg-green-100 border-green-300" onClick={() => handleRsvpClick('confirm', event.title)} title="Confirm Attendance">
+                                <Check className="h-4 w-4 text-green-600" />
+                            </Button>
+                            <Button size="icon" variant="outline" className="h-7 w-7 bg-red-50 hover:bg-red-100 border-red-300" onClick={() => handleRsvpClick('decline', event.title)} title="Decline Attendance">
+                                <X className="h-4 w-4 text-red-600" />
+                            </Button>
+                           </div>
+                        )}
+                        {!event.isUserHost && event.currentUserRsvpStatus === 'attending' && (
+                            <Badge variant="default" className="bg-green-600 hover:bg-green-700 text-xs flex-shrink-0 h-7 px-2"><ThumbsUp className="mr-1 h-3 w-3"/> Attending</Badge>
+                        )}
+                        {!event.isUserHost && event.currentUserRsvpStatus === 'declined' && (
+                            <Badge variant="destructive" className="text-xs flex-shrink-0 h-7 px-2"><ThumbsDown className="mr-1 h-3 w-3"/> Declined</Badge>
+                        )}
+                      </div>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-2 text-sm pb-4">
                       <div className="flex items-center text-muted-foreground">
@@ -104,7 +143,7 @@ export function EventsList() {
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="ml-1 text-primary hover:underline text-xs"
-                            onClick={(e) => e.stopPropagation()} // Prevent card click if clicking link
+                            onClick={(e) => e.stopPropagation()} 
                           >
                             (map)
                           </a>
@@ -132,7 +171,7 @@ export function EventsList() {
             </div>
           </section>
         )
-      ))}
+      })}
       {mockEvents.length > 25 && (
         <div className="text-center mt-8">
           <Button variant="outline" className="text-primary border-primary hover:bg-primary/10">

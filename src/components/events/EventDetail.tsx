@@ -6,11 +6,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { 
   CalendarDays, MapPin, Users, UserCircle, FileText, DollarSign, 
   XCircle, CheckSquare, Link as LinkIcon, Edit, ExternalLink,
-  CheckCircle2, HelpCircle, Users2
+  CheckCircle2, HelpCircle, Users2, Check, X, ThumbsUp, ThumbsDown
 } from 'lucide-react';
 import Link from 'next/link';
-import type { EventItem } from '@/lib/types'; // Assuming EventItem type is defined
+import type { EventItem, RsvpStatus } from '@/lib/types'; 
 import { Badge } from '@/components/ui/badge';
+import { useState } from 'react';
+import { useToast } from "@/hooks/use-toast";
 
 // Dummy data for a single event - replace with actual data fetching
 const mockEventData: EventItem = {
@@ -25,35 +27,43 @@ const mockEventData: EventItem = {
   groupName: "Sportsville Youth Soccer League",
   inviteesCount: 75,
   attendingMembersCount: 48,
-  cancelledMembersCount: 5, // Added mock data
+  cancelledMembersCount: 5, 
   registrationFee: 150,
   maxParticipants: 60,
   imageUrl: "https://placehold.co/1200x400.png",
   eventLinkUrl: "https://example.com/summer-soccer-camp-details",
   dataAiHint: "youth soccer camp",
-  isUserHost: true, // Assume current user is the host for demo purposes
+  isUserHost: false, // Assume current user is NOT the host for RSVP demo
   isCalendarSynced: false,
   allowComments: true,
   sendInvite: true,
   reminderTiming: '1day',
+  currentUserRsvpStatus: 'unconfirmed', // Initial RSVP status
 };
 
 export function EventDetail({ eventId }: { eventId: string }) {
   // In a real app, fetch event by eventId. Using mock data for now.
   const event = mockEventData; 
+  const { toast } = useToast();
+  const [userRsvpStatus, setUserRsvpStatus] = useState<RsvpStatus | undefined>(event.currentUserRsvpStatus);
 
   const handleCancelEvent = () => {
-    // Logic to cancel event
     if(confirm("Are you sure you want to cancel this event? This action cannot be undone.")) {
       alert(`Event "${event.title}" cancellation logic here.`);
-      // API call to cancel event
     }
   };
 
   const handleSyncCalendar = () => {
-    // Logic to sync calendar
     alert(`Calendar sync logic for "${event.title}" here.`);
-    // Update event.isCalendarSynced state, potentially make API call
+  };
+
+  const handleRsvp = (status: 'attending' | 'declined') => {
+    setUserRsvpStatus(status);
+    toast({
+      title: "RSVP Updated",
+      description: `You have ${status === 'attending' ? 'confirmed attendance' : 'declined'} for "${event.title}".`,
+    });
+    // In a real app, update backend here
   };
   
   const formattedStartDate = new Date(event.startDate).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
@@ -69,7 +79,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
     <Card className="overflow-hidden shadow-xl rounded-xl">
       <CardHeader className="p-0 relative">
         {event.imageUrl && (
-          <div className="relative h-40 md:h-56"> {/* Reduced height */}
+          <div className="relative h-40 md:h-56"> 
             <Image src={event.imageUrl} alt={event.title} layout="fill" objectFit="cover" data-ai-hint={event.dataAiHint} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           </div>
@@ -80,6 +90,37 @@ export function EventDetail({ eventId }: { eventId: string }) {
           <p className={`text-sm ${event.imageUrl ? 'text-gray-200' : 'text-muted-foreground'} flex items-center mt-1`}>
             <Users2 className="w-4 h-4 mr-1.5 flex-shrink-0" /> {totalInvited} Invited
           </p>
+          
+          {!event.isUserHost && (
+            <div className="mt-3 space-y-2">
+              {userRsvpStatus === 'unconfirmed' && (
+                <div className="flex gap-2">
+                  <Button size="sm" onClick={() => handleRsvp('attending')} className="bg-green-600 hover:bg-green-700 text-white">
+                    <Check className="mr-2 h-4 w-4" /> Confirm
+                  </Button>
+                  <Button size="sm" variant="destructive" onClick={() => handleRsvp('declined')}>
+                    <X className="mr-2 h-4 w-4" /> Decline
+                  </Button>
+                </div>
+              )}
+              {userRsvpStatus === 'attending' && (
+                <div className="flex items-center gap-2">
+                    <Badge variant="default" className="bg-green-600 hover:bg-green-700 text-base py-1 px-3">
+                        <ThumbsUp className="mr-2 h-4 w-4" /> You are Attending
+                    </Badge>
+                    <Button size="sm" variant="outline" onClick={() => handleRsvp('declined')}>Change to Decline</Button>
+                </div>
+              )}
+              {userRsvpStatus === 'declined' && (
+                 <div className="flex items-center gap-2">
+                    <Badge variant="destructive" className="text-base py-1 px-3">
+                        <ThumbsDown className="mr-2 h-4 w-4" /> You Declined
+                    </Badge>
+                    <Button size="sm" variant="outline" onClick={() => handleRsvp('attending')}>Change to Attend</Button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </CardHeader>
       <CardContent className="p-4 md:p-6 space-y-6">
@@ -179,7 +220,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
                     <XCircle className="w-5 h-5 mr-2 text-red-600 flex-shrink-0" />
                     <div>
                         <p className="font-semibold text-red-700">{cancelled}</p>
-                        <p className="text-xs text-red-600">Cancelled</p>
+                        <p className="text-xs text-red-600">Declined</p>
                     </div>
                 </div>
             </div>

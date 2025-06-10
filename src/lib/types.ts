@@ -12,6 +12,8 @@ export interface Group {
   creatorId: string;
 }
 
+export type RsvpStatus = 'attending' | 'declined' | 'unconfirmed';
+
 export interface EventItem {
   id: string;
   title: string;
@@ -29,13 +31,14 @@ export interface EventItem {
   reminderTiming?: '1day' | '2hours' | '1hour' | '30mins' | 'none';
   allowComments?: boolean;
   imageUrl?: string;
-  eventLinkUrl?: string; // New field for external event link
+  eventLinkUrl?: string; 
   dataAiHint?: string;
   inviteesCount?: number;
   attendingMembersCount?: number;
   cancelledMembersCount?: number; 
-  isUserHost?: boolean;
+  isUserHost?: boolean; // Is the current viewing user the host?
   isCalendarSynced?: boolean;
+  currentUserRsvpStatus?: RsvpStatus; // RSVP status of the current viewing user
 }
 
 export interface NotificationItem {
@@ -49,21 +52,20 @@ export interface NotificationItem {
   creatorId: string;
   groupId?: string;
   status?: 'active' | 'closed';
-  totalRecipientsCount?: number; // Total people this notification was sent/relevant to
-  yesResponsesCount?: number;    // Count of 'yes' or affirmative responses
-  noResponsesCount?: number;     // Count of 'no' or negative responses
-  // responsesCount can be deprecated or used if yes/no is not applicable, e.g. for surveys with many options
-  responsesCount?: number; // Generic total responses, kept for potential other uses
-  userChoice?: string | string[]; // For multiple choice
+  totalRecipientsCount?: number; 
+  yesResponsesCount?: number;    
+  noResponsesCount?: number;     
+  responsesCount?: number; 
+  userChoice?: string | string[]; 
 }
 
 export interface ShareItem {
   id: string;
   type: 'message' | 'report';
-  content: string; // Message text or report summary/link
+  content: string; 
   senderId: string;
-  recipientId?: string; // For direct messages
-  groupId?: string; // For group shares/reports
+  recipientId?: string; 
+  groupId?: string; 
   createdAt: string; // ISO string
 }
 
@@ -72,18 +74,17 @@ export interface PaymentItem {
   title: string;
   description?: string;
   dueDate?: string; // ISO string
-  paymentMethod?: string; // e.g., "Stripe"
+  paymentMethod?: string; 
   price: number;
-  currency: string; // e.g., "USD"
+  currency: string; 
   status: 'pending' | 'paid' | 'failed' | 'cancelled';
   requesterId: string;
   payerId?: string;
-  eventId?: string; // Link to an event if applicable
+  eventId?: string; 
   productOrServiceInfo?: string;
   createdAt: string; // ISO string
 }
 
-// Used for checkbox list of members in Event creation
 export interface SelectableMember extends User {
   selected?: boolean;
 }
