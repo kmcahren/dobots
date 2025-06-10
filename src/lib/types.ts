@@ -1,3 +1,4 @@
+
 export interface User {
   id: string;
   name: string;
@@ -42,15 +43,17 @@ export interface EventItem {
   reminderTiming?: '1day' | '2hours' | '1hour' | '30mins' | 'none';
   allowComments?: boolean;
   imageUrl?: string;
-  eventLinkUrl?: string; 
+  eventLinkUrl?: string;
   dataAiHint?: string;
   inviteesCount?: number;
   attendingMembersCount?: number;
-  cancelledMembersCount?: number; 
+  cancelledMembersCount?: number;
   isUserHost?: boolean; // Is the current viewing user the host?
   isCalendarSynced?: boolean;
   currentUserRsvpStatus?: RsvpStatus; // RSVP status of the current viewing user
 }
+
+export type NotificationUserChoice = 'yes' | 'no' | 'unconfirmed' | string[]; // string[] for multiple choice
 
 export interface NotificationItem {
   id: string;
@@ -58,25 +61,26 @@ export interface NotificationItem {
   description?: string;
   dueDate?: string; // ISO string
   allowMultipleChoice?: boolean;
+  options?: string[]; // For multiple choice
   allowComments?: boolean;
   hideVotes?: boolean;
   creatorId: string;
   groupId?: string;
   status?: 'active' | 'closed';
-  totalRecipientsCount?: number; 
-  yesResponsesCount?: number;    
-  noResponsesCount?: number;     
-  responsesCount?: number; 
-  userChoice?: string | string[]; 
+  totalRecipientsCount?: number;
+  yesResponsesCount?: number;
+  noResponsesCount?: number;
+  responsesCount?: number; // For multiple choice, total responses
+  userChoice?: NotificationUserChoice; // User's current selection
 }
 
 export interface ShareItem {
   id: string;
   type: 'message' | 'report';
-  content: string; 
+  content: string;
   senderId: string;
-  recipientId?: string; 
-  groupId?: string; 
+  recipientId?: string;
+  groupId?: string;
   createdAt: string; // ISO string
 }
 
@@ -85,13 +89,13 @@ export interface PaymentItem {
   title: string;
   description?: string;
   dueDate?: string; // ISO string
-  paymentMethod?: string; 
+  paymentMethod?: string;
   price: number;
-  currency: string; 
+  currency: string;
   status: 'pending' | 'paid' | 'failed' | 'cancelled';
   requesterId: string;
   payerId?: string;
-  eventId?: string; 
+  eventId?: string;
   productOrServiceInfo?: string;
   createdAt: string; // ISO string
 }
