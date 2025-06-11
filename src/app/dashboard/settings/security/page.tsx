@@ -61,7 +61,7 @@ export default function SecurityPrivacyPage() {
               <CardDescription>Manage your password and account security settings.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Button variant="outline" onClick={handleChangePassword} className="w-full sm:w-auto justify-start text-left">
+              <Button onClick={handleChangePassword} className="w-full sm:w-auto justify-start text-left bg-accent text-accent-foreground hover:bg-accent/90">
                 <Lock className="mr-2 h-4 w-4" /> Change Password
               </Button>
               <div className="p-4 border rounded-lg bg-muted/30">

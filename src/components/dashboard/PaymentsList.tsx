@@ -44,7 +44,7 @@ export function PaymentsList() {
                 </CardTitle>
                 <span className={cn(
                     "text-xs px-2 py-0.5 rounded-full flex items-center font-medium",
-                    payment.status === 'paid' && "bg-green-600 text-primary-foreground dark:bg-green-500 dark:text-primary-foreground",
+                    payment.status === 'paid' && "bg-green-600 text-primary-foreground hover:bg-green-600/90 dark:bg-green-500 dark:text-primary-foreground dark:hover:bg-green-500/90",
                     payment.status === 'pending' && "bg-amber-500 text-white dark:bg-amber-600 dark:text-amber-50",
                     payment.status === 'failed' && "bg-destructive text-destructive-foreground",
                     payment.status === 'cancelled' && "bg-gray-500 text-white dark:bg-gray-600 dark:text-gray-100"
@@ -72,7 +72,7 @@ export function PaymentsList() {
                 <Link href={`/app-payments/pay/${payment.id}`}>Pay Now</Link>
               </Button>
             ) : (
-              <Button asChild variant="outline" size="sm" className="w-full">
+              <Button asChild size="sm" className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
                 <Link href={`/dashboard/payments/${payment.id}`}>View Details</Link>
               </Button>
             )}

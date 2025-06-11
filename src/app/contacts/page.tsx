@@ -65,7 +65,7 @@ export default function ContactsPage() {
                         <div className="flex flex-col items-end flex-shrink-0 ml-auto text-right space-y-1 min-w-[80px]">
                             <span className="text-[11px] text-muted-foreground">{item.date}</span>
                             {item.type === "report" && item.reportUrl && (
-                                <Button variant="outline" size="xs" asChild className="text-accent border-accent hover:bg-accent/10 hover:text-accent">
+                                <Button size="xs" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
                                     <Link href={item.reportUrl}>View Report</Link>
                                 </Button>
                             )}

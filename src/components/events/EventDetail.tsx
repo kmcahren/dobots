@@ -109,14 +109,14 @@ export function EventDetail({ eventId }: { eventId: string }) {
                     onClick={() => handleRsvp('attending')}
                     className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-500 dark:hover:bg-green-600"
                   >
-                    <Check className="mr-1 h-4 w-4" /> Confirm
+                    <Check className="mr-1.5 h-4 w-4" /> Confirm
                   </Button>
                   <Button
                     size="sm"
                     variant="destructive"
                     onClick={() => handleRsvp('declined')}
                   >
-                    <X className="mr-1 h-4 w-4" /> Decline
+                    <X className="mr-1.5 h-4 w-4" /> Decline
                   </Button>
                 </div>
               )}
@@ -145,7 +145,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
             <div className="flex items-center text-sm text-muted-foreground">
               <UserCircle className="w-5 h-5 mr-2 text-primary flex-shrink-0" /> Hosted by <strong className="ml-1 text-foreground">{event.hostName || 'N/A'}</strong>
             </div>
-            <Button onClick={handleSyncCalendar} variant="outline" size="sm" className="w-full sm:w-auto">
+            <Button onClick={handleSyncCalendar} size="sm" className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
               {event.isCalendarSynced ? <CheckSquare className="mr-2 h-4 w-4 text-green-500 dark:text-green-400" /> : <CalendarDays className="mr-2 h-4 w-4" />}
               {event.isCalendarSynced ? 'Synced' : 'Add to Calendar'}
             </Button>
@@ -259,7 +259,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
         )}
       </CardContent>
       <CardFooter className="p-4 md:p-6 bg-muted/30 dark:bg-muted/20 border-t dark:border-border/50 flex flex-col sm:flex-row justify-end gap-3">
-        <Button variant="outline" asChild className="w-full sm:w-auto">
+        <Button asChild className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
           <Link href={`/dashboard/payments/new?eventId=${event.id}&title=${encodeURIComponent("Fee for " + event.title)}&amount=${event.registrationFee || ''}`}>
             <DollarSign className="mr-2 h-4 w-4" />
             Request Payment
@@ -267,7 +267,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
         </Button>
         {event.isUserHost && (
           <>
-            <Button variant="outline" asChild className="w-full sm:w-auto">
+            <Button asChild className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
               <Link href={`/dashboard/events/edit/${event.id}`}>
                 <Edit className="mr-2 h-4 w-4" />
                 Edit Event

@@ -97,12 +97,12 @@ export default function PaymentMethodsPage() {
                       <CreditCardIcon className="h-8 w-8 mr-4 text-primary" />
                       <div>
                         <p className="font-semibold text-foreground">{method.type} ending in {method.last4}</p>
-                        <p className="text-sm text-muted-foreground">Expires {method.expiry} {method.isDefault && <span className="ml-2 text-xs font-medium text-green-600 bg-green-100 px-1.5 py-0.5 rounded-full">Default</span>}</p>
+                        <p className="text-sm text-muted-foreground">Expires {method.expiry} {method.isDefault && <span className="ml-2 text-xs font-medium text-green-600 bg-green-100 px-1.5 py-0.5 rounded-full dark:bg-green-700 dark:text-green-100">Default</span>}</p>
                       </div>
                     </div>
                     <div className="flex gap-2 mt-2 sm:mt-0 w-full sm:w-auto">
                       {!method.isDefault && (
-                         <Button variant="outline" size="sm" onClick={() => handleSetDefault(method.id)} className="flex-1 sm:flex-auto">
+                         <Button size="sm" onClick={() => handleSetDefault(method.id)} className="flex-1 sm:flex-auto bg-accent text-accent-foreground hover:bg-accent/90">
                            Set as Default
                          </Button>
                       )}
