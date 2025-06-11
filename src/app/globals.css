@@ -18,7 +18,7 @@ body {
     --popover: 0 0% 100%; /* White popovers */
     --popover-foreground: 197 30% 20%;
 
-    --primary: 197 76% 53%; /* PRD: Saturated blue (#29ABE2) */
+    --primary: 289 65% 40%; /* PRD: Purple (#8E24AA) - Now Primary */
     --primary-foreground: 0 0% 100%; /* White text on primary */
 
     --secondary: 197 60% 88%; /* Lighter blue for secondary elements */
@@ -27,7 +27,7 @@ body {
     --muted: 197 60% 92%; /* Very light blue for muted elements */
     --muted-foreground: 197 40% 55%; /* Softer blue-gray text on muted */
 
-    --accent: 289 65% 40%; /* PRD: Purple (#8E24AA) */
+    --accent: 197 76% 53%; /* PRD: Saturated blue (#29ABE2) - Now Accent */
     --accent-foreground: 0 0% 100%; /* White text on accent */
 
     --destructive: 0 84% 60%; /* Clear Red */
@@ -35,10 +35,10 @@ body {
 
     --border: 197 50% 80%; /* Light blue border */
     --input: 0 0% 98%; /* Off-white input background for light theme */
-    --ring: 197 76% 58%; /* Primary blue (slightly adjusted) for focus rings */
+    --ring: 289 65% 45%; /* Purple-based for focus rings */
 
-    --chart-1: 197 76% 53%; /* Primary Blue */
-    --chart-2: 289 65% 40%; /* Accent Purple */
+    --chart-1: 289 65% 40%; /* Purple (New Primary) */
+    --chart-2: 197 76% 53%; /* Blue (New Accent) */
     --chart-3: 25 95% 55%;  /* Bright Orange */
     --chart-4: 140 60% 45%; /* Engaging Green */
     --chart-5: 0 84% 60%;   /* Vivid Red */
@@ -48,12 +48,12 @@ body {
     /* Sidebar specific colors for light theme */
     --sidebar-background: 197 60% 97%; /* Very Light Blue, almost white */
     --sidebar-foreground: 197 30% 25%; /* Dark Gray-Blue Text */
-    --sidebar-primary: 197 76% 50%; /* Sidebar Primary Action (slightly darker main primary) */
+    --sidebar-primary: 289 65% 37%; /* Purple-based Sidebar Primary Action (darker than main purple) */
     --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 197 88% 90%; /* Lighter Blue for hover/active items */
+    --sidebar-accent: 289 70% 85%; /* Lighter Purple for hover/active items */
     --sidebar-accent-foreground: 197 76% 30%; /* Dark Blue Text on Accent */
     --sidebar-border: 197 50% 82%; /* Light Blue Border for Sidebar */
-    --sidebar-ring: 197 76% 58%; /* Primary Blue for Focus */
+    --sidebar-ring: 289 65% 45%; /* Purple-based for Focus */
   }
 
   .dark {
@@ -66,7 +66,7 @@ body {
     --popover: 197 30% 15%; /* Similar to card or slightly darker for popovers */
     --popover-foreground: 197 15% 90%;
 
-    --primary: 197 76% 58%; /* Lighter Saturated Blue for dark mode */
+    --primary: 289 65% 55%; /* Lighter Purple for dark mode primary */
     --primary-foreground: 0 0% 100%; /* White text on primary */
 
     --secondary: 197 20% 25%; /* Darker gray-blue for secondary */
@@ -75,7 +75,7 @@ body {
     --muted: 197 20% 20%; /* Dark gray-blue for muted */
     --muted-foreground: 197 15% 65%;
 
-    --accent: 289 65% 55%; /* Lighter Purple for dark mode accent */
+    --accent: 197 76% 58%; /* Lighter Saturated Blue for dark mode accent */
     --accent-foreground: 0 0% 100%; /* White text on accent */
 
     --destructive: 0 70% 55%; /* Slightly less vibrant Red for dark mode */
@@ -83,11 +83,11 @@ body {
 
     --border: 197 20% 30%; /* Darker blue-gray border */
     --input: 197 20% 22%; /* Dark blue-gray input background */
-    --ring: 197 76% 65%; /* Lighter Primary Blue for focus rings */
+    --ring: 289 65% 60%; /* Lighter Purple-based for focus rings */
 
     /* Chart colors for dark mode */
-    --chart-1: 197 76% 60%; /* Primary Blue (Dark) */
-    --chart-2: 289 65% 60%; /* Accent Purple (Dark) */
+    --chart-1: 289 65% 55%; /* Purple (New Primary Dark) */
+    --chart-2: 197 76% 58%; /* Blue (New Accent Dark) */
     --chart-3: 35 80% 65%;  /* Orange (Dark) */
     --chart-4: 130 55% 60%; /* Green (Dark) */
     --chart-5: 0 70% 60%;   /* Red (Dark) */
@@ -95,12 +95,12 @@ body {
     /* Sidebar specific colors for dark theme */
     --sidebar-background: 197 30% 16%; /* Dark Background for Sidebar, distinct from main */
     --sidebar-foreground: 197 15% 85%; /* Light Text */
-    --sidebar-primary: 197 76% 58%; /* Primary Blue for Sidebar Actions */
+    --sidebar-primary: 289 65% 55%; /* Purple-based Sidebar Primary (same as main dark purple) */
     --sidebar-primary-foreground: 0 0% 100%; 
-    --sidebar-accent: 197 25% 28%; /* Darker Accent for Hover/Active */
+    --sidebar-accent: 289 30% 25%; /* Darker Purple for Hover/Active in sidebar */
     --sidebar-accent-foreground: 197 15% 95%; /* Light Text on Accent */
     --sidebar-border: 197 20% 25%; /* Dark Border for Sidebar */
-    --sidebar-ring: 197 76% 65%; /* Lighter Primary Blue for Focus */
+    --sidebar-ring: 289 65% 60%; /* Lighter Purple-based for Focus */
   }
 }
 
