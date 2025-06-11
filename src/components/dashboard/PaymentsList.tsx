@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { CreditCard, CheckCircle, AlertTriangle, MoreHorizontal, CircleDollarSign } from "lucide-react";
+import { CreditCard, CheckCircle, AlertTriangle, MoreHorizontal, CircleDollarSign, XCircle } from "lucide-react"; // Added XCircle
 import type { PaymentItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { format, parseISO } from "date-fns"; // Import format and parseISO
@@ -13,6 +13,7 @@ const mockPayments: PaymentItem[] = [
   { id: "p2", title: "Club Membership Renewal", price: 50.00, currency: "USD", status: "pending", requesterId: "user2", createdAt: "2024-08-05T15:20:00Z", dueDate: "2024-08-20" },
   { id: "p3", title: "Tournament Entry Fee", price: 100.00, currency: "USD", status: "pending", requesterId: "user1", createdAt: "2024-08-01T08:00:00Z", dueDate: "2024-08-15" },
   { id: "p4", title: "Fundraising Dinner Ticket", price: 75.00, currency: "USD", status: "paid", requesterId: "user3", createdAt: "2024-07-20T18:00:00Z", dueDate: "2024-07-15" },
+  { id: "p5", title: "Equipment Damage Fee", price: 30.00, currency: "USD", status: "failed", requesterId: "user4", createdAt: "2024-06-15T10:00:00Z", dueDate: "2024-06-10"},
 ];
 
 export function PaymentsList() {
@@ -43,12 +44,15 @@ export function PaymentsList() {
                 </CardTitle>
                 <span className={cn(
                     "text-xs px-2 py-0.5 rounded-full flex items-center font-medium",
-                    payment.status === 'paid' && "bg-green-100 text-green-700",
-                    payment.status === 'pending' && "bg-yellow-100 text-yellow-700",
-                    payment.status === 'failed' && "bg-red-100 text-red-700"
+                    payment.status === 'paid' && "bg-green-100 text-green-700 dark:bg-green-700/30 dark:text-green-300",
+                    payment.status === 'pending' && "bg-yellow-100 text-yellow-700 dark:bg-yellow-700/30 dark:text-yellow-300",
+                    payment.status === 'failed' && "bg-red-100 text-red-700 dark:bg-red-700/30 dark:text-red-300",
+                    payment.status === 'cancelled' && "bg-gray-100 text-gray-700 dark:bg-gray-700/30 dark:text-gray-300"
                 )}>
                     {payment.status === 'paid' && <CheckCircle className="w-3 h-3 mr-1"/>}
                     {payment.status === 'pending' && <AlertTriangle className="w-3 h-3 mr-1"/>}
+                    {payment.status === 'failed' && <XCircle className="w-3 h-3 mr-1"/>}
+                    {payment.status === 'cancelled' && <XCircle className="w-3 h-3 mr-1"/>}
                     {payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}
                 </span>
             </div>
@@ -61,9 +65,9 @@ export function PaymentsList() {
             {payment.dueDate && <p className="text-muted-foreground">Due Date: {format(parseISO(payment.dueDate), 'P')}</p>}
             <p className="text-muted-foreground">Created: {format(parseISO(payment.createdAt), 'P')}</p>
           </CardContent>
-          <CardFooter className="bg-muted/30 p-3">
+          <CardFooter className="bg-muted/30 p-3 dark:bg-muted/20">
             {payment.status === 'pending' ? (
-              <Button asChild variant="default" size="sm" className="w-full bg-green-600 hover:bg-green-700 text-white">
+              <Button asChild variant="default" size="sm" className="w-full bg-green-600 hover:bg-green-700 text-white dark:bg-green-500 dark:hover:bg-green-600">
                 {/* Link to payment page - placeholder */}
                 <Link href={`/app-payments/pay/${payment.id}`}>Pay Now</Link>
               </Button>

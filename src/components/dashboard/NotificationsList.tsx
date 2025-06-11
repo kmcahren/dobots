@@ -132,7 +132,7 @@ export function NotificationsList() {
               <div className="flex justify-between items-start gap-2">
                 <CardTitle className="font-headline text-lg">{notification.question}</CardTitle>
                 {notification.status === 'active' ?
-                  <Badge variant="outline" className="border-green-500 text-green-600"><AlertCircle className="w-3 h-3 mr-1"/> Active</Badge> :
+                  <Badge variant="outline" className="border-green-500 text-green-600 dark:border-green-400 dark:text-green-400"><AlertCircle className="w-3 h-3 mr-1"/> Active</Badge> :
                   <Badge variant="secondary"><CheckCircle2 className="w-3 h-3 mr-1"/> Closed</Badge>
                 }
               </div>
@@ -148,14 +148,14 @@ export function NotificationsList() {
                 <Users className="h-4 w-4 mr-0 flex-shrink-0" />
                 <span className="text-xs">{totalRecipients} Recipients</span>
                 {!notification.allowMultipleChoice && (
-                 <span className="text-xs text-muted-foreground/80 font-mono flex items-center">
-                    (<CheckCircle2 className="h-3.5 w-3.5 mr-0.5 text-green-600" />{yesCount}
-                    <HelpCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-gray-500" />{unconfirmedCount}
-                    <XCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-red-600" />{noCount})
+                 <span className="text-xs text-muted-foreground/80 font-mono flex items-center dark:text-muted-foreground/70">
+                    (<CheckCircle2 className="h-3.5 w-3.5 mr-0.5 text-green-600 dark:text-green-400" />{yesCount}
+                    <HelpCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-gray-500 dark:text-gray-400" />{unconfirmedCount}
+                    <XCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-red-600 dark:text-red-400" />{noCount})
                 </span>
                 )}
                 {notification.allowMultipleChoice && notification.responsesCount !== undefined && (
-                  <span className="text-xs text-muted-foreground/80 font-mono flex items-center">({notification.responsesCount} responded, {unconfirmedCount} pending)</span>
+                  <span className="text-xs text-muted-foreground/80 font-mono flex items-center dark:text-muted-foreground/70">({notification.responsesCount} responded, {unconfirmedCount} pending)</span>
                 )}
               </div>
 
@@ -163,7 +163,7 @@ export function NotificationsList() {
                 <div className="pt-2">
                   {isSimpleYesNo && notification.userChoice === 'unconfirmed' && (
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white flex-1 sm:flex-auto" onClick={() => handleResponse(notification.id, 'yes')}>
+                      <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white flex-1 sm:flex-auto dark:bg-green-500 dark:hover:bg-green-600" onClick={() => handleResponse(notification.id, 'yes')}>
                         <ThumbsUp className="mr-2 h-4 w-4" /> Yes
                       </Button>
                       <Button size="sm" variant="destructive" className="flex-1 sm:flex-auto" onClick={() => handleResponse(notification.id, 'no')}>
@@ -172,7 +172,7 @@ export function NotificationsList() {
                     </div>
                   )}
                   {isSimpleYesNo && notification.userChoice === 'yes' && (
-                    <Badge className="bg-green-100 text-green-700 hover:bg-green-200 text-sm py-1 px-3">
+                    <Badge className="bg-green-100 text-green-700 hover:bg-green-200 text-sm py-1 px-3 dark:bg-green-800/50 dark:text-green-300 dark:hover:bg-green-700/50">
                       <ThumbsUp className="mr-2 h-4 w-4" /> You responded: Yes
                     </Badge>
                   )}
@@ -195,7 +195,7 @@ export function NotificationsList() {
                     </div>
                   )}
                   {notification.allowMultipleChoice && Array.isArray(notification.userChoice) && notification.userChoice.length > 0 && (
-                     <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-200 text-sm py-1 px-3">
+                     <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-200 text-sm py-1 px-3 dark:bg-blue-800/50 dark:text-blue-300 dark:hover:bg-blue-700/50">
                       <CheckCircle2 className="mr-2 h-4 w-4" /> You voted: {notification.userChoice.join(', ')}
                     </Badge>
                   )}
@@ -215,3 +215,4 @@ export function NotificationsList() {
     </div>
   );
 }
+

@@ -115,7 +115,7 @@ export function EventsList() {
                         </div>
                         {/* RSVP Badges */}
                         {!event.isUserHost && event.currentUserRsvpStatus === 'attending' && (
-                            <Badge variant="default" className="bg-green-600 hover:bg-green-700 text-xs flex-shrink-0 h-7 px-2"><ThumbsUp className="mr-1 h-3 w-3"/> Attending</Badge>
+                            <Badge variant="default" className="bg-green-600 hover:bg-green-700 text-white text-xs flex-shrink-0 h-7 px-2"><ThumbsUp className="mr-1 h-3 w-3"/> Attending</Badge>
                         )}
                         {!event.isUserHost && event.currentUserRsvpStatus === 'declined' && (
                             <Badge variant="destructive" className="text-xs flex-shrink-0 h-7 px-2"><ThumbsDown className="mr-1 h-3 w-3"/> Declined</Badge>
@@ -143,25 +143,25 @@ export function EventsList() {
                       <div className="flex items-center text-muted-foreground space-x-1 pt-1">
                         <Users className="h-4 w-4 mr-0 flex-shrink-0" />
                         <span className="text-xs">{totalInvited} Invited</span>
-                        <span className="text-xs text-muted-foreground/80 font-mono flex items-center">
-                          (<CheckCircle2 className="h-3.5 w-3.5 mr-0.5 text-green-600" />{attending}
-                          <HelpCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-gray-500" />{unconfirmed}
-                          <XCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-red-600" />{cancelled})
+                        <span className="text-xs text-muted-foreground/80 font-mono flex items-center dark:text-muted-foreground/70">
+                          (<CheckCircle2 className="h-3.5 w-3.5 mr-0.5 text-green-600 dark:text-green-400" />{attending}
+                          <HelpCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-gray-500 dark:text-gray-400" />{unconfirmed}
+                          <XCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-red-600 dark:text-red-400" />{cancelled})
                         </span>
                       </div>
                       {event.description && <p className="text-muted-foreground line-clamp-2 pt-1">{event.description}</p>}
                     </CardContent>
-                    <CardFooter className="bg-muted/30 p-3">
+                    <CardFooter className="bg-muted/30 p-3 dark:bg-muted/20">
                         { !event.isUserHost && event.currentUserRsvpStatus === 'unconfirmed' ? (
                             <div className="flex items-center gap-2 w-full">
                                 <Button 
                                     size="xs" 
                                     variant="outline" 
-                                    className="w-7 px-0 bg-green-50 hover:bg-green-100 border-green-300" 
+                                    className="w-7 px-0 bg-green-50 hover:bg-green-100 border-green-300 dark:bg-green-700/30 dark:hover:bg-green-700/50 dark:border-green-500/50 dark:text-green-400" 
                                     onClick={() => handleRsvpClick('confirm', event.title)} 
                                     title="Confirm Attendance"
                                 >
-                                    <Check className="h-4 w-4 text-green-600" />
+                                    <Check className="h-4 w-4 text-green-600 dark:text-green-400" />
                                 </Button>
                                 <Button asChild variant="default" size="sm" className="flex-grow">
                                     <Link href={`/dashboard/events/${event.id}`}>View Details</Link>
@@ -169,11 +169,11 @@ export function EventsList() {
                                 <Button 
                                     size="xs" 
                                     variant="outline" 
-                                    className="w-7 px-0 bg-red-50 hover:bg-red-100 border-red-300" 
+                                    className="w-7 px-0 bg-red-50 hover:bg-red-100 border-red-300 dark:bg-red-700/30 dark:hover:bg-red-700/50 dark:border-red-500/50 dark:text-red-400" 
                                     onClick={() => handleRsvpClick('decline', event.title)} 
                                     title="Decline Attendance"
                                 >
-                                    <X className="h-4 w-4 text-red-600" />
+                                    <X className="h-4 w-4 text-red-600 dark:text-red-400" />
                                 </Button>
                             </div>
                         ) : (
