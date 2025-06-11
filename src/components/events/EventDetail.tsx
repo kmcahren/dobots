@@ -93,7 +93,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           </div>
         )}
-        <div className={`absolute bottom-0 left-0 p-4 md:p-6 ${event.imageUrl ? '' : 'relative bg-muted text-foreground p-4 md:p-6 rounded-t-xl dark:bg-muted/30'}`}>
+        <div className={`absolute bottom-0 left-0 p-4 md:p-6 ${event.imageUrl ? '' : 'relative bg-muted text-foreground dark:bg-muted/30 p-4 md:p-6 rounded-t-xl'}`}>
           {event.groupName && <Badge variant={event.imageUrl ? "secondary" : "outline"} className={`${event.imageUrl ? 'mb-2 bg-opacity-80 backdrop-blur-sm dark:bg-opacity-70 dark:text-secondary-foreground' : 'mb-2'}`}>{event.groupName}</Badge>}
           <h1 className={`text-2xl md:text-4xl font-bold font-headline ${event.imageUrl ? 'text-white drop-shadow-lg' : 'text-primary'}`}>{event.title}</h1>
           <p className={`text-sm ${event.imageUrl ? 'text-gray-200 dark:text-gray-300' : 'text-muted-foreground'} flex items-center mt-1`}>
@@ -104,11 +104,23 @@ export function EventDetail({ eventId }: { eventId: string }) {
             <div className="mt-3 space-y-2">
               {userRsvpStatus === 'unconfirmed' && (
                 <div className="flex gap-2">
-                  <Button size="sm" onClick={() => handleRsvp('attending')} className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-500 dark:hover:bg-green-600">
-                    <Check className="mr-2 h-4 w-4" /> Confirm
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    onClick={() => handleRsvp('attending')} 
+                    className="bg-green-50 hover:bg-green-100 border-green-300 text-green-700 dark:bg-green-700/30 dark:hover:bg-green-700/50 dark:border-green-500/50 dark:text-green-300"
+                    title="Confirm Attendance"
+                  >
+                    <Check className="mr-1.5 h-4 w-4" /> Confirm
                   </Button>
-                  <Button size="sm" variant="destructive" onClick={() => handleRsvp('declined')}>
-                    <X className="mr-2 h-4 w-4" /> Decline
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    onClick={() => handleRsvp('declined')}
+                    className="bg-red-50 hover:bg-red-100 border-red-300 text-red-700 dark:bg-red-700/30 dark:hover:bg-red-700/50 dark:border-red-500/50 dark:text-red-300"
+                    title="Decline Attendance"
+                  >
+                    <X className="mr-1.5 h-4 w-4" /> Decline
                   </Button>
                 </div>
               )}
@@ -170,7 +182,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
                   (map)
                 </a>
               </p>
-              <div className="mt-2 w-full h-32 bg-muted rounded-md flex items-center justify-center overflow-hidden dark:bg-muted/30">
+              <div className="mt-2 w-full h-32 bg-muted dark:bg-muted/30 rounded-md flex items-center justify-center overflow-hidden">
                 <Image src={`https://placehold.co/400x200.png?text=Map+of+${encodeURIComponent(event.location.split(',')[0])}`} alt="Map Placeholder" width={400} height={200} objectFit="cover" data-ai-hint="map location"/>
               </div>
             </div>
@@ -214,21 +226,21 @@ export function EventDetail({ eventId }: { eventId: string }) {
         <div className="pt-4 border-t dark:border-border/50">
             <p className="font-medium text-foreground mb-3">Attendance Status</p>
             <div className="flex flex-row justify-between items-start gap-2 md:gap-4 text-sm">
-                <div className="flex flex-col items-center text-center p-3 bg-green-50 rounded-lg border border-green-200 shadow-sm flex-1 dark:bg-green-900/30 dark:border-green-700/50">
+                <div className="flex flex-col items-center text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-700/50 shadow-sm flex-1">
                     <div className="flex items-center mb-1">
                         <CheckCircle2 className="w-5 h-5 mr-1.5 text-green-600 dark:text-green-400 flex-shrink-0" />
                         <span className="text-lg font-semibold text-green-700 dark:text-green-300">{attending}</span>
                     </div>
                     <span className="text-xs text-green-600 dark:text-green-400">Attending</span>
                 </div>
-                <div className="flex flex-col items-center text-center p-3 bg-gray-100 rounded-lg border border-gray-200 shadow-sm flex-1 dark:bg-gray-700/30 dark:border-gray-600/50">
+                <div className="flex flex-col items-center text-center p-3 bg-gray-100 dark:bg-gray-700/30 rounded-lg border border-gray-200 dark:border-gray-600/50 shadow-sm flex-1">
                      <div className="flex items-center mb-1">
                         <HelpCircle className="w-5 h-5 mr-1.5 text-gray-500 dark:text-gray-400 flex-shrink-0" />
                         <span className="text-lg font-semibold text-gray-600 dark:text-gray-300">{unconfirmed}</span>
                     </div>
                     <span className="text-xs text-gray-500 dark:text-gray-400">Unconfirmed</span>
                 </div>
-                <div className="flex flex-col items-center text-center p-3 bg-red-50 rounded-lg border border-red-200 shadow-sm flex-1 dark:bg-red-900/30 dark:border-red-700/50">
+                <div className="flex flex-col items-center text-center p-3 bg-red-50 dark:bg-red-900/30 rounded-lg border border-red-200 dark:border-red-700/50 shadow-sm flex-1">
                     <div className="flex items-center mb-1">
                         <XCircle className="w-5 h-5 mr-1.5 text-red-600 dark:text-red-400 flex-shrink-0" />
                         <span className="text-lg font-semibold text-red-700 dark:text-red-300">{cancelled}</span>
@@ -250,7 +262,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
           </div>
         )}
       </CardContent>
-      <CardFooter className="p-4 md:p-6 bg-muted/30 border-t flex flex-col sm:flex-row justify-end gap-3 dark:bg-muted/20 dark:border-border/50">
+      <CardFooter className="p-4 md:p-6 bg-muted/30 dark:bg-muted/20 border-t dark:border-border/50 flex flex-col sm:flex-row justify-end gap-3">
         <Button variant="outline" asChild className="w-full sm:w-auto">
           <Link href={`/dashboard/payments/new?eventId=${event.id}&title=${encodeURIComponent("Fee for " + event.title)}&amount=${event.registrationFee || ''}`}>
             <DollarSign className="mr-2 h-4 w-4" />
