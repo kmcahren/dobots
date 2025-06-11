@@ -1,3 +1,20 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBWNs5Ke0aK1GZhmIa-4AUu78-6FqulBa4",
+  authDomain: "doit-team-club-manager.firebaseapp.com",
+  projectId: "doit-team-club-manager",
+  storageBucket: "doit-team-club-manager.firebasestorage.app",
+  messagingSenderId: "370187476936",
+  appId: "1:370187476936:web:864828c99d10cf535baafd"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"; // Added Toaster for global notifications

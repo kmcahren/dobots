@@ -163,10 +163,18 @@ export function NotificationsList() {
                 <div className="pt-2">
                   {isSimpleYesNo && notification.userChoice === 'unconfirmed' && (
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white flex-1 sm:flex-auto dark:bg-green-500 dark:hover:bg-green-600" onClick={() => handleResponse(notification.id, 'yes')}>
+                      <Button 
+                        size="sm" 
+                        variant="default"
+                        className="bg-green-600 hover:bg-green-700 text-white flex-1 sm:flex-auto dark:bg-green-500 dark:hover:bg-green-600" 
+                        onClick={() => handleResponse(notification.id, 'yes')}>
                         <ThumbsUp className="mr-2 h-4 w-4" /> Yes
                       </Button>
-                      <Button size="sm" variant="destructive" className="flex-1 sm:flex-auto" onClick={() => handleResponse(notification.id, 'no')}>
+                      <Button 
+                        size="sm" 
+                        variant="destructive" 
+                        className="flex-1 sm:flex-auto" 
+                        onClick={() => handleResponse(notification.id, 'no')}>
                         <ThumbsDown className="mr-2 h-4 w-4" /> No
                       </Button>
                     </div>

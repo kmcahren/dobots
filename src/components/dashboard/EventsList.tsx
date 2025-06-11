@@ -156,8 +156,8 @@ export function EventsList() {
                             <div className="flex items-center gap-2 w-full">
                                 <Button
                                     size="sm"
-                                    variant="outline"
-                                    className="bg-green-50 hover:bg-green-100 border-green-300 text-green-700 dark:bg-green-700/30 dark:hover:bg-green-700/50 dark:border-green-500/50 dark:text-green-300"
+                                    variant="default"
+                                    className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-500 dark:hover:bg-green-600"
                                     onClick={() => handleRsvpClick('confirm', event.title)}
                                     title="Confirm Attendance"
                                 >
@@ -168,8 +168,7 @@ export function EventsList() {
                                 </Button>
                                 <Button
                                     size="sm"
-                                    variant="outline"
-                                    className="bg-red-50 hover:bg-red-100 border-red-300 text-red-700 dark:bg-red-700/30 dark:hover:bg-red-700/50 dark:border-red-500/50 dark:text-red-300"
+                                    variant="destructive"
                                     onClick={() => handleRsvpClick('decline', event.title)}
                                     title="Decline Attendance"
                                 >
