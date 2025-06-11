@@ -132,8 +132,8 @@ export function NotificationsList() {
               <div className="flex justify-between items-start gap-2">
                 <CardTitle className="font-headline text-lg">{notification.question}</CardTitle>
                 {notification.status === 'active' ?
-                  <Badge variant="outline" className="border-green-500 text-green-600 dark:border-green-400 dark:text-green-400"><AlertCircle className="w-3 h-3 mr-1"/> Active</Badge> :
-                  <Badge variant="secondary"><CheckCircle2 className="w-3 h-3 mr-1"/> Closed</Badge>
+                  <Badge className="bg-green-600 text-primary-foreground hover:bg-green-600/90 dark:bg-green-500 dark:text-primary-foreground dark:hover:bg-green-500/90"><AlertCircle className="w-3 h-3 mr-1"/> Active</Badge> :
+                  <Badge className="bg-gray-500 text-white hover:bg-gray-500/90 dark:bg-gray-600 dark:text-gray-100 dark:hover:bg-gray-600/90"><CheckCircle2 className="w-3 h-3 mr-1"/> Closed</Badge>
                 }
               </div>
               {notification.description && <CardDescription className="pt-1">{notification.description}</CardDescription>}
