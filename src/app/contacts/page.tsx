@@ -62,15 +62,15 @@ export default function ContactsPage() {
                                 <p className="text-xs text-muted-foreground truncate">{item.preview}</p>
                             </div>
                         </div>
-                        <div className="flex flex-col items-end flex-shrink-0 ml-auto text-right">
-                            <span className="text-[11px] text-muted-foreground mb-1">{item.date}</span>
+                        <div className="flex flex-col items-end flex-shrink-0 ml-auto text-right space-y-1">
+                            <span className="text-[11px] text-muted-foreground">{item.date}</span>
                             {item.type === "report" && item.reportUrl && (
-                                <Button variant="link" size="xs" asChild className="h-auto p-0 text-accent text-[11px]">
+                                <Button variant="outline" size="xs" asChild className="text-accent border-accent hover:bg-accent/10 hover:text-accent">
                                     <Link href={item.reportUrl}>View Report</Link>
                                 </Button>
                             )}
                              {item.type === "message" && (
-                                <Button variant="outline" size="xs" asChild className="h-auto px-1.5 py-0.5 text-[11px]">
+                                <Button variant="outline" size="xs" asChild className="text-primary border-primary hover:bg-primary/10 hover:text-primary">
                                     <Link href={`/contacts/message/${item.id}`}>View</Link>
                                 </Button>
                             )}
@@ -94,4 +94,3 @@ export default function ContactsPage() {
     </div>
   );
 }
-
