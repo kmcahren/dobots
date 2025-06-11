@@ -113,22 +113,14 @@ export function EventsList() {
                             </CardTitle>
                             <CardDescription className="text-xs">{event.groupName} - Hosted by {event.hostName}</CardDescription>
                         </div>
-                        {!event.isUserHost && event.currentUserRsvpStatus === 'unconfirmed' && (
-                           <div className="flex gap-1 flex-shrink-0">
-                            <Button size="icon" variant="outline" className="h-7 w-7 bg-green-50 hover:bg-green-100 border-green-300" onClick={() => handleRsvpClick('confirm', event.title)} title="Confirm Attendance">
-                                <Check className="h-4 w-4 text-green-600" />
-                            </Button>
-                            <Button size="icon" variant="outline" className="h-7 w-7 bg-red-50 hover:bg-red-100 border-red-300" onClick={() => handleRsvpClick('decline', event.title)} title="Decline Attendance">
-                                <X className="h-4 w-4 text-red-600" />
-                            </Button>
-                           </div>
-                        )}
+                        {/* RSVP Badges, no longer buttons here */}
                         {!event.isUserHost && event.currentUserRsvpStatus === 'attending' && (
                             <Badge variant="default" className="bg-green-600 hover:bg-green-700 text-xs flex-shrink-0 h-7 px-2"><ThumbsUp className="mr-1 h-3 w-3"/> Attending</Badge>
                         )}
                         {!event.isUserHost && event.currentUserRsvpStatus === 'declined' && (
                             <Badge variant="destructive" className="text-xs flex-shrink-0 h-7 px-2"><ThumbsDown className="mr-1 h-3 w-3"/> Declined</Badge>
                         )}
+                         {/* Unconfirmed status might show nothing here or a generic "Pending RSVP" if desired, but buttons moved to footer */}
                       </div>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-2 text-sm pb-4">
@@ -161,9 +153,25 @@ export function EventsList() {
                       {event.description && <p className="text-muted-foreground line-clamp-2 pt-1">{event.description}</p>}
                     </CardContent>
                     <CardFooter className="bg-muted/30 p-3">
-                      <Button asChild variant="default" size="sm" className="w-full">
-                        <Link href={`/dashboard/events/${event.id}`}>View Details</Link>
-                      </Button>
+                        { !event.isUserHost && event.currentUserRsvpStatus === 'unconfirmed' ? (
+                            <div className="flex items-center gap-2 w-full">
+                                <Button asChild variant="default" size="sm" className="flex-grow">
+                                    <Link href={`/dashboard/events/${event.id}`}>View Details</Link>
+                                </Button>
+                                <div className="flex gap-1 flex-shrink-0">
+                                    <Button size="xs" variant="outline" className="w-7 px-0 bg-green-50 hover:bg-green-100 border-green-300" onClick={() => handleRsvpClick('confirm', event.title)} title="Confirm Attendance">
+                                        <Check className="h-4 w-4 text-green-600" />
+                                    </Button>
+                                    <Button size="xs" variant="outline" className="w-7 px-0 bg-red-50 hover:bg-red-100 border-red-300" onClick={() => handleRsvpClick('decline', event.title)} title="Decline Attendance">
+                                        <X className="h-4 w-4 text-red-600" />
+                                    </Button>
+                                </div>
+                            </div>
+                        ) : (
+                            <Button asChild variant="default" size="sm" className="w-full">
+                            <Link href={`/dashboard/events/${event.id}`}>View Details</Link>
+                            </Button>
+                        )}
                     </CardFooter>
                   </Card>
                 );
@@ -192,3 +200,4 @@ export function EventsList() {
     </div>
   );
 }
+
