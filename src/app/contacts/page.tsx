@@ -4,7 +4,7 @@
 import { AppHeader } from "@/components/layout/AppHeader";
 import { BottomNavigationBar } from "@/components/layout/BottomNavigationBar";
 import { FloatingActionButton } from "@/components/layout/FloatingActionButton";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Users, MessageSquare, FileText, MoreHorizontal, Search, PlusCircle } from "lucide-react";
@@ -12,10 +12,10 @@ import { Input } from "@/components/ui/input";
 
 // Mock Data for contacts/messages/reports
 const mockContactItems = [
-  { id: "c1", type: "message", from: "Coach John", preview: "Reminder: Practice tomorrow at 5 PM sharp!", date: "2h ago", unread: true },
-  { id: "c2", type: "report", from: "Admin Bot", preview: "Weekly Attendance Report (U12 Soccer) is ready.", date: "Yesterday", unread: false, reportUrl: "/dashboard/reports/123" },
-  { id: "c3", type: "message", from: "Sarah M. (Photo Club)", preview: "Great shots from the event! Can you share them?", date: "3 days ago", unread: false },
-  { id: "c4", type: "message", from: "Team Fundraising Lead", preview: "Quick update on our fundraising goals for this month.", date: "5 days ago", unread: true },
+  { id: "m1", type: "message", from: "Coach John", contactId: "contact1", isAuthoredContact: true, preview: "Reminder: Practice tomorrow at 5 PM sharp!", date: "2h ago", unread: true },
+  { id: "r1", type: "report", from: "Admin Bot", preview: "Weekly Attendance Report (U12 Soccer) is ready.", date: "Yesterday", unread: false, reportUrl: "/dashboard/reports/123" },
+  { id: "m2", type: "message", from: "Sarah M. (Photo Club)", contactId: "contact2", isAuthoredContact: false, preview: "Great shots from the event! Can you share them?", date: "3 days ago", unread: false },
+  { id: "m3", type: "message", from: "Team Fundraising Lead", contactId: "contact3", isAuthoredContact: true, preview: "Quick update on our fundraising goals for this month.", date: "5 days ago", unread: true },
 ];
 
 export const metadata = {
@@ -62,16 +62,16 @@ export default function ContactsPage() {
                                 <p className="text-xs text-muted-foreground truncate">{item.preview}</p>
                             </div>
                         </div>
-                        <div className="flex flex-col items-end flex-shrink-0 ml-auto text-right space-y-1">
+                        <div className="flex flex-col items-end flex-shrink-0 ml-auto text-right space-y-1 min-w-[80px]">
                             <span className="text-[11px] text-muted-foreground">{item.date}</span>
                             {item.type === "report" && item.reportUrl && (
                                 <Button variant="outline" size="xs" asChild className="text-accent border-accent hover:bg-accent/10 hover:text-accent">
                                     <Link href={item.reportUrl}>View Report</Link>
                                 </Button>
                             )}
-                             {item.type === "message" && (
+                             {item.type === "message" && item.contactId && (
                                 <Button variant="outline" size="xs" asChild className="text-primary border-primary hover:bg-primary/10 hover:text-primary">
-                                    <Link href={`/contacts/message/${item.id}`}>View</Link>
+                                    <Link href={item.isAuthoredContact ? `/contacts/edit/${item.contactId}` : `/contacts/view/${item.contactId}`}>View</Link>
                                 </Button>
                             )}
                         </div>
