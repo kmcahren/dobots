@@ -22,7 +22,7 @@ export default function AppPaymentsPage() {
         <div className="flex flex-col items-center mb-6 gap-2 sm:gap-4">
             <h1 className="text-2xl font-bold font-headline text-center">All Payments</h1>
             <div className="flex flex-wrap justify-center gap-2 mt-2 sm:mt-0 w-full sm:w-auto">
-                <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
+                <Button asChild variant="link" className="text-primary hover:underline">
                     <Link href="/dashboard/payments/history"> {/* Placeholder for full history/filtering */}
                         View Full History <ExternalLink className="ml-2 h-3 w-3"/>
                     </Link>
@@ -41,3 +41,4 @@ export default function AppPaymentsPage() {
     </div>
   );
 }
+
