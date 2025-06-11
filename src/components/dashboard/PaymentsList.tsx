@@ -44,10 +44,10 @@ export function PaymentsList() {
                 </CardTitle>
                 <span className={cn(
                     "text-xs px-2 py-0.5 rounded-full flex items-center font-medium",
-                    payment.status === 'paid' && "bg-green-100 text-green-700 dark:bg-green-700/30 dark:text-green-300",
-                    payment.status === 'pending' && "bg-yellow-100 text-yellow-700 dark:bg-yellow-700/30 dark:text-yellow-300",
-                    payment.status === 'failed' && "bg-red-100 text-red-700 dark:bg-red-700/30 dark:text-red-300",
-                    payment.status === 'cancelled' && "bg-gray-100 text-gray-700 dark:bg-gray-700/30 dark:text-gray-300"
+                    payment.status === 'paid' && "bg-green-600 text-primary-foreground dark:bg-green-500 dark:text-primary-foreground",
+                    payment.status === 'pending' && "bg-amber-500 text-white dark:bg-amber-600 dark:text-amber-50",
+                    payment.status === 'failed' && "bg-destructive text-destructive-foreground",
+                    payment.status === 'cancelled' && "bg-gray-500 text-white dark:bg-gray-600 dark:text-gray-100"
                 )}>
                     {payment.status === 'paid' && <CheckCircle className="w-3 h-3 mr-1"/>}
                     {payment.status === 'pending' && <AlertTriangle className="w-3 h-3 mr-1"/>}
@@ -89,4 +89,3 @@ export function PaymentsList() {
     </div>
   );
 }
-
