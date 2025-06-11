@@ -25,9 +25,9 @@ body {
     --secondary-foreground: 197 76% 35%; /* Darker blue text on secondary */
 
     --muted: 197 60% 92%; /* Very light blue for muted elements */
-    --muted-foreground: 197 40% 55%; /* Softer blue-gray text on muted */
+    --muted-foreground: 197 40% 45%; /* Darker Softer blue-gray text on muted (was 197 40% 55%) */
 
-    --accent: 197 76% 53%; /* PRD: Saturated blue (#29ABE2) - Now Accent */
+    --accent: 197 76% 40%; /* Darker Saturated blue (#137CAC) - Now Accent (was 197 76% 53%) */
     --accent-foreground: 0 0% 100%; /* White text on accent */
 
     --destructive: 0 84% 60%; /* Clear Red */
@@ -35,10 +35,10 @@ body {
 
     --border: 197 50% 80%; /* Light blue border */
     --input: 0 0% 98%; /* Off-white input background for light theme */
-    --ring: 289 65% 45%; /* Purple-based for focus rings */
+    --ring: 289 65% 45%; /* Purple-based for focus rings (aligns with new Primary) */
 
     --chart-1: 289 65% 40%; /* Purple (New Primary) */
-    --chart-2: 197 76% 53%; /* Blue (New Accent) */
+    --chart-2: 197 76% 40%; /* Darker Blue (New Accent) */
     --chart-3: 25 95% 55%;  /* Bright Orange */
     --chart-4: 140 60% 45%; /* Engaging Green */
     --chart-5: 0 84% 60%;   /* Vivid Red */
@@ -76,7 +76,7 @@ body {
     --muted-foreground: 197 15% 65%;
 
     --accent: 197 76% 58%; /* Lighter Saturated Blue for dark mode accent */
-    --accent-foreground: 0 0% 100%; /* White text on accent */
+    --accent-foreground: 197 30% 20%; /* Dark blue-gray text on accent (was white #FFFFFF) */
 
     --destructive: 0 70% 55%; /* Slightly less vibrant Red for dark mode */
     --destructive-foreground: 0 0% 98%;
