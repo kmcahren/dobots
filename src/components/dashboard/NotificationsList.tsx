@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { BellRing, MoreHorizontal, CheckCircle2, AlertCircle, XCircle, HelpCircle, Users, Check, X, ThumbsUp, ThumbsDown } from "lucide-react";
 import type { NotificationItem, NotificationUserChoice } from "@/lib/types";
-import { parseISO, format } from 'date-fns';
+import { ClientSideFormattedDate } from '@/components/utils/ClientSideFormattedDate';
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
@@ -139,7 +139,11 @@ export function NotificationsList() {
               {notification.description && <CardDescription className="pt-1">{notification.description}</CardDescription>}
             </CardHeader>
             <CardContent className="text-sm space-y-3">
-              {notification.dueDate && <p className="text-muted-foreground">Due Date: {format(parseISO(notification.dueDate), "PPp")}</p>}
+              {notification.dueDate && (
+                <p className="text-muted-foreground">
+                  Due Date: <ClientSideFormattedDate isoDateString={notification.dueDate} formatString="PPp" />
+                </p>
+              )}
               <div className="flex items-center text-muted-foreground space-x-1">
                 <Users className="h-4 w-4 mr-0 flex-shrink-0" />
                 <span className="text-xs">{totalRecipients} Recipients</span>
@@ -197,10 +201,7 @@ export function NotificationsList() {
                   )}
                 </div>
               )}
-               {/* Link to view detailed results for admins/creators - future feature */}
-               {/* <Button variant="link" size="sm" className="p-0 h-auto text-xs">View Full Results</Button> */}
             </CardContent>
-            {/* CardFooter removed as actions are now inline */}
           </Card>
         );
       })}
