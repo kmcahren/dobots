@@ -33,10 +33,10 @@ export function PaymentsList() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {paymentsToShow.map((payment) => (
         <Card key={payment.id} className="shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg">
-          <CardHeader>
+          <CardHeader className="px-4 py-3">
              <div className="flex justify-between items-start">
                 <CardTitle className="font-headline text-lg flex items-center">
                     <CircleDollarSign className="h-5 w-5 mr-2 text-primary" />
@@ -60,12 +60,12 @@ export function PaymentsList() {
               Amount: <span className="font-semibold text-foreground">${payment.price.toFixed(2)} {payment.currency}</span>
             </CardDescription>
           </CardHeader>
-          <CardContent className="text-sm space-y-1">
+          <CardContent className="px-4 py-3 text-sm space-y-0.5">
             <p className="text-muted-foreground">Requested by: User {payment.requesterId.slice(-3)}</p>
             {payment.dueDate && <p className="text-muted-foreground">Due Date: {format(parseISO(payment.dueDate), 'P')}</p>}
             <p className="text-muted-foreground">Created: {format(parseISO(payment.createdAt), 'P')}</p>
           </CardContent>
-          <CardFooter className="bg-muted/30 p-3 dark:bg-muted/20">
+          <CardFooter className="bg-muted/30 p-2 dark:bg-muted/20">
             {payment.status === 'pending' ? (
               <Button asChild variant="default" size="sm" className="w-full bg-green-600 hover:bg-green-700 text-white dark:bg-green-500 dark:hover:bg-green-600">
                 {/* Link to payment page - placeholder */}
