@@ -62,7 +62,7 @@ export default function ContactsPage() {
                                 <p className="text-xs text-muted-foreground truncate">{item.preview}</p>
                             </div>
                         </div>
-                        <div className="flex flex-col items-end flex-shrink-0 ml-auto text-right space-y-1 min-w-[80px]">
+                        <div className="flex flex-col items-end flex-shrink-0 ml-auto text-right space-y-1 min-w-[90px]"> {/* Adjusted min-width for button consistency */}
                             <span className="text-[11px] text-muted-foreground">{item.date}</span>
                             {item.type === "report" && item.reportUrl && (
                                 <Button size="xs" asChild className="bg-accent text-accent-foreground hover:bg-accent/90">
