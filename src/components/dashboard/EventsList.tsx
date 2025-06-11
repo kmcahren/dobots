@@ -164,7 +164,7 @@ export function EventsList() {
                                     <Check className="h-4 w-4 mr-1.5" /> Confirm
                                 </Button>
                                 <Button asChild variant="default" size="sm" className="flex-grow">
-                                    <Link href={`/dashboard/events/${event.id}`}>View Details</Link>
+                                    <Link href={`/dashboard/events/${event.id}`}>Details</Link>
                                 </Button>
                                 <Button
                                     size="sm"
