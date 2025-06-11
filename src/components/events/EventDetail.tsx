@@ -1,15 +1,15 @@
 
-"use client"; 
+"use client";
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
-  CalendarDays, MapPin, Users, UserCircle, FileText, DollarSign, 
+import {
+  CalendarDays, MapPin, Users, UserCircle, FileText, DollarSign,
   XCircle, CheckSquare, Link as LinkIcon, Edit, ExternalLink,
   CheckCircle2, HelpCircle, Users2, Check, X, ThumbsUp, ThumbsDown
 } from 'lucide-react';
 import Link from 'next/link';
-import type { EventItem, RsvpStatus } from '@/lib/types'; 
+import type { EventItem, RsvpStatus } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
 import { useState, useEffect } from 'react'; // Added useEffect
 import { useToast } from "@/hooks/use-toast";
@@ -28,7 +28,7 @@ const mockEventData: EventItem = {
   groupName: "Sportsville Youth Soccer League",
   inviteesCount: 75,
   attendingMembersCount: 48,
-  cancelledMembersCount: 5, 
+  cancelledMembersCount: 5,
   registrationFee: 150,
   maxParticipants: 60,
   imageUrl: "https://placehold.co/1200x400.png",
@@ -43,7 +43,7 @@ const mockEventData: EventItem = {
 };
 
 export function EventDetail({ eventId }: { eventId: string }) {
-  const event = mockEventData; 
+  const event = mockEventData;
   const { toast } = useToast();
   const [userRsvpStatus, setUserRsvpStatus] = useState<RsvpStatus | undefined>(event.currentUserRsvpStatus);
 
@@ -76,7 +76,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
       description: `You have ${status === 'attending' ? 'confirmed attendance' : 'declined'} for "${event.title}".`,
     });
   };
-  
+
   const formattedStartDate = event.startDate ? format(parseISO(event.startDate), "EEEE, MMMM d, yyyy") : "Date TBD";
 
   const totalInvited = event.inviteesCount || 0;
@@ -88,7 +88,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
     <Card className="overflow-hidden shadow-xl rounded-xl">
       <CardHeader className="p-0 relative">
         {event.imageUrl && (
-          <div className="relative h-40 md:h-56"> 
+          <div className="relative h-40 md:h-56">
             <Image src={event.imageUrl} alt={event.title} layout="fill" objectFit="cover" data-ai-hint={event.dataAiHint} />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           </div>
@@ -99,28 +99,24 @@ export function EventDetail({ eventId }: { eventId: string }) {
           <p className={`text-sm ${event.imageUrl ? 'text-gray-200 dark:text-gray-300' : 'text-muted-foreground'} flex items-center mt-1`}>
             <Users2 className="w-4 h-4 mr-1.5 flex-shrink-0" /> {totalInvited} Invited
           </p>
-          
+
           {!event.isUserHost && (
             <div className="mt-3 space-y-2">
               {userRsvpStatus === 'unconfirmed' && (
                 <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline"
-                    onClick={() => handleRsvp('attending')} 
-                    className="bg-green-50 hover:bg-green-100 border-green-300 text-green-700 dark:bg-green-700/30 dark:hover:bg-green-700/50 dark:border-green-500/50 dark:text-green-300"
-                    title="Confirm Attendance"
+                  <Button
+                    size="sm"
+                    onClick={() => handleRsvp('attending')}
+                    className="bg-green-600 hover:bg-green-700 text-white dark:bg-green-500 dark:hover:bg-green-600"
                   >
-                    <Check className="mr-1.5 h-4 w-4" /> Confirm
+                    <Check className="mr-1 h-4 w-4" /> Confirm
                   </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline"
+                  <Button
+                    size="sm"
+                    variant="destructive"
                     onClick={() => handleRsvp('declined')}
-                    className="bg-red-50 hover:bg-red-100 border-red-300 text-red-700 dark:bg-red-700/30 dark:hover:bg-red-700/50 dark:border-red-500/50 dark:text-red-300"
-                    title="Decline Attendance"
                   >
-                    <X className="mr-1.5 h-4 w-4" /> Decline
+                    <X className="mr-1 h-4 w-4" /> Decline
                   </Button>
                 </div>
               )}
@@ -162,7 +158,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
               <p className="font-medium text-foreground">Date & Time</p>
               <p className="text-muted-foreground">{formattedStartDate}</p>
               <p className="text-muted-foreground">
-                {clientFormattedStartTime || "Loading time..."} 
+                {clientFormattedStartTime || "Loading time..."}
                 {clientFormattedEndTime && clientFormattedStartTime ? ` - ${clientFormattedEndTime}` : (!clientFormattedStartTime && clientFormattedEndTime ? clientFormattedEndTime : "")}
               </p>
             </div>
@@ -173,10 +169,10 @@ export function EventDetail({ eventId }: { eventId: string }) {
               <p className="font-medium text-foreground">Location</p>
               <p className="text-muted-foreground">
                 {event.location}
-                <a 
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="ml-1 text-primary hover:underline text-xs"
                 >
                   (map)
@@ -210,10 +206,10 @@ export function EventDetail({ eventId }: { eventId: string }) {
               <LinkIcon className="w-5 h-5 mr-3 mt-0.5 text-muted-foreground flex-shrink-0" />
               <div>
                 <p className="font-medium text-foreground">Event Link</p>
-                <a 
-                  href={event.eventLinkUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={event.eventLinkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-primary hover:underline flex items-center"
                 >
                   View Event Page <ExternalLink className="ml-1.5 h-4 w-4" />
@@ -249,7 +245,7 @@ export function EventDetail({ eventId }: { eventId: string }) {
                 </div>
             </div>
         </div>
-        
+
         {event.description && (
           <div className="pt-4 border-t dark:border-border/50">
             <div className="flex items-start">
@@ -287,4 +283,3 @@ export function EventDetail({ eventId }: { eventId: string }) {
     </Card>
   );
 }
-
