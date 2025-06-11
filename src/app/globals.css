@@ -9,98 +9,98 @@ body {
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* White */
-    --foreground: 0 0% 10%; /* Near Black */
+    --background: 197 88% 94%; /* PRD: Light desaturated blue (#E5F6FD) */
+    --foreground: 197 30% 25%; /* Darker blue-gray for text on light background */
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 0 0% 10%; /* Near Black */
+    --card: 0 0% 100%; /* White cards */
+    --card-foreground: 197 30% 20%; /* Darker blue-gray for text on cards */
 
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 0 0% 10%; /* Near Black */
+    --popover: 0 0% 100%; /* White popovers */
+    --popover-foreground: 197 30% 20%;
 
-    --primary: 270 60% 50%; /* Royal Purple */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 197 76% 53%; /* PRD: Saturated blue (#29ABE2) */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
 
-    --secondary: 220 10% 95%; /* Light Gray */
-    --secondary-foreground: 220 10% 30%; /* Darker Gray */
+    --secondary: 197 60% 88%; /* Lighter blue for secondary elements */
+    --secondary-foreground: 197 76% 35%; /* Darker blue text on secondary */
 
-    --muted: 220 10% 90%; /* Very Light Gray */
-    --muted-foreground: 220 10% 50%; /* Softer Gray */
+    --muted: 197 60% 92%; /* Very light blue for muted elements */
+    --muted-foreground: 197 40% 55%; /* Softer blue-gray text on muted */
 
-    --accent: 140 60% 45%; /* Engaging Green */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 289 65% 40%; /* PRD: Purple (#8E24AA) */
+    --accent-foreground: 0 0% 100%; /* White text on accent */
 
     --destructive: 0 84% 60%; /* Clear Red */
     --destructive-foreground: 0 0% 100%; /* White */
 
-    --border: 220 10% 88%; /* Light Gray Border */
-    --input: 220 10% 92%; /* Slightly Off-white Input Background */
-    --ring: 270 60% 55%; /* Lighter Royal Purple for Focus Rings */
+    --border: 197 50% 80%; /* Light blue border */
+    --input: 0 0% 98%; /* Off-white input background for light theme */
+    --ring: 197 76% 58%; /* Primary blue (slightly adjusted) for focus rings */
 
-    --chart-1: 270 60% 50%; /* Royal Purple */
-    --chart-2: 140 60% 45%; /* Engaging Green */
+    --chart-1: 197 76% 53%; /* Primary Blue */
+    --chart-2: 289 65% 40%; /* Accent Purple */
     --chart-3: 25 95% 55%;  /* Bright Orange */
-    --chart-4: 217 91% 60%; /* Vibrant Blue */
+    --chart-4: 140 60% 45%; /* Engaging Green */
     --chart-5: 0 84% 60%;   /* Vivid Red */
     
     --radius: 0.5rem;
 
-    /* Sidebar specific colors */
-    --sidebar-background: 0 0% 98%; /* Almost White */
-    --sidebar-foreground: 0 0% 20%; /* Dark Gray Text */
-    --sidebar-primary: 270 60% 45%; /* Sidebar Primary Action (slightly darker purple) */
+    /* Sidebar specific colors for light theme */
+    --sidebar-background: 197 60% 97%; /* Very Light Blue, almost white */
+    --sidebar-foreground: 197 30% 25%; /* Dark Gray-Blue Text */
+    --sidebar-primary: 197 76% 50%; /* Sidebar Primary Action (slightly darker main primary) */
     --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 220 10% 92%; /* Light Gray for hover/active items */
-    --sidebar-accent-foreground: 0 0% 10%; /* Dark Text on Accent */
-    --sidebar-border: 220 10% 85%; /* Light Gray Border */
-    --sidebar-ring: 270 60% 55%; /* Purple for Focus */
+    --sidebar-accent: 197 88% 90%; /* Lighter Blue for hover/active items */
+    --sidebar-accent-foreground: 197 76% 30%; /* Dark Blue Text on Accent */
+    --sidebar-border: 197 50% 82%; /* Light Blue Border for Sidebar */
+    --sidebar-ring: 197 76% 58%; /* Primary Blue for Focus */
   }
 
   .dark {
-    --background: 270 5% 10%; /* Dark Purple Tint Background */
-    --foreground: 0 0% 95%; /* Near White */
+    --background: 197 30% 12%; /* Very dark desaturated blue */
+    --foreground: 197 15% 90%; /* Light, slightly blue-tinted gray */
 
-    --card: 270 5% 15%; /* Dark Purple Tint Card */
-    --card-foreground: 0 0% 95%; /* Near White */
+    --card: 197 30% 18%; /* Slightly lighter dark desaturated blue for cards */
+    --card-foreground: 197 15% 90%; 
 
-    --popover: 270 5% 15%; /* Dark Purple Tint Popover */
-    --popover-foreground: 0 0% 95%; /* Near White */
+    --popover: 197 30% 15%; /* Similar to card or slightly darker for popovers */
+    --popover-foreground: 197 15% 90%;
 
-    --primary: 270 70% 65%; /* Lighter/Saturated Royal Purple */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 197 76% 58%; /* Lighter Saturated Blue for dark mode */
+    --primary-foreground: 0 0% 100%; /* White text on primary */
 
-    --secondary: 270 5% 20%; /* Medium Dark Gray with Purple Tint */
-    --secondary-foreground: 0 0% 85%; /* Lighter Gray */
+    --secondary: 197 20% 25%; /* Darker gray-blue for secondary */
+    --secondary-foreground: 197 15% 80%;
 
-    --muted: 270 5% 18%; /* Dark Gray for Muted Background with Purple Tint */
-    --muted-foreground: 0 0% 60%; /* Medium Gray for Muted Text */
+    --muted: 197 20% 20%; /* Dark gray-blue for muted */
+    --muted-foreground: 197 15% 65%;
 
-    --accent: 140 65% 55%; /* Lighter/Saturated Green */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 289 65% 55%; /* Lighter Purple for dark mode accent */
+    --accent-foreground: 0 0% 100%; /* White text on accent */
 
-    --destructive: 0 75% 55%; /* Slightly less vibrant Red for dark */
+    --destructive: 0 70% 55%; /* Slightly less vibrant Red for dark mode */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 270 5% 25%; /* Darker Border with Purple Tint */
-    --input: 270 5% 20%; /* Dark Input Background with Purple Tint */
-    --ring: 270 70% 70%; /* Lighter Royal Purple for Focus Rings (Dark) */
+    --border: 197 20% 30%; /* Darker blue-gray border */
+    --input: 197 20% 22%; /* Dark blue-gray input background */
+    --ring: 197 76% 65%; /* Lighter Primary Blue for focus rings */
 
     /* Chart colors for dark mode */
-    --chart-1: 270 70% 65%; /* Royal Purple (Dark) */
-    --chart-2: 140 65% 55%; /* Green (Dark) */
-    --chart-3: 25 90% 60%;  /* Orange (Dark) */
-    --chart-4: 217 85% 65%; /* Blue (Dark) */
-    --chart-5: 0 75% 55%;   /* Red (Dark) */
+    --chart-1: 197 76% 60%; /* Primary Blue (Dark) */
+    --chart-2: 289 65% 60%; /* Accent Purple (Dark) */
+    --chart-3: 35 80% 65%;  /* Orange (Dark) */
+    --chart-4: 130 55% 60%; /* Green (Dark) */
+    --chart-5: 0 70% 60%;   /* Red (Dark) */
 
     /* Sidebar specific colors for dark theme */
-    --sidebar-background: 270 5% 12%; /* Dark Background for Sidebar, subtle purple tint */
-    --sidebar-foreground: 0 0% 90%; /* Light Text */
-    --sidebar-primary: 270 70% 65%; /* Purple for Primary Actions */
-    --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 270 5% 22%; /* Darker Accent for Hover/Active with Purple Tint */
-    --sidebar-accent-foreground: 0 0% 95%; /* Light Text on Accent */
-    --sidebar-border: 270 5% 24%; /* Dark Border with Purple Tint */
-    --sidebar-ring: 270 70% 70%; /* Purple for Focus */
+    --sidebar-background: 197 30% 16%; /* Dark Background for Sidebar, distinct from main */
+    --sidebar-foreground: 197 15% 85%; /* Light Text */
+    --sidebar-primary: 197 76% 58%; /* Primary Blue for Sidebar Actions */
+    --sidebar-primary-foreground: 0 0% 100%; 
+    --sidebar-accent: 197 25% 28%; /* Darker Accent for Hover/Active */
+    --sidebar-accent-foreground: 197 15% 95%; /* Light Text on Accent */
+    --sidebar-border: 197 20% 25%; /* Dark Border for Sidebar */
+    --sidebar-ring: 197 76% 65%; /* Lighter Primary Blue for Focus */
   }
 }
 
