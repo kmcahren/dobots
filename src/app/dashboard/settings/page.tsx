@@ -68,7 +68,9 @@ export default function SettingsPage() {
           </CardHeader>
           <CardContent className="pt-2 pb-4 px-5">
             <p className="text-sm text-muted-foreground mb-3">This section is typically restricted to users with administrative privileges.</p>
-            <Button variant="secondary" disabled>Access Admin Panel (Admin Only)</Button>
+            <Button variant="secondary" asChild>
+                <Link href="/dashboard/settings/admin-config">Configure Settings</Link>
+            </Button>
           </CardContent>
         </Card>
 
