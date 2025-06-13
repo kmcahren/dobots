@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Users, ShieldX } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
+import { cn } from "@/lib/utils"; // Added this import
 
 interface AdminManagedGroupCreator {
   id: string;
