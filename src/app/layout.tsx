@@ -18,6 +18,7 @@ const app = initializeApp(firebaseConfig);
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"; // Added Toaster for global notifications
+import { ToastStateProvider } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: 'DOIT: Team & Club Manager',
@@ -53,7 +54,9 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         {children}
-        <Toaster />
+        <ToastStateProvider>
+          <Toaster />
+        </ToastStateProvider>
       </body>
     </html>
   );

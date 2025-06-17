@@ -4,11 +4,6 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
-export const metadata = {
-  title: 'New Payment Request - DOIT',
-  description: 'Create and send a new payment request.',
-};
-
 export default function NewPaymentPage() {
   // Dynamically import the PaymentRequestForm component, disable server-side rendering (ssr: false)
   // We are re-declaring PaymentRequestForm here to use the dynamically imported version.
