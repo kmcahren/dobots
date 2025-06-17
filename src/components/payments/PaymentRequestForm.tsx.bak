@@ -49,6 +49,7 @@ const paymentFormSchema = z.object({
   price: z.coerce.number().positive("Price must be a positive number."),
   dueDate: z.date().optional(),
   paymentMethodInfo: z.boolean().default(true).optional(),
+  productOrService: z.string().optional(),
   targetType: z.enum(["group", "contacts"], {
     required_error: "Please select who to send this request to.",
   }),
@@ -211,7 +212,27 @@ export function PaymentRequestForm() {
                 )}
             />
             
-            
+            <FormField
+              control={form.control}
+              name="productOrService"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Product/Service (Optional)</FormLabel>
+                  <div className="flex items-center gap-2">
+                    <FormControl>
+                      <Input placeholder="e.g., Small T-Shirt, Basic Membership" {...field} />
+                    </FormControl>
+                    <Button type="button" variant="outline" size="icon" className="flex-shrink-0">
+                        <PlusCircle className="h-4 w-4"/>
+                        <span className="sr-only">Add another product/service</span>
+                    </Button>
+                  </div>
+                  <FormDescription>Link to an existing product or service, or describe it here.</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="targetType"
