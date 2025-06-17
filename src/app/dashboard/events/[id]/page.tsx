@@ -3,6 +3,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 // This function could be used for generating static paths if needed, or for fetching data server-side.
 // For now, we assume client-side fetching or mock data within EventDetail.
 // export async function generateMetadata({ params }: { params: { id: string } }) {
