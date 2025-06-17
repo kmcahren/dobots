@@ -14,8 +14,8 @@ export function DashboardHeaderProfile() {
         <Image
           src="https://placehold.co/1200x300.png" // Placeholder for customizable image
           alt="Team or Club Banner"
-          layout="fill"
-          objectFit="cover"
+          fill // Replaced layout="fill"
+          style={{ objectFit: 'cover' }} // Replaced objectFit="cover"
           className="opacity-30" // Make placeholder less prominent if it's just a pattern
           data-ai-hint="team sport collage" // More specific hint
         />

@@ -100,7 +100,7 @@ export function EventsList() {
                   <Card key={event.id} className="flex flex-col overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg group">
                     {event.imageUrl && (
                        <div className="relative h-48 w-full">
-                          <Image src={event.imageUrl} alt={event.title} layout="fill" objectFit="cover" data-ai-hint={event.dataAiHint || "event image"} className="transition-transform duration-300 group-hover:scale-105"/>
+                          <Image src={event.imageUrl} alt={event.title} fill style={{ objectFit: 'cover' }} data-ai-hint={event.dataAiHint || "event image"} className="transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"/>
                        </div>
                     )}
                     <CardHeader className="pb-3">
