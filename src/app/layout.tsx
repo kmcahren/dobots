@@ -54,6 +54,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         {children}
+        {/* Toaster must be inside the ToastStateProvider to consume the context */}
         <ToastStateProvider>
           <Toaster />
         </ToastStateProvider>
