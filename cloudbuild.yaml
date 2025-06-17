@@ -1,0 +1,7 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-east1-docker.pkg.dev/doit-team-club-manager/nodejs-images/club-manager-app:$SHORT_SHA', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-east1-docker.pkg.dev/doit-team-club-manager/nodejs-images/club-manager-app:$SHORT_SHA']
+images: ['us-east1-docker.pkg.dev/doit-team-club-manager/nodejs-images/club-manager-app:$SHORT_SHA']
+
