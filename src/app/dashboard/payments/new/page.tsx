@@ -1,7 +1,8 @@
-import { PaymentRequestForm } from '@/components/payments/PaymentRequestForm';
+"use client";
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
+import dynamic from 'next/dynamic';
 
 export const metadata = {
   title: 'New Payment Request - DOIT',
@@ -9,6 +10,13 @@ export const metadata = {
 };
 
 export default function NewPaymentPage() {
+  // Dynamically import the PaymentRequestForm component, disable server-side rendering (ssr: false)
+  // We are re-declaring PaymentRequestForm here to use the dynamically imported version.
+  const PaymentRequestForm = dynamic(() => import('@/components/payments/PaymentRequestForm').then(mod => mod.PaymentRequestForm), {
+    ssr: false,
+    loading: () => <p>Loading form...</p>, // Optional loading component
+  });
+
   return (
     <div className="space-y-6">
       <div className="flex items-center mb-2">
