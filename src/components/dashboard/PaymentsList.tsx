@@ -2,17 +2,18 @@
 "use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 import { CreditCard, CheckCircle, AlertTriangle, MoreHorizontal, CircleDollarSign, XCircle } from "lucide-react"; // Added XCircle
-import type { PaymentItem } from "@/lib/types";
+import type { PaymentItem } from "@/lib/types"; // Updated to include imageUrl
 import { cn } from "@/lib/utils";
 import { format, parseISO } from "date-fns"; // Import format and parseISO
 
 const mockPayments: PaymentItem[] = [
   { id: "p1", title: "U12 Team Jersey Fee", price: 25.00, currency: "USD", status: "paid", requesterId: "user1", createdAt: "2024-08-10T11:00:00Z", dueDate: "2024-08-01" },
-  { id: "p2", title: "Club Membership Renewal", price: 50.00, currency: "USD", status: "pending", requesterId: "user2", createdAt: "2024-08-05T15:20:00Z", dueDate: "2024-08-20" },
+  { id: "p2", title: "Club Membership Renewal", price: 50.00, currency: "USD", status: "pending", requesterId: "user2", createdAt: "2024-08-05T15:20:00Z", dueDate: "2024-08-20", imageUrl: "https://placehold.co/600x400/FF5733/FFFFFF?text=Renewal+Due" }, // Added imageUrl
   { id: "p3", title: "Tournament Entry Fee", price: 100.00, currency: "USD", status: "pending", requesterId: "user1", createdAt: "2024-08-01T08:00:00Z", dueDate: "2024-08-15" },
-  { id: "p4", title: "Fundraising Dinner Ticket", price: 75.00, currency: "USD", status: "paid", requesterId: "user3", createdAt: "2024-07-20T18:00:00Z", dueDate: "2024-07-15" },
+  { id: "p4", title: "Fundraising Dinner Ticket", price: 75.00, currency: "USD", status: "paid", requesterId: "user3", createdAt: "2024-07-20T18:00:00Z", dueDate: "2024-07-15", imageUrl: "https://placehold.co/600x400/33FF57/000000?text=Gala+Ticket" }, // Added imageUrl
   { id: "p5", title: "Equipment Damage Fee", price: 30.00, currency: "USD", status: "failed", requesterId: "user4", createdAt: "2024-06-15T10:00:00Z", dueDate: "2024-06-10"},
 ];
 
@@ -36,6 +37,15 @@ export function PaymentsList() {
     <div className="space-y-4">
       {paymentsToShow.map((payment) => (
         <Card key={payment.id} className="shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg">
+          {payment.imageUrl && (
+            <div className="relative h-40 w-full mb-4"> {/* Added mb-4 for spacing */}
+              <Image 
+                src={payment.imageUrl} 
+                alt="Payment image" 
+                fill={true} 
+                style={{ objectFit: 'cover' }} />
+            </div>
+          )}
           <CardHeader className="px-4 py-3">
              <div className="flex justify-between items-start">
                 <CardTitle className="font-headline text-lg flex items-center">

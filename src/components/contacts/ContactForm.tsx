@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Loader2, UserPlus, Save } from "lucide-react";
 import Image from "next/image";
@@ -43,9 +43,14 @@ const defaultValues: Partial<ContactFormValues> = {
 };
 
 export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValues & { id?: string } }) {
+  // State for available avatars (will be fetched from server-side)
+  const [availableAvatars, setAvailableAvatars] = useState<string[]>([]);
+  // State for the currently selected avatar
+  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(contactToEdit?.avatarUrl || null);
+
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
-    defaultValues: contactToEdit || defaultValues,
+    defaultValues: contactToEdit ? contactToEdit : { ...defaultValues, avatarUrl: selectedAvatar || "" }, // Set default avatarUrl from selectedAvatar
   });
   const { toast } = useToast();
   const router = useRouter();
@@ -61,6 +66,14 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
       setAvatarPreview(null);
     }
   };
+
+  // TODO: Fetch the list of avatars from a server-side source
+  // useEffect(() => {
+  //   // Example: Fetch from an API endpoint
+  //   fetch('/api/avatars')
+  //     .then(res => res.json())
+  //     .then(data => setAvailableAvatars(data));
+  // }, []);
 
   async function onSubmit(data: ContactFormValues) {
     setIsLoading(true);
@@ -92,18 +105,33 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Avatar URL (Optional)</FormLabel>
+                  {/* TODO: Display the list of avatars here for selection */}
+                  <div className="mb-4">
+                    {/* Example: {availableAvatars.map(avatarPath => (
+                      <Image
+                        key={avatarPath}
+                        src={avatarPath}
+                        alt="Selectable Avatar"
+                        width={40}
+                        height={40}
+                        className={`rounded-full cursor-pointer ${selectedAvatar === avatarPath ? 'border-2 border-primary' : ''}`}
+                        onClick={() => setSelectedAvatar(avatarPath)}
+                      />
+                    ))}*/}
+                  </div>
                   <div className="flex items-center gap-4">
-                    {avatarPreview ? (
-                      <Image 
-                        src={avatarPreview} 
-                        alt="Avatar Preview" 
-                        width={64} 
-                        height={64} 
+                    {/* Avatar Preview */}
+                    {selectedAvatar ? ( // Use selectedAvatar for preview
+                      <Image
+                        src={selectedAvatar}
+                        alt="Avatar Preview"
+                        width={64}
+                        height={64}
                         className="rounded-full object-cover border-2 border-primary/30"
                         data-ai-hint="user avatar"
-                        onError={() => setAvatarPreview("https://placehold.co/64x64.png?text=Error")}
+                        onError={() => setSelectedAvatar("https://placehold.co/64x64.png?text=Error")} // Update selectedAvatar on error
                       />
-                    ) : (
+                    ) : ( // Fallback if no avatar is selected
                       <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center text-muted-foreground text-2xl">
                         {form.getValues("name")?.charAt(0).toUpperCase() || <UserPlus size={24} />}
                       </div>

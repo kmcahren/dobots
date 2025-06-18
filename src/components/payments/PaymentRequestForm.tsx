@@ -47,6 +47,7 @@ const paymentFormSchema = z.object({
   title: z.string().min(3, "Title is too short.").max(100),
   description: z.string().max(500).optional(),
   price: z.coerce.number().positive("Price must be a positive number."),
+  imageUrl: z.string().url("Invalid URL for image.").optional().or(z.literal('')),
   dueDate: z.date().optional(),
   paymentMethodInfo: z.boolean().default(true).optional(),
   targetType: z.enum(["group", "contacts"], {
@@ -86,6 +87,7 @@ export function PaymentRequestForm() {
     title: initialTitle,
     price: initialAmount ? parseFloat(initialAmount) : undefined,
     paymentMethodInfo: true,
+  imageUrl: "",
     selectedContactIds: [],
   };
   
@@ -211,6 +213,20 @@ export function PaymentRequestForm() {
                 )}
             />
             
+            <FormField
+                control={form.control}
+                name="imageUrl"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Image Link URL (Optional)</FormLabel>
+                    <FormControl>
+                    <Input placeholder="https://example.com/image.png" {...field} value={field.value || ""} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+
             
             <FormField
               control={form.control}

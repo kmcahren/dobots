@@ -98,6 +98,7 @@ export interface PaymentItem {
   eventId?: string;
   productOrServiceInfo?: string;
   createdAt: string; // ISO string
+  imageUrl?: string; // Optional image URL for the payment request
 }
 
 export interface SelectableMember extends User {
