@@ -29,9 +29,9 @@ export default function PaymentDetailsPage() {
   const paymentId = params.id; // Get the 'id' from the URL parameters
 
   const [payment, setPayment] = useState<PaymentItem | undefined>(undefined);
-  // Construct the full URL for the QR code
-
   const [loading, setLoading] = useState(true);
+  // Construct the full URL for the QR code
+  const fullPaymentUrl = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}${pathname}` : '';
 
   useEffect(() => {
     if (paymentId) {
