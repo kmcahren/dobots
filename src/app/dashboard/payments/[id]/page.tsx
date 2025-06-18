@@ -2,10 +2,12 @@
 
 import { useRouter, useParams, usePathname } from 'next/navigation';
 import { QRCodeCanvas } from 'qrcode.react';
+import NfcWriter from '@/components/NfcWriter';
 
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 import Image from "next/image";
 import { format, parseISO } from "date-fns";
@@ -23,6 +25,7 @@ const mockPayments: PaymentItem[] = [
 
 
 export default function PaymentDetailsPage() {
+  const { toast } = useToast();
   const router = useRouter();
   const params = useParams();
   const pathname = usePathname();
@@ -31,6 +34,7 @@ export default function PaymentDetailsPage() {
   const [payment, setPayment] = useState<PaymentItem | undefined>(undefined);
   const [loading, setLoading] = useState(true);
   // Construct the full URL for the QR code
+ const [showNfcWriter, setShowNfcWriter] = useState(false);
   const fullPaymentUrl = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}${pathname}` : '';
 
   useEffect(() => {
@@ -147,7 +151,30 @@ export default function PaymentDetailsPage() {
             size={256}
             level="H" // High error correction level
           />
+          {/* Copy Link Button */}
+          <Button
+            onClick={() => {
+              navigator.clipboard.writeText(fullPaymentUrl);
+              toast({
+                title: "Link Copied!",
+                description: "Payment link copied to clipboard!",
+              });
+            }}
+            disabled={!fullPaymentUrl}
+            className="mt-4"
+          >Copy Link to Clipboard</Button>
         </div>
+      )}
+
+      {/* Write on NFC Tag Button */}
+      {fullPaymentUrl && (
+        <div className="mt-4 flex flex-col items-center">
+           <Button
+             onClick={() => setShowNfcWriter(!showNfcWriter)}
+             className="bg-chart-3 hover:bg-chart-3/90 text-primary-foreground"
+           >Write on NFC Tag</Button>
+            {showNfcWriter && <NfcWriter dataToWrite={fullPaymentUrl} />}
+         </div>
       )}
 
        <div className="mt-8 text-center">

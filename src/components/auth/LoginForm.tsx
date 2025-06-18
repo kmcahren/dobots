@@ -44,7 +44,7 @@ export function LoginForm() {
           {otpSent ? 'Enter Verification Code' : 'Welcome Back!'}
         </CardTitle>
         <CardDescription className="text-center">
-          {otpSent ? `We've sent a one-time password to ${phoneNumber}.` : 'Enter your mobile number to sign in or sign up.'}
+          {otpSent ? `We've sent a one-time password to ${phoneNumber}.` : 'Enter your mobile number to sign in.'}
         </CardDescription>
       </CardHeader>
       <CardContent>

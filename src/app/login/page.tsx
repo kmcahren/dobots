@@ -15,13 +15,13 @@ export default function LoginPage() {
            <Image 
              src="/images/logo2.png" // "https://placehold.co/80x80.png" 
              alt="DOIT Logo" 
-             width={120} 
-             height={120} 
+             width={110} 
+             height={110} 
              className="mx-auto mb-6 rounded-2xl shadow-md" 
              data-ai-hint="app logo"
            />
           <h1 className="text-4xl font-bold font-headline text-primary">DO!</h1>
-          <p className="mt-2 text-lg text-muted-foreground">Team & Club Management, Simplified & FREE!</p>
+          <p className="mt-2 text-lg text-muted-foreground">Team & Club Management, Simple & FREE!</p>
         </div>
         <LoginForm />
         <p className="px-8 text-center text-xs text-muted-foreground">
