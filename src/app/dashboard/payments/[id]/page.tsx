@@ -30,7 +30,7 @@ export default function PaymentDetailsPage() {
 
   const [payment, setPayment] = useState<PaymentItem | undefined>(undefined);
   // Construct the full URL for the QR code
-  const fullPaymentUrl = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}${pathname}` : '';
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
