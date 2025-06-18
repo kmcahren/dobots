@@ -25,8 +25,8 @@ export function AppHeader() {
             <Image 
               src="/images/logo2.png" //"https://placehold.co/40x40.png" // Replace with actual logo
               alt="DOIT Logo" 
-              width={46} 
-              height={46} 
+              width={50} 
+              height={50} 
               className="rounded-lg"
               data-ai-hint="app logo"
             />

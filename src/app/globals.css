@@ -9,7 +9,7 @@ body {
 
 @layer base {
   :root {
-    --background: 197 88% 94%; /* PRD: Light desaturated blue (#E5F6FD) */
+    --background: 30 100% 95%; /* PRD: changed to light orange from the suggested test values below - was 197 88% 94%; Light desaturated blue (#E5F6FD) */
     --foreground: 197 30% 25%; /* Darker blue-gray for text on light background */
 
     --card: 0 0% 100%; /* White cards */
@@ -37,6 +37,7 @@ body {
     --input: 0 0% 98%; /* Off-white input background for light theme */
     --ring: 289 65% 45%; /* Purple-based for focus rings (aligns with new Primary) */
 
+ --test-background: 30 100% 95%; /* For testing background colors ADDED 8/18/2025 */
     --chart-1: 289 65% 40%; /* Purple (New Primary) */
     --chart-2: 197 76% 40%; /* Darker Blue (New Accent) */
     --chart-3: 25 95% 55%;  /* Bright Orange */
@@ -85,6 +86,7 @@ body {
     --input: 197 20% 22%; /* Dark blue-gray input background */
     --ring: 289 65% 60%; /* Lighter Purple-based for focus rings */
 
+    --test-background: 30 80% 25%; /* For testing background colors */
     /* Chart colors for dark mode */
     --chart-1: 289 65% 55%; /* Purple (New Primary Dark) */
     --chart-2: 197 76% 58%; /* Blue (New Accent Dark) */

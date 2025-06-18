@@ -15,8 +15,8 @@ export default function LoginPage() {
            <Image 
              src="/images/logo2.png" // "https://placehold.co/80x80.png" 
              alt="DOIT Logo" 
-             width={90} 
-             height={90} 
+             width={120} 
+             height={120} 
              className="mx-auto mb-6 rounded-2xl shadow-md" 
              data-ai-hint="app logo"
            />
@@ -26,11 +26,11 @@ export default function LoginPage() {
         <LoginForm />
         <p className="px-8 text-center text-xs text-muted-foreground">
           By continuing, you agree to our{' '}
-          <a href="/terms" className="underline underline-offset-4 hover:text-primary">
+          <a href="https://www.dobots.co/termsofuse.html" className="underline underline-offset-4 hover:text-primary">
             Terms of Service
           </a>{' '}
           and{' '}
-          <a href="/privacy" className="underline underline-offset-4 hover:text-primary">
+          <a href="https://www.dobots.co/privacypolicy.html" className="underline underline-offset-4 hover:text-primary">
             Privacy Policy
           </a>
           .
