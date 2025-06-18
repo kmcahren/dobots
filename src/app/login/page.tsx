@@ -13,15 +13,15 @@ export default function LoginPage() {
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
            <Image 
-             src="https://placehold.co/80x80.png" 
+             src="/images/logo2.png" // "https://placehold.co/80x80.png" 
              alt="DOIT Logo" 
-             width={80} 
-             height={80} 
+             width={90} 
+             height={90} 
              className="mx-auto mb-6 rounded-2xl shadow-md" 
              data-ai-hint="app logo"
            />
-          <h1 className="text-4xl font-bold font-headline text-primary">DOIT</h1>
-          <p className="mt-2 text-lg text-muted-foreground">Team & Club Management, Simplified.</p>
+          <h1 className="text-4xl font-bold font-headline text-primary">DO!</h1>
+          <p className="mt-2 text-lg text-muted-foreground">Team & Club Management, Simplified & FREE!</p>
         </div>
         <LoginForm />
         <p className="px-8 text-center text-xs text-muted-foreground">
