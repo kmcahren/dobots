@@ -39,7 +39,7 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
             records: [
               {
                 recordType: 'uri',
-                data: new TextEncoder().encode(urlToWrite),
+                data: new TextEncoder().encode(dataToWrite),
               },
             ],
           };
