@@ -341,7 +341,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="imageUrl"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel>Event Image URL (Optional)</FormLabel>
+                  <FormLabel>Event Image URL (600x400-Optional)</FormLabel>
                   <FormControl>
                     <Input placeholder="https://example.com/image.png" {...field} />
                   </FormControl>
@@ -356,7 +356,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="eventLinkUrl"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel>Event Link URL (Optional)</FormLabel>
+                  <FormLabel>Event Link URL (External-Optional)</FormLabel>
                   <FormControl>
                     <Input placeholder="https://example.com/event-details" {...field} />
                   </FormControl>
