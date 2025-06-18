@@ -12,7 +12,7 @@ export function DashboardHeaderProfile() {
     <div className="mb-6 rounded-xl overflow-hidden shadow-lg border border-border/50">
       <div className="relative h-32 md:h-40 bg-gradient-to-r from-primary/80 to-accent/80">
         <Image
-          src="https://placehold.co/1200x300.png" // Placeholder for customizable image
+          src="/images/logo2.png" // Placeholder for customizable image
           alt="Team or Club Banner"
           fill // Replaced layout="fill"
           style={{ objectFit: 'cover' }} // Replaced objectFit="cover"
@@ -21,7 +21,7 @@ export function DashboardHeaderProfile() {
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center space-y-2">
           <h2 className="text-xl md:text-2xl font-bold font-headline text-white drop-shadow-md">
-            Welcome to DOIT!
+            Welcome to DOBOTS-DO!
           </h2>
           <div className="flex items-center space-x-3 md:space-x-4">
             <div className="flex items-center text-white text-xs md:text-sm bg-black/30 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg">

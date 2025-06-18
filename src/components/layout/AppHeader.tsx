@@ -23,14 +23,14 @@ export function AppHeader() {
         <div className="flex h-16 items-center justify-between">
           <Link href="/dashboard" className="flex items-center space-x-2">
             <Image 
-              src="/images/logo.png" //"https://placehold.co/40x40.png" // Replace with actual logo
+              src="/images/logo2.png" //"https://placehold.co/40x40.png" // Replace with actual logo
               alt="DOIT Logo" 
               width={36} 
               height={36} 
               className="rounded-lg"
               data-ai-hint="app logo"
             />
-            <span className="text-xl font-bold font-headline text-primary">DOIT</span>
+            <span className="text-xl font-bold font-headline text-primary">DO!</span>
           </Link>
           
           {isLoggedIn && (
