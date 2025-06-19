@@ -19,8 +19,8 @@ export function FloatingActionButton() {
           <Button 
             variant="default" 
             size="icon" 
-            className="rounded-full w-14 h-14 shadow-lg bg-accent hover:bg-accent/90 text-accent-foreground"
-            aria-label="Create new item"
+ aria-label="Create new item"
+ className="rounded-full w-14 h-14 shadow-lg bg-purple-600 hover:bg-purple-700 text-white"
           >
             <Plus className="h-7 w-7" />
           </Button>
@@ -31,7 +31,7 @@ export function FloatingActionButton() {
           <DropdownMenuItem asChild className="focus:bg-accent/20 focus:text-accent-foreground cursor-pointer">
             <Link href="/dashboard/events/new" className="flex items-center px-3 py-2.5 text-sm">
               <CalendarPlus className="mr-3 h-5 w-5 text-primary" />
-              <span>New Event/Group</span>
+              <span>New Group/Event</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild className="focus:bg-accent/20 focus:text-accent-foreground cursor-pointer">
@@ -43,7 +43,7 @@ export function FloatingActionButton() {
           <DropdownMenuItem asChild className="focus:bg-accent/20 focus:text-accent-foreground cursor-pointer">
             <Link href="/dashboard/shares/new" className="flex items-center px-3 py-2.5 text-sm">
               <Share2 className="mr-3 h-5 w-5 text-primary" />
-              <span>New Share/Report</span>
+              <span>New Message/Report</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild className="focus:bg-accent/20 focus:text-accent-foreground cursor-pointer">

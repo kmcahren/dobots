@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'New Notification - DOIT',
+  title: 'New Notification',
   description: 'Create and send a new notification or survey.',
 };
 

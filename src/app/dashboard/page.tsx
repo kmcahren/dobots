@@ -21,7 +21,7 @@ export default function DashboardPage() {
             <BellRing className="h-4 w-4 mr-2" /> Notifications
           </TabsTrigger>
           <TabsTrigger value="shares" className="flex flex-row items-center justify-center h-12 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md px-2 text-xs sm:text-sm">
-            <Share2 className="h-4 w-4 mr-2" /> Shares
+            <Share2 className="h-4 w-4 mr-2" /> Reports
           </TabsTrigger>
           <TabsTrigger value="payments" className="flex flex-row items-center justify-center h-12 data-[state=active]:bg-background data-[state=active]:text-primary data-[state=active]:shadow-md rounded-md px-2 text-xs sm:text-sm">
             <CreditCard className="h-4 w-4 mr-2" /> Payments

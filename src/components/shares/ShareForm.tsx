@@ -97,7 +97,7 @@ export function ShareForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="p-6 md:p-8 bg-card rounded-xl shadow-lg border">
             <h2 className="text-2xl font-semibold font-headline mb-6 text-primary">
-                Create New Share
+                New Message/Report
             </h2>
             <div className="space-y-6">
             <FormField
@@ -226,13 +226,13 @@ export function ShareForm() {
             )}
             </div>
         </div>
-        <div className="flex justify-end gap-3 pt-4">
-          <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
-            Cancel
-          </Button>
+        <div className="flex justify-start gap-3 pt-4">
           <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground">
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {shareType === "message" ? "Send Message" : "Generate & Share Report"}
+          </Button>
+          <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
+            Cancel
           </Button>
         </div>
       </form>

@@ -99,6 +99,7 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
           </h2>
           
           <div className="space-y-6">
+            {/* Avatar URL feature commented out for future use */}
             <FormField
               control={form.control}
               name="avatarUrl"
@@ -184,7 +185,7 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address (Optional)</FormLabel>
+                    <FormLabel>Email Address (Optional - for reports)</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="name@example.com" {...field} value={field.value || ""} />
                     </FormControl>
@@ -199,7 +200,7 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notes (Optional)</FormLabel>
+                  <FormLabel>Notes (Optional - for key relationships)</FormLabel>
                   <FormControl>
                     <Textarea placeholder="Any additional information about this contact..." {...field} rows={4} value={field.value || ""} />
                   </FormControl>

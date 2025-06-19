@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'Create New Event - DOIT',
+  title: 'Create New Group/Event',
   description: 'Schedule a new event for your team or club.',
 };
 

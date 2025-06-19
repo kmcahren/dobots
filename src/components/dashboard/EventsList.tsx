@@ -18,10 +18,10 @@ const getMockDateString = (daysOffset: number, hour: number = 10): string => {
 
 // Dummy data - ensure isUserHost and currentUserRsvpStatus are included
 const mockEvents: EventItem[] = [
-  { id: "1", title: "Team Practice Session", startDate: getMockDateString(1, 10), endDate: getMockDateString(1, 12), location: "Main Community Field, Sportsville", groupName: "U12 Soccer Stars", inviteesCount: 20, attendingMembersCount: 15, cancelledMembersCount: 2, hostName: "Coach John", description: "Focus on passing drills and game strategy.", imageUrl: "https://placehold.co/600x400.png", dataAiHint: "soccer practice", hostUserId: "user1", isUserHost: false, currentUserRsvpStatus: 'unconfirmed' },
+  { id: "1", title: "Team Practice Session", startDate: getMockDateString(1, 10), endDate: getMockDateString(1, 12), location: "Main Community Field, Sportsville", groupName: "U12 Soccer Stars", inviteesCount: 20, attendingMembersCount: 15, cancelledMembersCount: 2, hostName: "Coach John", description: "Focus on passing drills and game strategy.", imageUrl: "https://placehold.co/600x200.png", dataAiHint: "soccer practice", hostUserId: "user1", isUserHost: false, currentUserRsvpStatus: 'unconfirmed' },
   { id: "2", title: "Club Committee Meeting", startDate: getMockDateString(0, 14), endDate: getMockDateString(0, 15), location: "Town Hall Room 3, Downtown", groupName: "Photography Club", inviteesCount: 15, attendingMembersCount: 10, cancelledMembersCount: 1, hostName: "Sarah M.", description: "Discuss upcoming exhibition and budget.", hostUserId: "user2", isUserHost: true, currentUserRsvpStatus: 'unconfirmed' },
   { id: "3", title: "Championship Game Day", startDate: getMockDateString(-7, 15), endDate: getMockDateString(-7, 17), location: "Away Team Stadium, Rival Town", groupName: "Varsity Basketball Team", inviteesCount: 50, attendingMembersCount: 45, cancelledMembersCount: 0, hostName: "Coach Miller", description: "The big game! Let's bring home the trophy.", hostUserId: "user3", isUserHost: false, currentUserRsvpStatus: 'attending' },
-  { id: "4", title: "Annual Fundraiser Gala", startDate: getMockDateString(-10, 18), endDate: getMockDateString(-10, 22), location: "Grand Ballroom Downtown, Metro City", groupName: "Charity Org Volunteers", inviteesCount: 100, attendingMembersCount: 80, cancelledMembersCount: 5, hostName: "Mrs. Gable", description: "Evening of giving and celebration.", imageUrl: "https://placehold.co/600x400.png", dataAiHint: "gala event", hostUserId: "user4", isUserHost: false, currentUserRsvpStatus: 'declined' },
+  { id: "4", title: "Annual Fundraiser Gala", startDate: getMockDateString(-10, 18), endDate: getMockDateString(-10, 22), location: "Grand Ballroom Downtown, Metro City", groupName: "Charity Org Volunteers", inviteesCount: 100, attendingMembersCount: 80, cancelledMembersCount: 5, hostName: "Mrs. Gable", description: "Evening of giving and celebration.", imageUrl: "https://placehold.co/600x200.png", dataAiHint: "gala event", hostUserId: "user4", isUserHost: false, currentUserRsvpStatus: 'declined' },
   { id: "5", title: "Weekend Coding Workshop", startDate: getMockDateString(-20, 9), endDate: getMockDateString(-18, 17), location: "Tech Hub Co-working, Innovation Drive", groupName: "Developers United", inviteesCount: 25, attendingMembersCount: 18, cancelledMembersCount: 3, hostName: "Alex P.", description: "Deep dive into new JavaScript frameworks.", hostUserId: "user5", isUserHost: true, currentUserRsvpStatus: 'unconfirmed' },
 ];
 
@@ -99,8 +99,8 @@ export function EventsList() {
                 return (
                   <Card key={event.id} className="flex flex-col overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 rounded-lg group">
                     {event.imageUrl && (
-                       <div className="relative h-48 w-full">
-                          <Image src={event.imageUrl} alt={event.title} fill style={{ objectFit: 'cover' }} data-ai-hint={event.dataAiHint || "event image"} className="transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"/>
+                       <div className="relative h-48 w-full" style={{ height: '200px' }}>
+                          <Image src={event.imageUrl} alt={event.title} width={600} height={200} style={{ objectFit: 'cover' }} data-ai-hint={event.dataAiHint || "event image"} className="transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"/>
                        </div>
                     )}
                     <CardHeader className="pb-3">
@@ -201,7 +201,7 @@ export function EventsList() {
             <h3 className="text-xl font-semibold font-headline text-muted-foreground mb-2">No Events Yet</h3>
             <p className="text-muted-foreground mb-6">It looks a bit empty here. Why not create your first event?</p>
             <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                <Link href="/dashboard/events/new">Create New Event/Group</Link>
+                <Link href="/dashboard/events/new">Create New Group/Event</Link>
             </Button>
         </div>
       )}

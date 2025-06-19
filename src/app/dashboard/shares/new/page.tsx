@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'New Share - DOIT',
+  title: 'New Share',
   description: 'Share a message or generate a report.',
 };
 

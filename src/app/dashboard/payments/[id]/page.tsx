@@ -172,7 +172,7 @@ export default function PaymentDetailsPage() {
            <Button
              onClick={() => setShowNfcWriter(!showNfcWriter)}
              className="bg-chart-3 hover:bg-chart-3/90 text-primary-foreground"
-           >Write on NFC Tag</Button>
+           >Write Link on NFC Tag</Button>
             {showNfcWriter && <NfcWriter dataToWrite={fullPaymentUrl} />}
          </div>
       )}

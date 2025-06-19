@@ -92,7 +92,7 @@ export function ProfileForm() {
  name="email"
  render={({ field }) => (
  <FormItem>
- <FormLabel>Email Address (Optional - to request reports)</FormLabel>
+ <FormLabel>Email Address (Optional - for reports)</FormLabel>
  <FormControl>
  <Input type="email" placeholder="name@example.com" {...field} />
  </FormControl>
@@ -120,10 +120,10 @@ export function ProfileForm() {
  name="aboutMe"
  render={({ field }) => (
  <FormItem className="md:col-span-2">
- <FormLabel>About Me (Optional - just is)</FormLabel>
+ <FormLabel>About Me (Optional - but Do!)</FormLabel>
  <FormControl>
  <Textarea
- placeholder="e.g., I'm not a robot..."
+ placeholder="e.g., I am not a robot..."
  className="resize-none"
  {...field}
  />

@@ -113,7 +113,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="p-6 md:p-8 bg-card rounded-xl shadow-lg border">
           <h2 className="text-2xl font-semibold font-headline mb-6 text-primary">
-            {eventToEdit ? "Edit Event" : "Create New Event"}
+            {eventToEdit ? "Edit Event" : "New Group/Event"}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -122,7 +122,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="title"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel>Event Title</FormLabel>
+                  <FormLabel>Group/Event Title</FormLabel>
                   <FormControl>
                     <Input placeholder="e.g., Weekly Team Sync" {...field} />
                   </FormControl>
@@ -411,13 +411,13 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
           </div>
         </div>
         
-        <div className="flex justify-end gap-3 pt-4">
-           <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
-            Cancel
-          </Button>
+        <div className="flex justify-start gap-3 pt-4">
           <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground">
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {eventToEdit ? "Update Event" : "Create Event"}
+          </Button>
+ <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
+            Cancel
           </Button>
         </div>
       </form>
