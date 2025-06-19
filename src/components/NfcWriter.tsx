@@ -24,61 +24,58 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
     setMessage('Scanning for NFC tag. Tap a tag to write...');
 
     try {
-      // Request NFC permission
-      // Note: This permission request is often implicit when calling NDEFReader constructor or methods,
-      // but explicitly requesting is good practice if your workflow requires it earlier.
-      // The standard way is to just proceed and the browser will prompt on first interaction.
       const reader = new (window as any).NDEFReader();
 
+      // Set up the 'reading' event handler
       reader.onreading = async (event: any) => {
         setStatus('writing');
         setMessage('Writing data to tag...');
         try {
-          // Prepare the NDEF message with the provided dataToWrite
-          const messageToWrite = {
-            records: [
-              {
-                recordType: 'uri',
-                data: new TextEncoder().encode(dataToWrite),
-              },
-            ],
+          // Create an NDEF URI record correctly
+          const uriRecord = {
+            recordType: 'uri', // Or the equivalent recognized by the API
+            data: new TextEncoder().encode(dataToWrite), // Encode the URL string as bytes
           };
 
-          await event.target.write(messageToWrite);
+          // Create an NDEF message with the URI record
+          const ndefMessage = {
+            records: [uriRecord],
+          };
+
+          // Write the NDEF message to the tag
+          await reader.write(ndefMessage); // Use reader.write() here, not event.target.write()
 
           setStatus('success');
-          setMessage('Successfully wrote to NFC tag!');
+          setMessage('Successfully wrote event URL to NFC tag!');
         } catch (writeError: any) {
           setStatus('error');
           setMessage(`Failed to write to NFC tag: ${writeError.message}`);
-          console.error('NFC Write Error:', writeError); // Log the error for debugging
+          console.error("NFC write error:", writeError);
         } finally {
-          // Stop scanning after attempting to write to avoid writing multiple times to the same tag
-          try {
-             // This might not be necessary as `write` might stop the session,
-             // but explicitly calling `cancel` can ensure it.
-            await reader.cancel();
-          } catch (cancelError: any) {
-             console.error("Error canceling NFC reader:", cancelError);
-          }
+          // You might want to stop scanning after writing or error
+          // reader.scan.cancel(); // This might be needed depending on your workflow
         }
       };
+
       // Handle errors during scanning
-       reader.onerror = (error: any) => {
-         // Update status and message on scan error
-         console.error('NFC Read Error:', error);
-       };
+      reader.onerror = (error: any) => {
+        // Update status and message on scan error
+        setStatus('error'); // Set status to error on scan error as well
+        setMessage(`NFC scan error: ${error.message}`); // Provide a user-friendly message
+        console.error('NFC Read Error:', error);
+      };
 
 
-      await reader.scan(); // Start scanning
+      // Start scanning for tags
+      await reader.scan();
+      console.log("NDEFReader scanning started.");
 
-    } catch (error: any) {
+    } catch (scanError: any) {
       setStatus('error');
-      // Update status and message on failure to start scan
-      setMessage(`Failed to start NFC scan: ${error.message}`);
-      console.error('NFC Scan Start Error:', error);
+      setMessage(`Failed to start NFC scan: ${scanError.message}`);
+      console.error("NFC scan error:", scanError);
     }
-  };
+  }; // <-- This is the correct and only closing of handleWriteNfc
 
   return (
     <div>

@@ -4,6 +4,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProfilePage() {
   // Placeholder user data - in a real app, this would come from auth/state
@@ -64,6 +65,18 @@ export default function ProfilePage() {
             <p className="text-muted-foreground mb-2">Phone: {user.phoneNumber}</p>
           )}
           {user.address && <p className="text-muted-foreground">Address: {user.address}</p>}
+        </CardContent>
+        <CardContent className="flex flex-col space-y-4 mt-4">
+          <Link href="/DigitalCheckin" passHref>
+            <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Turbo Digital Checkin
+            </button>
+          </Link>
+ <Link href="/DigitalCheckin" passHref>
+ <button className="w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+              Write on NFC Tag
+            </button>
+          </Link>
         </CardContent>
       </Card>
     </div>

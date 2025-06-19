@@ -201,7 +201,7 @@ export function EventsList() {
             <h3 className="text-xl font-semibold font-headline text-muted-foreground mb-2">No Events Yet</h3>
             <p className="text-muted-foreground mb-6">It looks a bit empty here. Why not create your first event?</p>
             <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
-                <Link href="/dashboard/events/new">Create New Event</Link>
+                <Link href="/dashboard/events/new">Create New Event/Group</Link>
             </Button>
         </div>
       )}

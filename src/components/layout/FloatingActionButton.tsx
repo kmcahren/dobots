@@ -31,7 +31,7 @@ export function FloatingActionButton() {
           <DropdownMenuItem asChild className="focus:bg-accent/20 focus:text-accent-foreground cursor-pointer">
             <Link href="/dashboard/events/new" className="flex items-center px-3 py-2.5 text-sm">
               <CalendarPlus className="mr-3 h-5 w-5 text-primary" />
-              <span>New Event</span>
+              <span>New Event/Group</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild className="focus:bg-accent/20 focus:text-accent-foreground cursor-pointer">
