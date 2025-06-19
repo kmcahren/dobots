@@ -58,7 +58,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
       {fullEventUrl && (
         <div className="mt-4 flex justify-center">
           <Button className="mt-4 bg-chart-3 hover:bg-chart-3/90 text-primary-foreground" onClick={() => setShowNfcWriter(!showNfcWriter)}>
-            Write on NFC Tag
+            Write Link on NFC Tag
           </Button>
         </div>
       )}

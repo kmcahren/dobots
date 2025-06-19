@@ -33,7 +33,7 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
         try {
           // Create an NDEF URI record correctly
           const uriRecord = {
-            recordType: 'uri', // Or the equivalent recognized by the API
+            recordType: 'uri', // Explicitly set recordType to 'uri' for a URI record
             data: new TextEncoder().encode(dataToWrite), // Encode the URL string as bytes
           };
 

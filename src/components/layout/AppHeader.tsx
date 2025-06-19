@@ -20,7 +20,7 @@ export function AppHeader() {
   return (
     <header className="bg-card shadow-sm sticky top-0 z-30 border-b">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-14 items-center justify-between">
           <Link href="/dashboard" className="flex items-center space-x-2">
             <Image 
               src="/images/logo2.png" //"https://placehold.co/40x40.png" // Replace with actual logo

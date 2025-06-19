@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -66,19 +66,21 @@ export default function ProfilePage() {
           )}
           {user.address && <p className="text-muted-foreground">Address: {user.address}</p>}
         </CardContent>
-        <CardContent className="flex flex-col space-y-4 mt-4">
-          <Link href="/DigitalCheckin" passHref>
-            <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Turbo Digital Checkin
-            </button>
-          </Link>
- <Link href="/DigitalCheckin" passHref>
- <button className="w-full bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
-              Write on NFC Tag
-            </button>
-          </Link>
-        </CardContent>
       </Card>
+
+      <CardFooter className="p-4 md:p-6 bg-muted/30 dark:bg-muted/20 border-t dark:border-border/50 flex flex-col sm:flex-row justify-end gap-3 max-w-md mx-auto rounded-lg mt-6">
+        <Link href="/DigitalCheckin" passHref>
+          <button className="w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Turbo Digital Checkin
+          </button>
+        </Link>
+        <Link href="/DigitalCheckin" passHref>
+          <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+            Write Link on NFC Tag
+          </button>
+        </Link>
+      </CardFooter>
+
     </div>
   );
 }
