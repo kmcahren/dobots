@@ -24,7 +24,7 @@ import Image from "next/image";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters.").max(100, "Name is too long."),
-  phoneNumber: z.string().optional().refine(val => !val || /^[+]?[0-9\s-()]*$/.test(val), {
+  phoneNumber: z.string().refine(val => /^\+(?:[0-9] ?){6,14}[0-9]$/.test(val), {
     message: "Invalid phone number format.",
   }),
   email: z.string().email("Invalid email address.").optional().or(z.literal('')),
@@ -170,7 +170,7 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number (Optional)</FormLabel>
+                    <FormLabel>Phone Number</FormLabel>
                     <FormControl>
                       <Input type="tel" placeholder="+1 123-456-7890" {...field} value={field.value || ""} />
                     </FormControl>

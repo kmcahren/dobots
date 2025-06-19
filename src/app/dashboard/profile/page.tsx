@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { ProfileForm } from '@/components/profile/ProfileForm';
 
 export default function ProfilePage() {
   // Placeholder user data - in a real app, this would come from auth/state
@@ -49,32 +50,16 @@ export default function ProfilePage() {
       <h1 className="text-2xl font-bold font-headline mb-6">User Profile</h1>
 
       <Card className="max-w-md mx-auto shadow-lg rounded-lg">
-        <CardHeader className="flex flex-col items-center">
-          <Image
-            src={userData.imageUrl}
-            alt={`${userData.name}'s profile picture`}
-            width={100}
-            height={100}
-            className="rounded-full mb-4"
-          />
-          <CardTitle className="text-xl font-headline">{userData.name}</CardTitle>
-        </CardHeader>
-        <CardContent className="text-center">
-          <p className="text-muted-foreground mb-2">{userData.email}</p>
-          {user.phoneNumber && (
-            <p className="text-muted-foreground mb-2">Phone: {user.phoneNumber}</p>
-          )}
-          {user.address && <p className="text-muted-foreground">Address: {user.address}</p>}
-        </CardContent>
+ <ProfileForm initialData={userData} />
       </Card>
 
       <CardFooter className="p-4 md:p-6 bg-muted/30 dark:bg-muted/20 border-t dark:border-border/50 flex flex-col sm:flex-row justify-end gap-3 max-w-md mx-auto rounded-lg mt-6">
-        <Link href="/DigitalCheckin" passHref>
+        <Link href="/optimizedcheckin" passHref>
           <button className="w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Optimized Pro Checkin
+            Optimized Checkin
           </button>
         </Link>
-        <Link href="/DigitalCheckin" passHref>
+        <Link href="/optimizedcheckin" passHref>
           <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
             Write Link on NFC Tag
           </button>
