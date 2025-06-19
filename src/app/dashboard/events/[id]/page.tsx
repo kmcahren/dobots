@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { QRCodeCanvas } from 'qrcode.react';
 import { usePathname } from 'next/navigation';
 import { useToast } from "@/hooks/use-toast";
+import NfcWriter from '@/components/NfcWriter';
 import { useState } from 'react'; // Import useState
 import { ChevronLeft } from 'lucide-react';
 
@@ -25,7 +26,6 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
   const [showNfcWriter, setShowNfcWriter] = useState(false);
   const fullEventUrl = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}${pathname}` : '';
   const { toast } = useToast();
-
   return (
     <div className="space-y-6">
       <div className="flex items-center">
@@ -63,13 +63,11 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
         </div>
       )}
 
-      {/* NFC Writing Status and Trigger */}
-      {showNfcWriter && fullEventUrl && ( // Only show if button is toggled and URL exists
-        <div className="mt-4 p-4 border rounded-md bg-muted/30 dark:bg-muted/20">
-           <h3 className="text-xl font-semibold font-headline mb-4 text-foreground">Write to NFC Tag</h3>
-           {/* Render the NfcWriter component */}
-           <NfcWriter dataToWrite={fullEventUrl} />
-           {/* The NfcWriter component handles its own status and messages, so no need to display status here */}
+      {/* NFC Writer Component */}
+      {showNfcWriter && fullEventUrl && (
+        <div className="mt-4 flex flex-col items-center">
+          <h3 className="text-xl font-semibold font-headline mb-4 text-foreground">Write to NFC Tag</h3>
+          <NfcWriter dataToWrite={fullEventUrl} />
         </div>
       )}
 
