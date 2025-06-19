@@ -71,7 +71,7 @@ export default function ProfilePage() {
       <CardFooter className="p-4 md:p-6 bg-muted/30 dark:bg-muted/20 border-t dark:border-border/50 flex flex-col sm:flex-row justify-end gap-3 max-w-md mx-auto rounded-lg mt-6">
         <Link href="/DigitalCheckin" passHref>
           <button className="w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Turbo Digital Checkin
+            Optimized Pro Checkin
           </button>
         </Link>
         <Link href="/DigitalCheckin" passHref>
