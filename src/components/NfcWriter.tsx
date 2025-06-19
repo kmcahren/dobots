@@ -7,7 +7,7 @@ type NfcWriterProps = {
   dataToWrite: string; // Prop to receive the data to write
 };
 
-const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dataToWrite prop
+const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => {
   const [status, setStatus] = useState<NfcStatus>('idle');
   const [message, setMessage] = useState<string>('Click "Start NFC Write" and tap a tag.');
 
@@ -26,47 +26,59 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
     try {
       const reader = new (window as any).NDEFReader();
 
-      // Set up the 'reading' event handler
       reader.onreading = async (event: any) => {
         setStatus('writing');
         setMessage('Writing data to tag...');
         try {
+          // *** We will focus on refining this section next ***
           // Create an NDEF URI record correctly
-          const uriRecord = {
-            recordType: 'uri', // Explicitly set recordType to 'uri' for a URI record
-            data: new TextEncoder().encode(dataToWrite), // Encode the URL string as bytes
-          };
+          const encoder = new TextEncoder();
+          let dataBytes = encoder.encode(dataToWrite);
 
-          // Create an NDEF message with the URI record
-          const ndefMessage = {
-            records: [uriRecord],
-          };
+           const uriIdentifierCode = 0x03; // 0x03 for https://
 
-          // Write the NDEF message to the tag
-          await reader.write(ndefMessage); // Use reader.write() here, not event.target.write()
+           if (dataToWrite.startsWith('https://')) {
+             dataBytes = encoder.encode(dataToWrite.substring('https://'.length));
+              const finalDataBytes = new Uint8Array([uriIdentifierCode, ...dataBytes]);
+              const uriRecord = {
+                recordType: 'uri',
+                data: finalDataBytes,
+              };
+               const ndefMessage = {
+                 records: [uriRecord],
+               };
+              await reader.write(ndefMessage);
+
+
+           } else {
+              const textRecord = {
+                recordType: 'text',
+                data: dataBytes,
+                lang: 'en',
+              };
+               const ndefMessage = {
+                 records: [textRecord],
+               };
+              await reader.write(ndefMessage);
+           }
 
           setStatus('success');
-          setMessage('Successfully wrote event URL to NFC tag!');
+          setMessage('Successfully wrote data to NFC tag!');
         } catch (writeError: any) {
           setStatus('error');
           setMessage(`Failed to write to NFC tag: ${writeError.message}`);
           console.error("NFC write error:", writeError);
         } finally {
-          // You might want to stop scanning after writing or error
-          // reader.scan.cancel(); // This might be needed depending on your workflow
+           reader.scan().catch(() => {});
         }
       };
 
-      // Handle errors during scanning
       reader.onerror = (error: any) => {
-        // Update status and message on scan error
-        setStatus('error'); // Set status to error on scan error as well
-        setMessage(`NFC scan error: ${error.message}`); // Provide a user-friendly message
+        setStatus('error');
+        setMessage(`NFC scan error: ${error.message}`);
         console.error('NFC Read Error:', error);
       };
 
-
-      // Start scanning for tags
       await reader.scan();
       console.log("NDEFReader scanning started.");
 
@@ -75,7 +87,7 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
       setMessage(`Failed to start NFC scan: ${scanError.message}`);
       console.error("NFC scan error:", scanError);
     }
-  }; // <-- This is the correct and only closing of handleWriteNfc
+  };
 
   return (
     <div>
@@ -85,13 +97,13 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
         <>
           <button
             onClick={handleWriteNfc}
-            disabled={!dataToWrite || status === 'scanning' || status === 'writing'} // Disable if no data or writing is in progress
+            disabled={!dataToWrite || status === 'scanning' || status === 'writing'}
             className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
           >
             {status === 'scanning' ? 'Scanning...' : status === 'writing' ? 'Writing...' : 'Start NFC Write'}
           </button>
           {message && <p className="mt-2">{message}</p>}
-           {status === 'scanning' && ( // Only show "Keep tag near" while scanning
+           {status === 'scanning' && (
              <p className="mt-2 text-sm text-gray-600">Keep the tag near your device.</p>
            )}
         </>

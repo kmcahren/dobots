@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import NfcWriter from "@/components/NfcWriter"; // Import the NfcWriter component
 
 export default function ProfilePage() {
   // Placeholder user data - in a real app, this would come from auth/state
   const userData = {
+ id: "user123", // Added a placeholder ID
  name: "Jane Doe",
     email: "jane.doe@example.com",
     imageUrl: "https://placehold.co/100x100.png?text=JP",
@@ -18,7 +20,6 @@ export default function ProfilePage() {
 
   const [user, setUser] = useState<typeof userData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Fetch user data from your backend or auth service
@@ -31,14 +32,6 @@ export default function ProfilePage() {
     // Cleanup function (optional, but good practice for async operations)
     return () => clearTimeout(timer);
   }, []); // Empty dependency array means this effect runs once on mount
-
-  if (loading) {
-    return <div className="text-center py-8">Loading profile...</div>;
-  }
-
-  if (error) {
-    return <div className="text-center py-8 text-red-500">Error loading profile: {error}</div>;
-  }
 
   if (!user) {
      return <div className="text-center py-8">User data not available.</div>;
@@ -68,18 +61,18 @@ export default function ProfilePage() {
         </CardContent>
       </Card>
 
-      <CardFooter className="p-4 md:p-6 bg-muted/30 dark:bg-muted/20 border-t dark:border-border/50 flex flex-col sm:flex-row justify-end gap-3 max-w-md mx-auto rounded-lg mt-6">
+ <CardFooter className="p-4 md:p-6 bg-muted/30 dark:bg-muted/20 border-t dark:border-border/50 flex flex-col sm:flex-row justify-end gap-3 max-w-md mx-auto rounded-lg mt-6">
         <Link href="/DigitalCheckin" passHref>
           <button className="w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Turbo Digital Checkin
           </button>
         </Link>
-        <Link href="/DigitalCheckin" passHref>
-          <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
-            Write Link on NFC Tag
-          </button>
-        </Link>
+        {/* Render the NfcWriter component */}
+        {user.id && ( // Only render if user data with an ID is available
+          <NfcWriter dataToWrite={`${window.location.origin}/user/${user.id}`} />
+        )}
       </CardFooter>
+
 
     </div>
   );
