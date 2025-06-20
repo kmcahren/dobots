@@ -21,7 +21,7 @@ export default function LoginPage() {
              data-ai-hint="app logo"
            />
           <h1 className="text-4xl font-bold font-headline text-primary">DO!</h1>
-          <p className="mt-2 text-lg text-muted-foreground">Group Event Payment App - that's FREE!</p>
+          <p className="mt-2 text-lg text-muted-foreground">Group Event Payment App - it's FREE!</p>
         </div>
         <LoginForm />
         <p className="px-8 text-center text-xs text-muted-foreground">

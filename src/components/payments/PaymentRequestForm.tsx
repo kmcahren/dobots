@@ -361,13 +361,15 @@ export function PaymentRequestForm() {
             </div>
         </div>
         <div className="flex justify-end gap-3 pt-4">
-           <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground">
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Send Payment Request
-          </Button>
-          <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
-            Cancel
-          </Button>
+          <div className="flex justify-start w-full gap-3">
+            <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground">
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Send Payment Request
+            </Button>
+            <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
+              Cancel
+            </Button>
+          </div>
         </div>
       </form>
     </Form>
