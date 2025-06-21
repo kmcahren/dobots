@@ -30,16 +30,16 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
       reader.onreading = async (event: any) => {
         setStatus('writing');
         setMessage('Writing data to tag...');
-        try {
+        try { // Attempt to write the message to the tag
           // Create an NDEF URI record correctly
           const uriRecord = {
             recordType: 'uri', // Explicitly set recordType to 'uri' for a URI record
-            data: new TextEncoder().encode(dataToWrite), // Encode the URL string as bytes
+            data: new TextEncoder().encode(dataToWrite) // Encode the URL string as bytes
           };
 
           // Create an NDEF message with the URI record
           const ndefMessage = {
-            records: [uriRecord],
+            records: [uriRecord]
           };
 
           // Write the NDEF message to the tag
@@ -70,7 +70,7 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
       await reader.scan();
       console.log("NDEFReader scanning started.");
 
-    } catch (scanError: any) {
+    } catch (scanError: any) { // Catch any errors during the scan attempt
       setStatus('error');
       setMessage(`Failed to start NFC scan: ${scanError.message}`);
       console.error("NFC scan error:", scanError);
