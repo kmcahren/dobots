@@ -8,6 +8,7 @@ import { PlusCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Payment, Event, Notification } from '../lib/types'; // Assuming types are defined in types.ts
 import { FloatingActionButton } from '@/components/layout/FloatingActionButton';
+import { usePathname } from 'next/navigation';
 
 // Placeholder data - replace with actual data fetching logic
 const mockPayments: Payment[] = [
@@ -36,6 +37,7 @@ const OptimizedCheckinPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showFabMenu, setShowFabMenu] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -211,18 +213,15 @@ const OptimizedCheckinPage: React.FC = () => {
       </div>
  <FloatingActionButton
  onClick={() => setShowFabMenu(!showFabMenu)}
- icon={<PlusCircle size={24} />}
+ icon={<PlusCircle size={24} />} // Changed icon to PlusCircle
  />
 
-      <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8 mb-8">
         <Link href="/optimizedcheckin" passHref>
  <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
  Write Link on NFC Tag
  </button>
- </Link>
-      </div>
-      <div className="flex justify-center mt-8">
- <Link href="/dashboard">Return to Dashboard</Link>
+ </Link> {/* This Link component is not used for NFC writing, it's a button */}
       </div>
  </>
   );
