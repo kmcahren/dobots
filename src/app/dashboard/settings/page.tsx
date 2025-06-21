@@ -19,6 +19,7 @@ export default function SettingsPage() {
     { title: "Notifications", description: "Manage how and when you receive notifications.", icon: Bell, href: "/dashboard/settings/notifications" },
     { title: "Payment Methods", description: "Add or remove payment cards.", icon: CreditCardIcon, href: "/dashboard/settings/payment-methods" },
     { title: "Security & Privacy", description: "Manage password, 2FA, and view legal policies.", icon: Shield, href: "/dashboard/settings/security" },
+    { title: "Optimized Checkin", description: "Designed for experienced NFC users to do quick checkins.", icon: User, href: "/optimizedcheckin" },
   ];
 
   return (

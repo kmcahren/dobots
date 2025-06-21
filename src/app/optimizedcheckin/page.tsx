@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { PlusCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Payment, Event, Notification } from '../lib/types'; // Assuming types are defined in types.ts
+import { FloatingActionButton } from '@/components/layout/FloatingActionButton';
 
 // Placeholder data - replace with actual data fetching logic
 const mockPayments: Payment[] = [
@@ -71,8 +72,12 @@ const OptimizedCheckinPage: React.FC = () => {
 
   return (
     <>
-      <div className="container mx-auto px-2 sm:px-4 py-8">
- <h1 className="text-2xl font-bold mb-4">Optimized Checkin</h1>
+      <div className="container mx-auto px-2 sm:px-4 py-8 mb-8">
+ <Link href="/dashboard" passHref className="flex items-center text-2xl font-bold mb-4 text-foreground hover:text-muted-foreground">
+          <span className="text-2xl font-bold mr-2">&lt;</span>
+          <h1>Optimized Checkin</h1>
+
+ </Link>
  <div className="space-y-6">
           {/* Actionable Payments Section */}
  <Card>
@@ -203,19 +208,24 @@ const OptimizedCheckinPage: React.FC = () => {
  </CardContent>
  </Card>
  </div>
-
-        <button className="bg-blue-600 text-white rounded-full p-4 shadow-lg hover:bg-blue-700 focus:outline-none"
-          onClick={() => setShowFabMenu(!showFabMenu)}>
-          <PlusCircle size={24} />
-        </button>
       </div>
+ <FloatingActionButton
+ onClick={() => setShowFabMenu(!showFabMenu)}
+ icon={<PlusCircle size={24} />}
+ />
 
-      {/* Link to Dashboard */}
       <div className="flex justify-center mt-8">
-        <Link href="/dashboard">Return to Dashboard</Link>
+        <Link href="/optimizedcheckin" passHref>
+ <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+ Write Link on NFC Tag
+ </button>
+ </Link>
       </div>
-    </>
+      <div className="flex justify-center mt-8">
+ <Link href="/dashboard">Return to Dashboard</Link>
+      </div>
+ </>
   );
-}
+};
 
 export default OptimizedCheckinPage;

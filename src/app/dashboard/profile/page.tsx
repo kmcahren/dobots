@@ -53,19 +53,6 @@ export default function ProfilePage() {
  <ProfileForm initialData={userData} />
       </Card>
 
-      <CardFooter className="p-4 md:p-6 bg-muted/30 dark:bg-muted/20 border-t dark:border-border/50 flex flex-col sm:flex-row justify-end gap-3 max-w-md mx-auto rounded-lg mt-6">
-        <Link href="/optimizedcheckin" passHref>
-          <button className="w-full sm:w-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Optimized Checkin
-          </button>
-        </Link>
-        <Link href="/optimizedcheckin" passHref>
-          <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
-            Write Link on NFC Tag
-          </button>
-        </Link>
-      </CardFooter>
-
     </div>
   );
 }

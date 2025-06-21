@@ -33,7 +33,11 @@ export default function LoginPage() {
           <a href="https://www.dobots.co/privacypolicy.html" className="underline underline-offset-4 hover:text-primary">
             Privacy Policy
           </a>
-          .
+          . Buy more&nbsp;
+          <a href="https://www.dobots.co/buynow.html" className="underline underline-offset-4 hover:text-primary">
+             DOBOTS
+          </a>
+          !
         </p>
       </div>
     </div>
