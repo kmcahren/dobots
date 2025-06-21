@@ -13,7 +13,7 @@ export default function LoginPage() {
       <div className="w-full max-w-sm space-y-8">
         <div className="text-center">
            <Image 
-             src="/images/logo2.png" // "https://placehold.co/80x80.png" 
+             src="/images/newlogo-150x150withco.png" // "https://placehold.co/80x80.png" 
              alt="DOIT Logo" 
              width={110} 
              height={110} 
