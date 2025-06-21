@@ -14,7 +14,8 @@ export default function LoginPage() {
         <div className="text-center">
            <Image 
              src="/images/newlogo-150x150withco.png" // "https://placehold.co/80x80.png" 
-             alt="DOIT Logo" 
+             alt="DOBOTS Logo"
+             priority 
              width={110} 
              height={110} 
              className="mx-auto mb-6 rounded-2xl shadow-md" 

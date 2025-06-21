@@ -8,6 +8,7 @@ import { PlusCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Payment, Event, Notification } from '../lib/types'; // Assuming types are defined in types.ts
 import { FloatingActionButton } from '@/components/layout/FloatingActionButton';
+import NfcWriter from '@/components/NfcWriter';
 import { usePathname } from 'next/navigation';
 
 // Placeholder data - replace with actual data fetching logic
@@ -27,6 +28,7 @@ const mockNotifications: Notification[] = [
   { id: 'n1', message: 'New message in Team Chat', read: false, timestamp: '2023-12-10T10:30:00Z' },
   { id: 'n2', message: 'Upcoming event reminder: Team Practice', read: false, timestamp: '2023-12-09T18:00:00Z' },
 ];
+
 
 
 const OptimizedCheckinPage: React.FC = () => {
@@ -216,13 +218,6 @@ const OptimizedCheckinPage: React.FC = () => {
  icon={<PlusCircle size={24} />} // Changed icon to PlusCircle
  />
 
-      <div className="flex justify-center mt-8 mb-8">
-        <Link href="/optimizedcheckin" passHref>
- <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
- Write Link on NFC Tag
- </button>
- </Link> {/* This Link component is not used for NFC writing, it's a button */}
-      </div>
  </>
   );
 };
