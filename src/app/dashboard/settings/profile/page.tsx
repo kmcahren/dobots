@@ -21,13 +21,11 @@ import { useRouter } from "next/navigation";
 export default function ProfileSettingsPage() {
   const router = useRouter();
   const { toast } = useToast();
-  const [name, setName] = useState("Alex Doe");
-  const [email, setEmail] = useState("alex.doe@example.com");
-  const [phone, setPhone] = useState("+1 555-0101");
-  const [birthdate, setBirthdate] = useState<Date | undefined>(new Date("1990-05-15"));
-  const [gender, setGender] = useState("prefer_not_to_say");
-  const [country, setCountry] = useState("usa");
-  const [bio, setBio] = useState("Loves hiking and coding.");
+  const [name, setName] = useState("e,g,, Alex Doe"); // Assuming name is still required
+  const [email, setEmail] = useState("e.g., alex.doe@example.com"); // Email is optional for reporting purposes
+  const [phone, setPhone] = useState("+1 555-555-0101");
+  const [bio, setBio] = useState("e.g., I am not a robot...");
+  const [city, setCity] = useState("");
   const [profilePictureUrl, setProfilePictureUrl] = useState("https://placehold.co/120x120.png");
   const [calendarSyncEnabled, setCalendarSyncEnabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,8 +51,13 @@ export default function ProfileSettingsPage() {
       title: "Profile Updated",
       description: "Your profile details have been saved.",
     });
-    console.log({ name, email, phone, birthdate, gender, country, bio, profilePictureUrl, calendarSyncEnabled });
+    console.log({ name, email, phone, city, bio, profilePictureUrl, calendarSyncEnabled });
   };
+
+  // No explicit validation for email being required in the provided code,
+  // so simply removing a hypothetical 'required' attribute from the Input
+  // and allowing the state to be an empty string makes it optional from the UI perspective.
+  // Backend validation would be needed for true optionality.
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -74,115 +77,35 @@ export default function ProfileSettingsPage() {
           <Card className="mb-6 shadow-lg">
             <CardHeader data-ai-block="cardHeader">
               <CardTitle className="font-headline">Profile Information</CardTitle>
-              {/* <CardDescription>Update your personal details and profile picture.</CardDescription> */}
-              <CardDescription>Update your personal details and profile picture.</CardDescription>
+              {/* <CardDescription>Update your personal details and profile picture.</CardDescription> 
+              <CardDescription>Update your personal details and profile picture.</CardDescription> */}
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex flex-col items-center sm:flex-row sm:items-start gap-6">
-                <div className="relative">
-                  <Image 
-                    src={profilePictureUrl} 
-                    alt="Profile Picture" 
-                    width={120} 
-                    height={120} 
-                    className="rounded-full object-cover border-2 border-primary/50 shadow-md"
-                    data-ai-hint="user avatar" 
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="icon"
-                    className="absolute bottom-0 right-0 rounded-full bg-card hover:bg-muted"
-                    onClick={() => document.getElementById('profilePictureInput')?.click()}
-                  >
-                    <UploadCloud className="h-4 w-4" />
-                    <span className="sr-only">Change profile picture</span>
-                  </Button>
-                  <input 
-                    type="file" 
-                    id="profilePictureInput" 
-                    className="hidden" 
-                    accept="image/*" 
-                    onChange={handleProfilePictureChange} 
-                  />
-                </div>
                 <div className="flex-grow space-y-4 w-full">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="name">Full Name</Label>
-                      <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" />
+ <div>
+ <Label htmlFor="name">Full Name</Label>
+ <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" />
+ </div>
+ <div>
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+1 123-456-7890" /> {/* Consider adding validation for international format */}
                     </div>
-                    <div>
-                      <Label htmlFor="email">Email Address</Label>
+                   <div>
+                      <Label htmlFor="email">Email Address (Optional - for reporting)</Label>
                       <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your.email@example.com" />
+ </div>
+ <div>
+                      <Label htmlFor="city">City (Optional - but good to know)</Label>
+                      <Input id="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="e.g., Your city" />
                     </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+1 123-456-7890" />
                   </div>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="birthdate">Birthdate</Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant={"outline"}
-                        className="w-full justify-start text-left font-normal"
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {birthdate ? format(birthdate, "PPP") : <span>Pick a date</span>}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={birthdate}
-                        onSelect={setBirthdate}
-                        captionLayout="dropdown-buttons"
-                        fromYear={1950}
-                        toYear={new Date().getFullYear() - 10} // Example: min 10 years old
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-                <div>
-                  <Label htmlFor="gender">Gender</Label>
-                  <Select value={gender} onValueChange={setGender}>
-                    <SelectTrigger id="gender">
-                      <SelectValue placeholder="Select gender" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
-                      <SelectItem value="non_binary">Non-binary</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                      <SelectItem value="prefer_not_to_say">Prefer not to say</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
               <div>
-                <Label htmlFor="country">Country</Label>
-                <Select value={country} onValueChange={setCountry}>
-                  <SelectTrigger id="country">
-                    <SelectValue placeholder="Select country" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="usa">United States</SelectItem>
-                    <SelectItem value="canada">Canada</SelectItem>
-                    <SelectItem value="uk">United Kingdom</SelectItem>
-                    <SelectItem value="australia">Australia</SelectItem>
-                    {/* Add more countries as needed */}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="bio">Short Bio (Optional)</Label>
+                <Label htmlFor="bio">Short Bio (Optional - but cool to Do!)</Label>
                 <Textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Tell us a bit about yourself..." rows={3}/>
               </div>
             </CardContent>
@@ -203,7 +126,7 @@ export default function ProfileSettingsPage() {
                 <Switch
                   id="calendarSync"
                   checked={calendarSyncEnabled}
-                  onCheckedChange={setCalendarSyncEnabled}
+                  onCheckedChange={(checked) => console.log("Calendar Sync:", checked)} // Placeholder for future implementation
                 />
               </div>
             </CardContent>
