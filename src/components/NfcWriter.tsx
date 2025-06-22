@@ -11,12 +11,12 @@ type NfcWriterProps = {
 const createNdefMessage = (url: string) => ({
   records: [
     {
-      recordType: 'well-known',
-      type: 'U', // 'U' stands for URI record according to NDEF spec
-      data: new TextEncoder().encode(url),
+      recordType: 'url',
+      data: url,
     },
   ],
 });
+
 
 const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => {
   const [status, setStatus] = useState<NfcStatus>('idle');
