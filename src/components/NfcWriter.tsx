@@ -32,14 +32,16 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
         setMessage('Writing data to tag...');
         try { // Attempt to write the message to the tag
           // Create an NDEF URI record correctly
-          const uriRecord = {
-            recordType: 'uri', // Explicitly set recordType to 'uri' for a URI record
-            data: new TextEncoder().encode(dataToWrite) // Encode the URL string as bytes
+          // Create a simple NDEF text record
+          const textRecord = {
+            recordType: 'text', // Use 'text' for a text record
+            data: new TextEncoder().encode('Hello, NFC!'), // Encode the text string as bytes
+            lang: 'en' // Specify language for text records
           };
 
-          // Create an NDEF message with the URI record
+          // Create an NDEF message with the text record
           const ndefMessage = {
-            records: [uriRecord]
+            records: [textRecord]
           };
 
           // Write the NDEF message to the tag
