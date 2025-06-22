@@ -50,7 +50,7 @@ const NfcWriter: React.FC<NfcWriterProps> = ({ dataToWrite }) => { // Accept dat
         } catch (writeError: any) {
           setStatus('error');
           setMessage(`Failed to write to NFC tag: ${writeError.message}`);
-          console.error("NFC write error:", writeError);
+          console.error("NFC write error:", writeError, writeError.message); // Log the error object and message
         } finally {
           // You might want to stop scanning after writing or error
           // reader.scan.cancel(); // This might be needed depending on your workflow
