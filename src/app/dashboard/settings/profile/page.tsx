@@ -72,8 +72,9 @@ export default function ProfileSettingsPage() {
 
         <form onSubmit={handleSubmit}>
           <Card className="mb-6 shadow-lg">
-            <CardHeader>
-              <CardTitle className="font-headline">Personal Information</CardTitle>
+            <CardHeader data-ai-block="cardHeader">
+              <CardTitle className="font-headline">Profile Information</CardTitle>
+              {/* <CardDescription>Update your personal details and profile picture.</CardDescription> */}
               <CardDescription>Update your personal details and profile picture.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -208,7 +209,7 @@ export default function ProfileSettingsPage() {
             </CardContent>
           </Card>
 
-          <div className="flex justify-end">
+          <div className="flex justify-start">
             <Button type="submit" size="lg" disabled={isLoading}>
               {isLoading ? (
                 <UserCircle className="mr-2 h-4 w-4 animate-spin" />

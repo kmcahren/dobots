@@ -20,8 +20,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon, Users, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import type { User, Group, SelectableMember } from "@/lib/types";
+import { format } from "date-fns";import { HelpCircle } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
@@ -251,9 +251,21 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="location"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel>Location</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g., Conference Room A" {...field} />
+                  <div className="flex items-center gap-1">
+ <FormLabel>Location</FormLabel>
+ <TooltipProvider>
+ <Tooltip>
+ <TooltipTrigger asChild>
+ <HelpCircle className="h-4 w-4 text-muted-foreground cursor-help" />
+ </TooltipTrigger>
+ <TooltipContent>
+ <p>Enter a street address if you want a map link to be included with the event details.</p>
+ </TooltipContent>
+ </Tooltip>
+ </TooltipProvider>
+ </div>
+ <FormControl>
+                    <Input placeholder="e.g., 123 Main St., Anywhere on Maps" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -415,7 +427,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
           <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground">
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {eventToEdit ? "Update Event" : "Create Event"}
-          </Button>
+ </Button>
  <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
             Cancel
           </Button>
