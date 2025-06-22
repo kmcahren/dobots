@@ -8,12 +8,12 @@ type NfcWriterProps = {
   dataToWrite: string;
 };
 
-const createNdefMessage = (text: string) => ({
+const createNdefMessage = (url: string) => ({
   records: [
     {
-      recordType: 'text',
-      data: new TextEncoder().encode(text),
-      lang: 'en',
+      recordType: 'well-known',
+      type: 'U', // 'U' stands for URI record according to NDEF spec
+      data: new TextEncoder().encode(url),
     },
   ],
 });
