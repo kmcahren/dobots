@@ -212,12 +212,16 @@ const OptimizedCheckinPage: React.FC = () => {
  </CardContent>
  </Card>
  </div>
+ <div className="flex justify-center mt-8">
+ <button className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+ Write Link on NFC Tag
+ </button>
+ </div>
       </div>
  <FloatingActionButton
  onClick={() => setShowFabMenu(!showFabMenu)}
  icon={<PlusCircle size={24} />} // Changed icon to PlusCircle
  />
-
  </>
   );
 };

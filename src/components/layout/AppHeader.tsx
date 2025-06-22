@@ -23,8 +23,8 @@ export function AppHeader() {
         <div className="flex h-14 items-center justify-between">
           <Link href="/dashboard" className="flex items-center space-x-2">
             <Image 
-              src="/images/.png" //"https://placehold.co/40x40.png" // Replace with actual logo
-              alt="DOIT Logo" 
+              src="/images/newlogo-150x150withco.png" //"https://placehold.co/40x40.png" // Replace with actual logo
+              alt="DOBOTS DO! Logo" 
               width={50} 
               height={50} 
               className="rounded-lg"
@@ -46,9 +46,8 @@ export function AppHeader() {
                 <span className="sr-only">Logout</span>
               </Button>
                <Button variant="ghost" className="px-2 py-1 h-auto md:hidden" asChild>
-                 <Link href="/dashboard/profile"> {/* Mobile profile quick access */}
+                 <Link href="/dashboard/settings/profile"> {/* Mobile profile quick access */}
                     <UserCircle className="h-6 w-6 text-muted-foreground hover:text-primary" />
-                    <span className="sr-only">Profile</span>
                  </Link>
                </Button>
             </div>

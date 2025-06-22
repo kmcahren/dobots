@@ -3,8 +3,8 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Login - DOIT',
-  description: 'Login to DOIT Team & Club Manager.',
+  title: 'Login - DOBOTS DO!',
+  description: 'Login to DOBITS Group Event Payment App.',
 };
 
 export default function LoginPage() {

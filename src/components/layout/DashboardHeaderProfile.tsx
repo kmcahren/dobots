@@ -1,14 +1,17 @@
 
 "use client"; 
+"use client";
 import Image from 'next/image';
 import { Users, ShieldCheck } from 'lucide-react'; // ShieldCheck for groups/clubs
+import Link from 'next/link';
 
 export function DashboardHeaderProfile() {
   // These would come from state/props in a real application
   const memberCount = 120; // Example data
   const groupCount = 5;   // Example data
 
-  return (
+  return ( 
+    <Link href="/dashboard/settings/profile" passHref>
     <div className="mb-6 rounded-xl overflow-hidden shadow-lg border border-border/50">
       <div className="relative h-32 md:h-40 bg-gradient-to-r from-primary/80 to-accent/80">
         <Image
@@ -36,5 +39,6 @@ export function DashboardHeaderProfile() {
         </div>
       </div>
     </div>
+    </Link>
   );
 }
