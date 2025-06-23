@@ -121,9 +121,18 @@ export function EventsList() {
                       </div>
                     </CardHeader>
                     <CardContent className="flex-grow space-y-2 text-sm pb-4">
-                      <div className="flex items-center text-muted-foreground">
-                        <CalendarDays className="h-4 w-4 mr-2 flex-shrink-0" /> <span>{displayDate}</span>
-                      </div>
+                      <div className="flex items-center text-muted-foreground justify-between">
+ <div className="flex items-center">
+ <CalendarDays className="h-4 w-4 mr-2 flex-shrink-0" /> <span>{displayDate}</span>
+ </div>
+                        <span className="text-xs text-muted-foreground/80 font-mono flex items-center dark:text-muted-foreground/70 ml-4">
+ <Users className="h-4 w-4 mr-0.5 flex-shrink-0" />
+ {totalInvited} Invited
+                          (<CheckCircle2 className="h-3.5 w-3.5 ml-1 mr-0.5 text-green-600 dark:text-green-400" />{attending}
+ <HelpCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-gray-500 dark:text-gray-400" />{unconfirmed}
+ <XCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-red-600 dark:text-red-400" />{cancelled})
+ </span>
+ </div>
                       <div className="flex items-start text-muted-foreground">
                         <MapPin className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" /> 
                         <span className="flex-grow">{event.location} 
@@ -136,15 +145,6 @@ export function EventsList() {
                           >
                             (map)
                           </a>
-                        </span>
-                      </div>
-                      <div className="flex items-center text-muted-foreground space-x-1 pt-1">
-                        <Users className="h-4 w-4 mr-0 flex-shrink-0" />
-                        <span className="text-xs">{totalInvited} Invited</span>
-                        <span className="text-xs text-muted-foreground/80 font-mono flex items-center dark:text-muted-foreground/70">
-                          (<CheckCircle2 className="h-3.5 w-3.5 mr-0.5 text-green-600 dark:text-green-400" />{attending}
-                          <HelpCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-gray-500 dark:text-gray-400" />{unconfirmed}
-                          <XCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-red-600 dark:text-red-400" />{cancelled})
                         </span>
                       </div>
                       {event.description && <p className="text-muted-foreground line-clamp-2 pt-1">{event.description}</p>}
