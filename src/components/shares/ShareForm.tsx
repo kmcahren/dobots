@@ -29,8 +29,10 @@ const mockGroups = [
   { id: "group2", name: "Photography Club Committee" },
 ];
 const mockReportTypes = [
-  { id: "event_summary", name: "Event Attendance Summary" },
-  { id: "payment_status", name: "Payment Status Report" },
+  { id: "event_summary1", name: "Event Attendance Summary - Current Month" },
+  { id: "event_summary2", name: "Event Attendance Summary - Prior Month" },
+  { id: "payment_status1", name: "Payment Status Report - Current Month" },
+  { id: "payment_status2", name: "Payment Status Report - Prior Month" },
 ];
 
 

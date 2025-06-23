@@ -158,7 +158,7 @@ export default function NotificationSettingsPage() {
           </Card>
 
 
-          <div className="flex justify-end mt-8">
+          <div className="flex justify-start mt-8">
             <Button type="submit" size="lg" disabled={isLoading}>
               {isLoading ? (
                 <BellRing className="mr-2 h-4 w-4 animate-spin" />

@@ -128,9 +128,9 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notes (Optional - for key relationships)</FormLabel>
+                  <FormLabel>Notes / Short Bio (Optional - for relationships)</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Any additional information about this contact..." {...field} rows={4} value={field.value || ""} />
+                    <Textarea placeholder="Add temporary information about this contact. NOTE: the Full Name and Notes will be overwritten with their Short Bio if the owner of this phone number takes control of the record - they will not see your entries and your data will be lost." {...field} rows={4} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,7 +141,7 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
         
         <div className="flex justify-start gap-3 pt-4">
           <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground">
-            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}\
+            {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
             {contactToEdit ? "Save Changes" : "Save Contact"}
           </Button>
           <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
