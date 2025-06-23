@@ -11,7 +11,7 @@ export function DashboardHeaderProfile() {
   const groupCount = 5;   // Example data
 
   return ( 
-    <Link href="/dashboard/settings/profile" passHref>
+    <Link href="#" passHref>
     <div className="mb-6 rounded-xl overflow-hidden shadow-lg border border-border/50">
       <div className="relative h-32 md:h-40 bg-gradient-to-r from-primary/80 to-accent/80">
         <Image

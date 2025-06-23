@@ -122,15 +122,15 @@ export function EventsList() {
                     </CardHeader>
                     <CardContent className="flex-grow space-y-2 text-sm pb-4">
                       <div className="flex items-center text-muted-foreground justify-between">
- <div className="flex items-center">
- <CalendarDays className="h-4 w-4 mr-2 flex-shrink-0" /> <span>{displayDate}</span>
- </div>
+                        <div className="flex items-center">
+                          <CalendarDays className="h-4 w-4 mr-2 flex-shrink-0" /> <span>{displayDate}</span>
+                        </div>
                         <span className="text-xs text-muted-foreground/80 font-mono flex items-center dark:text-muted-foreground/70 ml-4">
- <Users className="h-4 w-4 mr-0.5 flex-shrink-0" />
- {totalInvited} Invited
-                          (<CheckCircle2 className="h-3.5 w-3.5 ml-1 mr-0.5 text-green-600 dark:text-green-400" />{attending}
+ <Users className="h-4 w-4 mr-0.5 flex-shrink-0" /> 
+ {totalInvited} Sent
+ <CheckCircle2 className="h-3.5 w-3.5 ml-1 mr-0.5 text-green-600 dark:text-green-400" />{attending}
  <HelpCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-gray-500 dark:text-gray-400" />{unconfirmed}
- <XCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-red-600 dark:text-red-400" />{cancelled})
+ <XCircle className="h-3.5 w-3.5 ml-1 mr-0.5 text-red-600 dark:text-red-400" />{cancelled}
  </span>
  </div>
                       <div className="flex items-start text-muted-foreground">
