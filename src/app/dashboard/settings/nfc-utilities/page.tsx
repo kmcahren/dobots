@@ -64,6 +64,19 @@ export default function NfcUtilitiesPage() {
 
         <div>
           <p><br></br></p>
+          <div className="mt-6">
+            <h2 className="text-xl font-semibold font-headline">Test Reports</h2>
+            <ul className="mt-2">
+              <li>
+                <Link href="/dashboard/reports/event-attendance-summary" className="text-primary hover:underline">Event Attendance Summary</Link>
+              </li>
+               <li>
+                <Link href="/dashboard/reports/payment-status-report" className="text-primary hover:underline">
+                  Payment Status Report
+                </Link>
+              </li>
+            </ul>
+          </div>
           <p>More to come...</p>
         </div>
 
