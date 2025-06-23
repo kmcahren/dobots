@@ -39,7 +39,7 @@ export default function NfcUtilitiesPage() {
               <Input
                 id="linkToAnywhere"
                 type="url"
-                placeholder="e.g., https://example.com << include the https://"
+                placeholder="e.g., https://www.instagram.com/dobots.co/ << include the https://"
                 value={linkToAnywhere}
                 onChange={(e) => setLinkToAnywhere(e.target.value)}
                 className="mt-1"
