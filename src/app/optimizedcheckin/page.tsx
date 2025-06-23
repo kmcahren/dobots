@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { PlusCircle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button'; // Import Button component
 import { Payment, Event, Notification } from '../lib/types'; // Assuming types are defined in types.ts
 import { FloatingActionButton } from '@/components/layout/FloatingActionButton';
 import NfcWriter from '@/components/NfcWriter';
@@ -38,6 +39,8 @@ const OptimizedCheckinPage: React.FC = () => {
   const [actionableNotifications, setActionableNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [showFabMenu, setShowFabMenu] = useState(false);
+ const [showNfcWriter, setShowNfcWriter] = useState(false);
+  const [fullCheckinUrl, setFullCheckinUrl] = useState('');
   const [error, setError] = useState<string | null>(null);
   const pathname = usePathname();
 
@@ -58,6 +61,7 @@ const OptimizedCheckinPage: React.FC = () => {
       }
     };
 
+    setFullCheckinUrl(typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}${pathname}` : '');
     fetchData();
   }, []);
 
@@ -212,11 +216,22 @@ const OptimizedCheckinPage: React.FC = () => {
  </CardContent>
  </Card>
  </div>
- <div className="flex justify-center mt-8">
- <button className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
- Write Link on NFC Tag
- </button>
- </div>
+ {/* Button to Write on NFC Tag */}
+ {fullCheckinUrl && (
+        <div className="mt-4 flex justify-center">
+          <Button className="mt-4 bg-chart-3 hover:bg-chart-3/90 text-primary-foreground" onClick={() => setShowNfcWriter(!showNfcWriter)}>
+            Write Link on NFC Tag
+          </Button>
+        </div>
+      )}
+
+      {/* NFC Writer Component */}
+      {showNfcWriter && fullCheckinUrl && (
+        <div className="mt-4 flex flex-col items-center">
+          <h3 className="text-xl font-semibold font-headline mb-4 text-foreground">Write to NFC Tag</h3>
+          <NfcWriter dataToWrite={fullCheckinUrl} />
+        </div>
+      )}
       </div>
  <FloatingActionButton
  onClick={() => setShowFabMenu(!showFabMenu)}

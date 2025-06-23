@@ -20,6 +20,7 @@ export default function SettingsPage() {
     { title: "Payment Methods", description: "Add or remove payment cards.", icon: CreditCardIcon, href: "/dashboard/settings/payment-methods" },
     { title: "Security & Privacy", description: "Manage password, 2FA, and view legal policies.", icon: Shield, href: "/dashboard/settings/security" },
     { title: "Optimized Checkin", description: "Designed for experienced NFC users to do quick checkins.", icon: User, href: "/optimizedcheckin" },
+    { title: "Free NFC Utilities", description: "Access tools for working with NFC tags.", icon: Cog, href: "/dashboard/settings/nfc-utilities" },
   ];
 
   return (
