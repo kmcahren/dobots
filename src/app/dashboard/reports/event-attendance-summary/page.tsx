@@ -57,6 +57,18 @@ const sampleData: AttendanceData[] = [
   },
 ];
 
+interface EventDetails {
+  startDate: string; // Or Date type
+  endDate: string;   // Or Date type
+}
+
+// Placeholder data - replace with your actual event details lookup
+const eventDetailsMap: Record<string, EventDetails> = {
+  "Group A - Team Meeting": { startDate: "2024-08-15 09:00 AM", endDate: "2024-08-15 11:00 AM" },
+  "Event B - Workshop": { startDate: "2024-08-20 01:00 PM", endDate: "2024-08-20 04:00 PM" },
+  "Group C - Study Session": { startDate: "2024-08-25 05:30 PM", endDate: "2024-08-25 07:00 PM" },
+};
+
 const EventAttendanceSummaryPage = () => {
 
   // Sort data by Group/Event Name for grouping
@@ -105,7 +117,14 @@ const EventAttendanceSummaryPage = () => {
                   <React.Fragment key={`${attendance.groupEventName}-${index}`}>
                     {isNewGroup && (
                       <tr className="bg-gray-200 dark:bg-gray-600">
-                        <td className="px-4 py-2 whitespace-nowrap font-semibold" colSpan={5}>{attendance.groupEventName}</td>
+                        <td className="px-4 py-2 whitespace-nowrap font-semibold" colSpan={5}>
+                          {attendance.groupEventName}
+                          {eventDetailsMap[attendance.groupEventName] && (
+                            <span className="font-normal ml-4 text-gray-700 dark:text-gray-300">
+                              {eventDetailsMap[attendance.groupEventName].startDate} - {eventDetailsMap[attendance.groupEventName].endDate}
+                            </span>
+                          )}
+                        </td>
                       </tr>
                     )}
                <tr className={rowClassName}> {/* Removed Group/Event Name cell */}

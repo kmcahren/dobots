@@ -88,7 +88,12 @@ const PaymentStatusReportPage = () => {
                 <React.Fragment key={`${payment.paymentRequestName}-${index}`}>
                   {isNewGroup && (
                     <tr className="bg-gray-200 dark:bg-gray-600">
-                      <td className="px-4 py-2 whitespace-nowrap font-semibold" colSpan={4}>{payment.paymentRequestName}</td>
+                      <td className="px-4 py-2 whitespace-nowrap font-semibold" colSpan={4}>
+                        {payment.paymentRequestName}{' '}
+                        <span className="font-normal text-sm">
+                          {payment.dateTime}
+                        </span>
+                      </td>
                     </tr>
                   )}
                   <tr className={rowClassName}>

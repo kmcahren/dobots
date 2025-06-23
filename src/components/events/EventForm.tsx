@@ -17,8 +17,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"; // Import Popover components
+import HelpTooltip from "@/components/ui/HelpTooltip";
+ // Import the new HelpTooltip component
 import { Calendar } from "@/components/ui/calendar";
-import { CalendarIcon, Users, Loader2 } from "lucide-react";
+import { CalendarIcon, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";import { HelpCircle } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -253,15 +255,8 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
                   <div className="flex items-center gap-1">
- <FormLabel>Location</FormLabel> {/* Use FormLabel for accessibility */}
-                    <Popover> {/* Use Popover for mobile-friendly tooltip */}
- <PopoverTrigger>
- <Button variant="ghost" size="icon" className="h-4 w-4 text-muted-foreground cursor-help">
- <HelpCircle className="h-4 w-4" /> {/* Use HelpCircle */}
- </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-3 text-sm">Enter a street address if you want a map link to be included with the event details.</PopoverContent>
-                    </Popover>
+                    <FormLabel>Location</FormLabel> {/* Use FormLabel for accessibility */}
+                    <HelpTooltip helpText="Enter a street address if you want a map link to be included with the event details." />
                   </div>
                   <FormControl>
                     <Input placeholder="e.g., 123 Main St., Anywhere on Maps" {...field} />
