@@ -2,7 +2,7 @@
 import { AppHeader } from "@/components/layout/AppHeader";
 import { BottomNavigationBar } from "@/components/layout/BottomNavigationBar";
 import { FloatingActionButton } from "@/components/layout/FloatingActionButton";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ChevronLeft, User, Bell, CreditCardIcon, Shield, Cog } from "lucide-react";
@@ -18,7 +18,7 @@ export default function SettingsPage() {
     { title: "Profile", description: "Update personal info, profile picture, and preferences.", icon: User, href: "/dashboard/settings/profile" },
     { title: "Notifications", description: "Manage how and when you receive notifications.", icon: Bell, href: "/dashboard/settings/notifications" },
     { title: "Payment Methods", description: "Add or remove payment cards.", icon: CreditCardIcon, href: "/dashboard/settings/payment-methods" },
-    { title: "Security & Privacy", description: "Manage password, 2FA, and view legal policies.", icon: Shield, href: "/dashboard/settings/security" },
+    { title: "Payment Groups", description: "Create a Store with open payments for Products & Services", icon: CreditCardIcon, href: "/dashboard/settings/payment-groups" },
     { title: "Optimized Checkin", description: "Designed for experienced NFC users to do quick checkins.", icon: User, href: "/optimizedcheckin" },
     { title: "Free NFC Utilities", description: "Access tools for working with NFC tags.", icon: Cog, href: "/dashboard/settings/nfc-utilities" },
   ];

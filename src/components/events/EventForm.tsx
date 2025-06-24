@@ -1,3 +1,4 @@
+
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -15,19 +16,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"; // Import Popover components
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import HelpTooltip from "@/components/ui/HelpTooltip";
- // Import the new HelpTooltip component
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";import { HelpCircle } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { format } from "date-fns";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import type { SelectableMember } from "@/lib/types";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 
 // Mock data for selectable members/groups
 const mockUsers: SelectableMember[] = [
@@ -51,7 +53,7 @@ const eventFormSchema = z.object({
   sendInvite: z.boolean().default(true).optional(),
   reminderTiming: z.enum(["none", "1hour", "2hours", "1day"]).default("1day").optional(),
   allowComments: z.boolean().default(true).optional(),
-  imageUrl: z.string().url("Must be a valid URL.").optional(),
+  imageUrl: z.string().url("Must be a valid URL.").optional().or(z.literal('')),
   eventLinkUrl: z.string().url("Must be a valid URL for the event link.").optional().or(z.literal('')), // Allow empty string
 });
 
@@ -67,13 +69,15 @@ const defaultValues: Partial<EventFormValues> = {
 };
 
 export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id?: string} }) {
-  const form = useForm<EventFormValues>({
-    resolver: zodResolver(eventFormSchema),
-    defaultValues: eventToEdit || defaultValues, // Use eventToEdit if provided
-  });
   const { toast } = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  
+  const form = useForm<EventFormValues>({
+    resolver: zodResolver(eventFormSchema),
+    defaultValues: eventToEdit || defaultValues,
+  });
+
   const [selectedMembers, setSelectedMembers] = useState<SelectableMember[]>(
     // Pre-select members if editing and IDs are available
     // This part needs actual logic to map eventToEdit.selectedMemberIds to mockUsers
@@ -107,7 +111,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
       description: `"${data.title}" has been successfully ${eventToEdit ? 'updated' : 'scheduled'}.`,
       variant: "default", 
     });
-    router.push("/dashboard?tab=events"); // Redirect to events list
+    router.push("/dashboard?tab=events"); 
   }
 
   return (
@@ -124,7 +128,10 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="title"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel>Group/Event Title</FormLabel>
+                 <div className="flex items-center gap-1">
+                 <FormLabel>Group/Event Title</FormLabel>
+                 <HelpTooltip helpText="This could be your family, friend circles, sports team, clubs or membership organizations." />
+                 </div>
                   <FormControl>
                     <Input placeholder="e.g., Weekly Team Sync" {...field} />
                   </FormControl>
@@ -152,7 +159,10 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="startDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Start Date & Time</FormLabel>
+                 <div className="flex items-center gap-1">
+                 <FormLabel>Start Date & Time</FormLabel>
+                 <HelpTooltip helpText="Select the date and time when your event will begin." />
+                 </div>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -203,7 +213,10 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="endDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>End Date & Time</FormLabel>
+                  <div className="flex items-center gap-1">
+                    <FormLabel>End Date & Time</FormLabel>
+                    <HelpTooltip helpText="Select the date and time when your event will end." />
+                  </div>
                    <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -251,7 +264,6 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
             <FormField
               control={form.control}
               name="location"
-
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
                   <div className="flex items-center gap-1">
@@ -349,7 +361,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
                 <FormItem className="md:col-span-2">
                   <FormLabel>Event Image URL (600x400-Optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://example.com/image.png" {...field} />
+                    <Input placeholder="https://example.com/image.png" {...field} value={field.value || ""} />
                   </FormControl>
                   {field.value && <img src={field.value} alt="Preview" className="mt-2 rounded-md max-h-40 object-cover" data-ai-hint="event banner" />}
                   <FormMessage />
@@ -364,7 +376,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
                 <FormItem className="md:col-span-2">
                   <FormLabel>Event Link URL (External-Optional)</FormLabel>
                   <FormControl>
-                    <Input placeholder="https://example.com/event-details" {...field} />
+                    <Input placeholder="https://example.com/event-details" {...field} value={field.value || ""} />
                   </FormControl>
                   <FormDescription>Provide an external link for more event information, if any.</FormDescription>
                   <FormMessage />
@@ -421,8 +433,8 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
           <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground">
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             {eventToEdit ? "Update Event" : "Create Event"}
- </Button>
- <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
+         </Button>
+         <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
             Cancel
           </Button>
         </div>
