@@ -114,6 +114,16 @@ const PaymentStatusReportPage = () => {
         </table>
       </div>
 
+      {/* Generic Button */}
+      <div className="mt-6 text-left">
+        <a href="#" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+ Export current year data
+        </a> 
+ <a href="#" className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+ Export prior year data
+ </a>
+      </div>
+
     </div>
   );
 };

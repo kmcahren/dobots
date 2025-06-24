@@ -3,7 +3,6 @@ import { format } from 'date-fns';
 import { CheckCircle2, XCircle, HelpCircle } from 'lucide-react'; // Import icons
 
 import Link from 'next/link';
-// Define a type for your data
 interface AttendanceData {
   groupEventName: string;
   dateTime: string;
@@ -75,16 +74,18 @@ const EventAttendanceSummaryPage = () => {
   // Then sort by date in descending order within each group
   const sortedData = [...sampleData].sort((a, b) => {
     const groupCompare = a.groupEventName.localeCompare(b.groupEventName);
+
     if (groupCompare !== 0) return groupCompare;
     // Assuming dateTime can be directly compared or parsed to Date objects
     return new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime();
   });
-  let currentGroup = ''; // To keep track of the current group for striped rows
-  let isEvenRow = true; // To alternate row colors within each group
 
-  return (
+ return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-4">Event Attendance Summary</h1>
+      {/* This is the EventAttendanceSummaryPage component */}
+
+
       <h2 className="text-xl font-semibold mb-2">Current Month: {new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
       {/* Placeholder for the actual report content */}
       <div>
@@ -103,6 +104,8 @@ const EventAttendanceSummaryPage = () => {
             </thead>
             <tbody>
               {sortedData.map((attendance, index) => {
+                let currentGroup = ''; // To keep track of the current group for striped rows
+                let isEvenRow = true; // To alternate row colors within each group
                 const isNewGroup = attendance.groupEventName !== currentGroup;
                 if (isNewGroup) {
                   currentGroup = attendance.groupEventName;
@@ -148,6 +151,16 @@ const EventAttendanceSummaryPage = () => {
           </table>
         </div>
 
+      </div>
+
+      {/* Export Button */}
+      <div className="mt-6 text-left">
+        <a href="#" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+          Export current year data
+        </a>
+        <a href="#" className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+          Export prior year data
+        </a>
       </div>
     </div>
   );
