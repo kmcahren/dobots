@@ -39,6 +39,7 @@ const mockReportTypes = [
 const shareFormSchema = z.object({
   shareType: z.enum(["message", "report"], { required_error: "Please select a share type."}),
   messageContent: z.string().optional(),
+  genericLink: z.string().optional(), // Added genericLink field
   reportType: z.string().optional(),
   targetType: z.enum(["contact", "group"], { required_error: "Please select a target."}).optional(),
   targetId: z.string({ required_error: "Please select a recipient or group."}).optional(),
@@ -84,6 +85,9 @@ export function ShareForm() {
     setIsLoading(true);
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
+ if (data.shareType === "message" && data.genericLink) {
+ data.messageContent = `${data.messageContent}\n${data.genericLink}`;
+    }
     console.log("Share Form Submitted:", data);
     
     setIsLoading(false);
@@ -149,6 +153,21 @@ export function ShareForm() {
                 />
             )}
 
+            {shareType === "message" && (
+                <FormField
+                control={form.control}
+                name="genericLink"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Message Link</FormLabel>
+                    <FormControl>
+                        <input type="text" placeholder="e.g., Link to an event or payment request - use https://..." className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                    </FormItem>
+                )}
+                />
+            )}
             {shareType === "report" && (
                 <FormField
                 control={form.control}

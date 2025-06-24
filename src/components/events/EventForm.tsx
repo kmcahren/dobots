@@ -161,7 +161,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
                 <FormItem className="flex flex-col">
                  <div className="flex items-center gap-1">
                  <FormLabel>Start Date & Time</FormLabel>
-                 <HelpTooltip helpText="Select the date and time when your event will begin." />
+                 <HelpTooltip helpText="Select the date and time when your event will begin. NOTE: family and friend groups do not need a start date." />
                  </div>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -215,7 +215,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
                 <FormItem className="flex flex-col">
                   <div className="flex items-center gap-1">
                     <FormLabel>End Date & Time</FormLabel>
-                    <HelpTooltip helpText="Select the date and time when your event will end." />
+                    <HelpTooltip helpText="Select the date and time when your event will end - events often span multiple days. NOTE: all events do not need an end date." />
                   </div>
                    <Popover>
                     <PopoverTrigger asChild>
@@ -359,7 +359,10 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="imageUrl"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel>Event Image URL (600x400-Optional)</FormLabel>
+ <div className="flex items-center gap-1">
+                  <FormLabel>Event Image URL (Optional)</FormLabel>
+ <HelpTooltip helpText="Provide a URL for the event banner image. Recommended size is 600x400 pixels." />
+ </div>
                   <FormControl>
                     <Input placeholder="https://example.com/image.png" {...field} value={field.value || ""} />
                   </FormControl>
@@ -374,7 +377,10 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               name="eventLinkUrl"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel>Event Link URL (External-Optional)</FormLabel>
+ <div className="flex items-center gap-1">
+ <FormLabel>Event Link URL (External-Optional)</FormLabel>
+ <HelpTooltip helpText="Provide a URL for an external event page or link." />
+ </div>
                   <FormControl>
                     <Input placeholder="https://example.com/event-details" {...field} value={field.value || ""} />
                   </FormControl>

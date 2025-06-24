@@ -18,7 +18,7 @@ export default function SettingsPage() {
     { title: "Profile", description: "Update personal info, profile picture, and preferences.", icon: User, href: "/dashboard/settings/profile" },
     { title: "Notifications", description: "Manage how and when you receive notifications.", icon: Bell, href: "/dashboard/settings/notifications" },
     { title: "Payment Methods", description: "Add or remove payment cards.", icon: CreditCardIcon, href: "/dashboard/settings/payment-methods" },
-    { title: "Payment Groups", description: "Create a Store with open payments for Products & Services", icon: CreditCardIcon, href: "/dashboard/settings/payment-groups" },
+    { title: "Payment Groups", description: "Create  a POS Store for Products & Services", icon: CreditCardIcon, href: "/dashboard/settings/payment-groups" },
     { title: "Optimized Checkin", description: "Designed for experienced NFC users to do quick checkins.", icon: User, href: "/optimizedcheckin" },
     { title: "Free NFC Utilities", description: "Access tools for working with NFC tags.", icon: Cog, href: "/dashboard/settings/nfc-utilities" },
   ];

@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import HelpTooltip from "@/components/ui/HelpTooltip";
 import { CalendarIcon, Loader2, Users, UserCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -127,7 +128,10 @@ export function NotificationForm() {
               name="question"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Question / Title</FormLabel>
+                  <div className="flex items-center gap-1">
+                    <FormLabel>Question / Title / Vote</FormLabel>
+                    <HelpTooltip helpText="Enter the question or title for your notification or survey. NOTE: you can add multiple choices and interactions below." />
+                  </div>
                   <FormControl>
                     <Input placeholder="e.g., Confirm availability for next game?" {...field} />
                   </FormControl>
