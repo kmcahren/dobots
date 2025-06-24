@@ -15,9 +15,9 @@ export const metadata = {
 
 export default function SettingsPage() {
   const settingsOptions = [
-    { title: "Profile", description: "Update personal info, profile picture, and preferences.", icon: User, href: "/dashboard/settings/profile" },
+    { title: "Profile", description: "Update personal info and preferences.", icon: User, href: "/dashboard/settings/profile" },
     { title: "Notifications", description: "Manage how and when you receive notifications.", icon: Bell, href: "/dashboard/settings/notifications" },
-    { title: "Payment Methods", description: "Add or remove payment cards.", icon: CreditCardIcon, href: "/dashboard/settings/payment-methods" },
+    { title: "Payment Methods", description: "Add or remove payment details.", icon: CreditCardIcon, href: "/dashboard/settings/payment-methods" },
     { title: "Payment Groups", description: "Create  a POS Store for Products & Services", icon: CreditCardIcon, href: "/dashboard/settings/payment-groups" },
     { title: "Optimized Checkin", description: "Designed for experienced NFC users to do quick checkins.", icon: User, href: "/optimizedcheckin" },
     { title: "Free NFC Utilities", description: "Access tools for working with NFC tags.", icon: Cog, href: "/dashboard/settings/nfc-utilities" },
@@ -69,7 +69,7 @@ export default function SettingsPage() {
             </div>
           </CardHeader>
           <CardContent className="pt-2 pb-4 px-5">
-            <p className="text-sm text-muted-foreground mb-3">This section is typically restricted to users with administrative privileges.</p>
+            <p className="text-sm text-muted-foreground mb-3">This section is restricted to users with administrative privileges.</p>
             <Button variant="secondary" asChild>
                 <Link href="/dashboard/settings/admin-config">Configure Settings</Link>
             </Button>

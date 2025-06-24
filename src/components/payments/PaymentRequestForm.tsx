@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
+import HelpTooltip from "@/components/ui/HelpTooltip";
 import { CalendarIcon, Info, Loader2, PlusCircle, Users, UserCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
@@ -136,7 +137,11 @@ export function PaymentRequestForm() {
                 name="title"
                 render={({ field }) => (
                 <FormItem>
-                    <FormLabel>Title</FormLabel>
+ <div className="flex items-center gap-1">
+ <FormLabel>Payment Title</FormLabel>
+ <HelpTooltip helpText="Enter a title for this payment request. It could be a Product, Service, Entry Ticket or Membership Fee as examples." />
+
+ </div>
                     <FormControl>
                     <Input placeholder="e.g., Team Jersey Fee" {...field} />
                     </FormControl>
@@ -150,7 +155,9 @@ export function PaymentRequestForm() {
                 name="price"
                 render={({ field }) => (
                 <FormItem>
+ <div className="flex items-center gap-1">
                     <FormLabel>Price (USD)</FormLabel>
+ <HelpTooltip helpText="Enter the amount for this payment request in USD. Inquire to see if other currencies are availble in your Region." /></div>
                     <FormControl>
                     <Input type="number" placeholder="0.00" step="0.01" {...field} />
                     </FormControl>
@@ -166,7 +173,7 @@ export function PaymentRequestForm() {
                 <FormItem>
                     <FormLabel>Description (Optional)</FormLabel>
                     <FormControl>
-                    <Textarea placeholder="Details about this payment..." {...field} rows={3}/>
+                    <Textarea placeholder="Enter the full description about this payment. You might consider adding details for shipping or pickups to reduce any buyer confusion." {...field} rows={3}/>
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -192,7 +199,7 @@ export function PaymentRequestForm() {
                             {field.value ? (
                             format(field.value, "PPP")
                             ) : (
-                            <span>Pick a due date</span>
+                            <span>Pick a due date or leave blank if this Payment is not ending soon.</span>
                             )}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>

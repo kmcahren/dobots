@@ -22,6 +22,7 @@ import { useState } from "react";
 import { Loader2, UserPlus, Save } from "lucide-react";
 import Image from "next/image";
 
+import HelpTooltip from "@/components/ui/HelpTooltip";
 const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters.").max(100, "Name is too long."),
   phoneNumber: z.string().refine(val => /^\+(?:[0-9] ?){6,14}[0-9]$/.test(val), {
@@ -84,7 +85,10 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+ <div className="flex items-center gap-1">
+ <FormLabel>Full Name</FormLabel>
+ <HelpTooltip helpText="Enter the full name of the contact. NOTE: this is not a CMS so the phone number you enter below may be already taken by the owner. It would still be cool to know what you put in this field." />
+ </div>
                   <FormControl>
                     <Input placeholder="e.g., Jane Doe" {...field} />
                   </FormControl>
@@ -99,7 +103,10 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+ <div className="flex items-center gap-1">
+ <FormLabel>Phone Number</FormLabel>
+ <HelpTooltip helpText="Enter the phone number for this contact. This is an OTP App designed for active users on the go. The owner will be allowed to take ownership of this record, feel free to enter it first." />
+ </div>
                     <FormControl>
                       <Input type="tel" placeholder="+1 123-456-7890" {...field} value={field.value || ""} />
                     </FormControl>
@@ -112,8 +119,11 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address (Optional - for reports)</FormLabel>
+                  <FormItem> {/* Use FormLabel for accessibility */}
+ <div className="flex items-center gap-1">
+                    <FormLabel>Email Address (Optional)</FormLabel>
+ <HelpTooltip helpText="Provide an email address for sending and receiving reports or notifications." />
+ </div>
                     <FormControl>
                       <Input type="email" placeholder="name@example.com" {...field} value={field.value || ""} />
                     </FormControl>
@@ -128,9 +138,12 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
               name="notes"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Notes / Short Bio (Optional - for relationships)</FormLabel>
+ <div className="flex items-center gap-1">
+ <FormLabel>Notes / Short Bio (Optional)</FormLabel>
+ <HelpTooltip helpText="Add notes or a short bio for this contact. NOTE: although packed with great features - this App is not a CMS and everything will be overwritten by the owner of this phone number if they sign in - they will not see your entries but your data will be lost. You were just inviting them anyway, right? I wonder what their real name is..." />
+ </div>
                   <FormControl>
-                    <Textarea placeholder="Add temporary information about this contact. NOTE: the Full Name and Notes will be overwritten with their Short Bio if the owner of this phone number takes control of the record - they will not see your entries and your data will be lost." {...field} rows={4} value={field.value || ""} />
+                    <Textarea placeholder="Add notes or a short bio for this contact. NOTE: the Full Name and this Note will be overwritten by the owner of this phone number if they sign in and take control of the record - they will not see your entries but your data will be lost." {...field} rows={4} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
