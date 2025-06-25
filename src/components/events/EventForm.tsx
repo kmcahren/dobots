@@ -378,7 +378,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
  <div className="flex items-center gap-1">
- <FormLabel>Event Link URL (External-Optional)</FormLabel>
+ <FormLabel>Event Link URL (Optional)</FormLabel>
  <HelpTooltip helpText="Provide a URL for an external event page or link." />
  </div>
                   <FormControl>
