@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { QRCodeCanvas } from 'qrcode.react';
 import { usePathname } from 'next/navigation';
@@ -13,6 +13,7 @@ interface PaymentRequest {
   id: string;
   amount: number;
   description: string;
+  deliveryMethod?: string; // Added placeholder for delivery method
   imageUrl?: string; // Added optional imageUrl field
   // Add other relevant payment request fields
 }
@@ -35,9 +36,10 @@ const PaymentGroupPreviewPage: React.FC = () => {
     const dummyPaymentGroup: PaymentGroup = {
       id: 'group-1',
       title: 'My Awesome Payment Group',
-      imageUrl: '/images/dashboard.png', // Example group image URL
+      imageUrl: '/images/dashboard.png', // Payment group image URL
+ description: 'This is a sample payment group description. It provides more details about what this group is for.',
       paymentRequests: [
-        { id: 'req-1', amount: 10.00, description: 'Product A', imageUrl: '/images/newlogo-150x150.png' }, // Example item image URL
+        { id: 'req-1', amount: 10.00, description: 'Product A', imageUrl: '/images/bots/0000logo.png', deliveryMethod: 'Digital Download' }, // Product A with image
         { id: 'req-2', amount: 25.50, description: 'Service B' },
         { id: 'req-3', amount: 5.00, description: 'Product C' },
       ],
@@ -55,64 +57,66 @@ const PaymentGroupPreviewPage: React.FC = () => {
 
   return (
     <>
-    <div className="container mx-auto px-4 py-8">
-      <div className="relative mb-8">
-        {paymentGroup.imageUrl && (
-          <div className="relative h-64 w-full">
-            <Image
-              src={paymentGroup.imageUrl}
-              alt={paymentGroup.title || 'Payment Group Image'}
+    <div className="mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      {/* Header Section (Compact, inspired by DashboardHeaderProfile) */}
+      <div className="relative w-full h-48 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md overflow-hidden shadow-md border border-gray-200 mb-8">
+        {paymentGroup.imageUrl && ( // Use the group image as the banner
+          <Image
+            src={paymentGroup.imageUrl}
+            alt={paymentGroup.title || 'Payment Group Image'}
               layout="fill"
-              objectFit="cover"
-              className="rounded-md"
+ objectFit="cover"
+ className="opacity-50" // Add some opacity to the banner image
             />
-            <div className="absolute inset-0 bg-black opacity-50 rounded-md"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <h1 className="text-4xl font-bold text-white text-center drop-shadow-lg">
-                {paymentGroup.title}
-              </h1>
-            </div>
-          </div>
         )}
-        {!paymentGroup.imageUrl && (
-          <div className="h-40 bg-gray-200 rounded-md flex items-center justify-center">
-             <h1 className="text-3xl font-bold text-gray-800">
-                {paymentGroup.title}
-              </h1>
-          </div>
-        )}
+        {/* Content Overlay */}
+        <div className="absolute inset-0 flex flex-col justify-center items-center p-4 text-white text-center">
+          <h2 className="text-3xl font-bold mb-2">{paymentGroup.title}</h2>
+          {paymentGroup.description && (
+            <p className="text-lg opacity-90">{paymentGroup.description}</p> // Add some opacity to the description
+          )}
+          {/* Add other relevant group info here if needed */}
+        </div>
       </div>
 
-      <h2 className="text-2xl font-semibold mb-4">Available Items</h2>
+      {/* Payment Requests Section */}
+      <h3 className="text-2xl font-semibold text-foreground mb-6 text-center">Available Items</h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Product List (Shopping Cart Design) */}
+      <div className="grid grid-cols-1 gap-4 sm:px-0"> {/* Adjusted gap and removed small screen padding */}
         {paymentGroup.paymentRequests.map((request) => (
-          <Card key={request.id}>
-            <CardHeader>
- <CardTitle>{request.description}</CardTitle>
-            </CardHeader>
-            <CardContent className="flex items-center">
+          <Card key={request.id} className="flex flex-col sm:flex-row items-center"> {/* Card for each product, flex column on mobile, row on wider screens */}
+            <CardContent className="flex flex-col sm:flex-row items-center p-4 w-full"> {/* Content within Card, flex column on mobile, row on wider screens, full width */}
               {request.imageUrl && (
-                <div className="relative w-1/2 h-32 mr-4 overflow-hidden rounded-md">
+                <div className="relative w-32 h-32 sm:w-24 sm:h-24 mb-4 sm:mb-0 sm:mr-4 overflow-hidden rounded-md flex-shrink-0"> {/* Smaller image size for mobile, adjusted margin */}
                   <Image
- src={request.imageUrl}
+                    src={request.imageUrl}
                     alt={request.description}
                     layout="fill"
-                    objectFit="cover"
+                    objectFit="cover" // Use 'cover' for consistent image sizing
                   />
                 </div>
               )}
- <div className={`flex-grow flex flex-col justify-between ${request.imageUrl ? 'w-1/2' : 'w-full'}`}>
-                <p className="text-xl font-bold">${request.amount.toFixed(2)}</p>
-             
-
-              </div> {/* Closing div for flex-grow */}
-              <Button className="mt-4 w-full">
-                Add to Cart
-              </Button>
+              <div className="flex-grow text-center sm:text-left mb-4 sm:mb-0"> {/* Text alignment, added bottom margin on mobile */}
+                <h3 className="text-lg font-semibold mb-1">{request.description}</h3> {/* Product Title */}
+                <p className="text-gray-600 text-sm mb-2">{request.description}</p> {/* Product Description (using description field again as example) */}
+                {request.deliveryMethod && (<p className="text-sm text-gray-500 mb-2">Delivery: {request.deliveryMethod}</p>)} {/* Delivery Method */}
+              </div>
+              <div className="flex flex-col items-center sm:items-end ml-0 sm:ml-auto"> {/* Price and Add to Cart Button */}
+                <p className="text-lg font-bold mb-2">${request.amount.toFixed(2)}</p> {/* Product Price */}
+                <Button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full sm:w-auto">Add to Cart</Button> {/* Add to Cart Button */}
+              </div>
             </CardContent>
           </Card>
         ))}
+      </div>
+
+      {/* Checkout Link/Button/Icon */}
+      <div className="flex justify-center mt-8">
+        {/* This can be a button, link, or icon depending on desired UI */}
+        <button className="bg-green-500 text-white text-lg font-semibold px-8 py-3 rounded-md hover:bg-green-600">
+          Proceed to Checkout
+        </button>
       </div>
 
       {/* QR Code for Sharing */}
@@ -127,7 +131,7 @@ const PaymentGroupPreviewPage: React.FC = () => {
       {fullPaymentGroupUrl && (
         <div className="mt-4 flex justify-center">
           <Button className="mt-4" onClick={() => { navigator.clipboard.writeText(fullPaymentGroupUrl); /*toast({ title: "Payment group link copied to clipboard!" });*/ }} disabled={!fullPaymentGroupUrl}>Copy Link to Clipboard</Button>
-        </div>
+          </div>
       )}
 
       {/* Button to Write on NFC Tag */}

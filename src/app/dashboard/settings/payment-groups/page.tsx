@@ -19,6 +19,7 @@ interface PaymentRequest {
 const ManagePaymentGroupsPage: React.FC = () => {
   const [groupImageUrl, setGroupImageUrl] = useState('');
   const [paymentGroupTitle, setPaymentGroupTitle] = useState('');
+  const [paymentGroupDescription, setPaymentGroupDescription] = useState('');
   const [openPaymentRequests, setOpenPaymentRequests] = useState<PaymentRequest[]>([]);
 
   // Component for individual payment request item with assign button state
@@ -67,6 +68,10 @@ const ManagePaymentGroupsPage: React.FC = () => {
     setGroupImageUrl(e.target.value);
   };
 
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPaymentGroupDescription(e.target.value);
+  };
+
   // TODO: Implement logic to assign payment requests to a group or perform other actions
 
   return (
@@ -96,6 +101,15 @@ const ManagePaymentGroupsPage: React.FC = () => {
               placeholder="Enter image URL for the group"
             />
           </div>
+ <div className="mb-6">
+ <Label htmlFor="payment_group_description">Payment Group Description (Optional)</Label>
+ <Input
+ id="payment_group_description"
+ value={paymentGroupDescription}
+ onChange={handleDescriptionChange}
+ placeholder="Enter a description for the payment group"
+ />
+ </div>
 
           <div>
             <h3 className="text-lg font-semibold mb-4">Open Payment Requests</h3>
@@ -116,7 +130,7 @@ const ManagePaymentGroupsPage: React.FC = () => {
       </Card>
       <div className="mt-6">
  <Link href="/dashboard/settings/payment-groups/preview" passHref>
-          <Button size="lg">Preview Group/Store - share Link, QR & NFC</Button>
+          <Button size="lg">Publish Group/Store - Share Link, QR & NFC</Button>
         </Link>
       </div>
     </div>

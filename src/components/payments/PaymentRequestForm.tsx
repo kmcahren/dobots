@@ -203,7 +203,7 @@ export function PaymentRequestForm() {
                             {field.value ? (
                             format(field.value, "PPP")
                             ) : (
-                            <span>Pick a due date or leave blank if Payment is open ended.</span>
+                            <span>Pick a due date or leave blank if open ended.</span>
                             )}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
