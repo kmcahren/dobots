@@ -87,7 +87,7 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                 <FormItem>
  <div className="flex items-center gap-1">
  <FormLabel>Full Name</FormLabel>
- <HelpTooltip helpText="Enter the full name of the contact. NOTE: this is not a CMS so the phone number you enter below may be already taken by the owner. It would still be cool to know what you put in this field." />
+ <HelpTooltip helpText="Enter the full name of the contact. NOTE: this is not a CMS so the phone number you enter below may be already taken by the owner." />
  </div>
                   <FormControl>
                     <Input placeholder="e.g., Jane Doe" {...field} />
@@ -140,10 +140,10 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                 <FormItem>
  <div className="flex items-center gap-1">
  <FormLabel>Notes / Short Bio (Optional)</FormLabel>
- <HelpTooltip helpText="Add notes or a short bio for this contact. NOTE: although packed with great features - this App is not a CMS and everything will be overwritten by the owner of this phone number if they sign in - they will not see your entries but your data will be lost. You were just inviting them anyway, right? I wonder what their real name is..." />
+ <HelpTooltip helpText="Add notes or a short bio for this contact. NOTE: this App is not a CMS and everything will be overwritten by the owner of this phone number if they sign in - they will not see your entries but your data will be lost. You were just inviting them anyway, right? I wonder what their real name is..." />
  </div>
                   <FormControl>
-                    <Textarea placeholder="Add notes or a short bio for this contact. NOTE: the Full Name and this Note will be overwritten by the owner of this phone number if they sign in and take control of the record - they will not see your entries but your data will be lost." {...field} rows={4} value={field.value || ""} />
+                    <Textarea placeholder="Add notes or a short bio for this contact. NOTE: This data could be overridden if the owner of this number signs in - read the tool tip for details." {...field} rows={4} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

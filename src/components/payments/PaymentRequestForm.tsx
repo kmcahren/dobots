@@ -50,6 +50,8 @@ const paymentFormSchema = z.object({
   price: z.coerce.number().positive("Price must be a positive number."),
   imageUrl: z.string().url("Invalid URL for image.").optional().or(z.literal('')),
   dueDate: z.date().optional(),
+  isPublic: z.boolean().default(false).optional(),
+  allowAnyoneToPurchase: z.boolean().default(false).optional(),
   paymentMethodInfo: z.boolean().default(true).optional(),
   targetType: z.enum(["group", "contacts"], {
     required_error: "Please select who to send this request to.",
@@ -88,6 +90,8 @@ export function PaymentRequestForm() {
     title: initialTitle,
     price: initialAmount ? parseFloat(initialAmount) : undefined,
     paymentMethodInfo: true,
+ isPublic: false,
+    allowAnyoneToPurchase: false,
   imageUrl: "",
     selectedContactIds: [],
   };
@@ -199,7 +203,7 @@ export function PaymentRequestForm() {
                             {field.value ? (
                             format(field.value, "PPP")
                             ) : (
-                            <span>Pick a due date or leave blank if this Payment is not ending soon.</span>
+                            <span>Pick a due date or leave blank if Payment is open ended.</span>
                             )}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>

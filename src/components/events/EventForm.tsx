@@ -53,6 +53,7 @@ const eventFormSchema = z.object({
   sendInvite: z.boolean().default(true).optional(),
   reminderTiming: z.enum(["none", "1hour", "2hours", "1day"]).default("1day").optional(),
   allowComments: z.boolean().default(true).optional(),
+ allowAnyoneToJoin: z.boolean().default(false).optional(),
   imageUrl: z.string().url("Must be a valid URL.").optional().or(z.literal('')),
   eventLinkUrl: z.string().url("Must be a valid URL for the event link.").optional().or(z.literal('')), // Allow empty string
 });
@@ -63,6 +64,7 @@ type EventFormValues = z.infer<typeof eventFormSchema>;
 const defaultValues: Partial<EventFormValues> = {
   sendInvite: true,
   allowComments: true,
+ allowAnyoneToJoin: false,
   reminderTiming: "1day",
   imageUrl: "",
   eventLinkUrl: "",
@@ -130,7 +132,7 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
                 <FormItem className="md:col-span-2">
                  <div className="flex items-center gap-1">
                  <FormLabel>Group/Event Title</FormLabel>
-                 <HelpTooltip helpText="This could be your family, friend circles, sports team, clubs or membership organizations." />
+                 <HelpTooltip helpText="This could be family groups, friend circles, sports teams, clubs, fundraisers or membership organizations." />
                  </div>
                   <FormControl>
                     <Input placeholder="e.g., Weekly Team Sync" {...field} />
@@ -431,6 +433,26 @@ export function EventForm({ eventToEdit }: { eventToEdit?: EventFormValues & {id
                   </FormItem>
                 )}
               />
+ <FormField
+ control={form.control}
+ name="allowAnyoneToJoin"
+ render={({ field }) => (
+ <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4 shadow-sm bg-muted/20">
+ <FormControl>
+ <Checkbox
+ checked={field.value}
+ onCheckedChange={field.onChange}
+ />
+ </FormControl>
+ <div className="space-y-1 leading-none">
+ <FormLabel>Anyone can Join</FormLabel>
+ <FormDescription>
+ Allow anyone to join this event, even if not invited.
+ </FormDescription>
+ </div>
+ </FormItem>
+ )}
+ />
             </div>
           </div>
         </div>
