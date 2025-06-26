@@ -4,8 +4,8 @@ import { BottomNavigationBar } from '@/components/layout/BottomNavigationBar';
 import { FloatingActionButton } from '@/components/layout/FloatingActionButton';
 
 export const metadata: Metadata = {
-  title: 'Dashboard - DOIT',
-  description: 'Manage your team and club activities with DOIT.',
+  title: 'DOBOTS Do))) App',
+  description: 'Group Event Payment App.',
 };
 
 export default function DashboardLayout({

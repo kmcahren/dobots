@@ -9,7 +9,7 @@ import { ChevronLeft, User, Bell, CreditCardIcon, Shield, Cog } from "lucide-rea
 
 
 export const metadata = {
-  title: 'Settings - Do!',
+  title: 'Settings - Do)))',
   description: 'Manage your account and application settings.',
 };
 

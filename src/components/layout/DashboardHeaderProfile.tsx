@@ -24,7 +24,7 @@ export function DashboardHeaderProfile() {
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center space-y-2">
           <h2 className="text-xl md:text-2xl font-bold font-headline text-white drop-shadow-md">
-            Welcome to the DO! App
+            Welcome to the Do))) App
           </h2>
           <div className="flex items-center space-x-3 md:space-x-4">
             <div className="flex items-center text-white text-xs md:text-sm bg-black/30 backdrop-blur-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg">

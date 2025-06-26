@@ -120,7 +120,7 @@ export function ProfileForm() {
  name="aboutMe"
  render={({ field }) => (
  <FormItem className="md:col-span-2">
- <FormLabel>About Me (Optional - but cool to Do!)</FormLabel>
+ <FormLabel>About Me (Optional)</FormLabel>
  <FormControl>
  <Textarea
  placeholder="e.g., I am not a robot..."

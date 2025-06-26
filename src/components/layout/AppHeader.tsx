@@ -24,13 +24,13 @@ export function AppHeader() {
           <Link href="/dashboard" className="flex items-center space-x-2">
             <Image 
               src="/images/newlogo-150x150withco.png" //"https://placehold.co/40x40.png" // Replace with actual logo
-              alt="DOBOTS DO! Logo" 
+              alt="DOBOTS Do))) Logo" 
               width={50} 
               height={50} 
               className="rounded-lg"
               data-ai-hint="app logo"
             />
-            <span className="text-xl font-bold font-headline text-primary">DO!</span>
+            <span className="text-xl font-bold font-headline text-primary">Do)))</span>
           </Link>
           
           {isLoggedIn && (

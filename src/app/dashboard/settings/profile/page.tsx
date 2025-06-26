@@ -93,11 +93,11 @@ export default function ProfileSettingsPage() {
                       <Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+1 123-456-7890" /> {/* Consider adding validation for international format */}
                     </div>
                    <div>
-                      <Label htmlFor="email">Email Address (Optional - for reporting)</Label>
+                      <Label htmlFor="email">Email Address (Optional)</Label>
                       <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your.email@example.com" />
  </div>
  <div>
-                      <Label htmlFor="city">City (Optional - but good to know)</Label>
+                      <Label htmlFor="city">City (Optional)</Label>
                       <Input id="city" type="text" value={city} onChange={(e) => setCity(e.target.value)} placeholder="e.g., Your city" />
                     </div>
                   </div>
@@ -105,7 +105,7 @@ export default function ProfileSettingsPage() {
               </div>
 
               <div>
-                <Label htmlFor="bio">Short Bio (Optional - but cool to Do!)</Label>
+                <Label htmlFor="bio">Short Bio (Optional)</Label>
                 <Textarea id="bio" value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Tell us a bit about yourself..." rows={3}/>
               </div>
             </CardContent>

@@ -17,7 +17,7 @@ const mockContactData = {
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const contact = (mockContactData as any)[params.id];
   return {
-    title: `Edit ${contact?.name || 'Contact'} - DOIT`,
+    title: `Edit ${contact?.name || 'Contact'} - Do)))`,
     description: `Edit details for contact ${contact?.name || params.id}.`,
   };
 }

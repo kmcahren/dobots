@@ -1,4 +1,4 @@
-# **App Name**: DOIT: Team & Club Manager
+# **App Name**: Do!: Group Event Payment App
 
 ## Core Features:
 

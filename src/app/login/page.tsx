@@ -3,7 +3,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Login - DOBOTS DO!',
+  title: 'Login - DOBOTS Do)))',
   description: 'Login to DOBITS Group Event Payment App.',
 };
 
@@ -21,7 +21,7 @@ export default function LoginPage() {
              className="mx-auto mb-6 rounded-2xl shadow-md" 
              data-ai-hint="app logo"
            />
-          <h1 className="text-4xl font-bold font-headline text-primary">DO!</h1>
+          <h1 className="text-4xl font-bold font-headline text-primary">Do)))</h1>
           <p className="mt-2 text-lg text-muted-foreground">Group Event Payment App - it's FREE!</p>
         </div>
         <LoginForm />

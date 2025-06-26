@@ -21,8 +21,8 @@ import { Toaster } from "@/components/ui/toaster"; // Added Toaster for global n
 import { ToastStateProvider } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'DOIT: Team & Club Manager',
-  description: 'Free and Simple Team and Club Management Mobile App by DOIT',
+  title: 'Do))): Group Event Payment App',
+  description: 'Free and Simple Team and Club Management Mobile App by DOBOTS',
   manifest: '/manifest.json', // Link to the manifest file
 };
 
