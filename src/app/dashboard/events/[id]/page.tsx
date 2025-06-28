@@ -43,7 +43,7 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
       {fullEventUrl && (
         <div className="mt-8 flex flex-col items-center">
           <h3 className="text-xl font-semibold font-headline mb-4 text-foreground">Share This Event</h3>
-          <QRCodeCanvas value={fullEventUrl} size={256} level="H" />
+          <QRCodeCanvas value={fullEventUrl} size={192} level="H" />
         </div>
       )}
 

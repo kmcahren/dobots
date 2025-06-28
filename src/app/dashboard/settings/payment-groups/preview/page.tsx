@@ -123,7 +123,7 @@ const PaymentGroupPreviewPage: React.FC = () => {
       {fullPaymentGroupUrl && (
         <div className="mt-8 flex flex-col items-center">
           <h3 className="text-xl font-semibold font-headline mb-4 text-foreground">Share This Payment Group</h3>
-          <QRCodeCanvas value={fullPaymentGroupUrl} size={256} level="H" />
+          <QRCodeCanvas value={fullPaymentGroupUrl} size={192} level="H" />
         </div>
       )}
 

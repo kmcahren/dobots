@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Login - DOBOTS Do)))',
-  description: 'Login to DOBITS Group Event Payment App.',
+  description: 'Login to DOBOTS Group Event Payment App.',
 };
 
 export default function LoginPage() {
@@ -35,7 +35,7 @@ export default function LoginPage() {
             Privacy Policy
           </a>
           . Buy more&nbsp;
-          <a href="https://www.dobots.co/buynow.html" className="underline underline-offset-4 hover:text-primary">
+          <a href="https://www.dobots.co/" className="underline underline-offset-4 hover:text-primary">
              DOBOTS
           </a>
           !

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from 'next/navigation';
 import { Loader2, Smartphone, KeyRound } from 'lucide-react'; // Icons for visual cues
+import HelpTooltip from "@/components/ui/HelpTooltip";
 
 export function LoginForm() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -51,7 +52,10 @@ export function LoginForm() {
         {!otpSent ? (
           <form onSubmit={handleSendOtp} className="space-y-6">
             <div className="space-y-2">
-              <Label htmlFor="phone" className="text-muted-foreground">Phone Number</Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="phone" className="text-muted-foreground">Phone Number</Label>
+                <HelpTooltip helpText="This is a real-time OTP App which uses your phone number and SMS for multi-factor authentication. Go to dobots.co to learn more about DOBOTS. NFC enabled DOBOTS are not necessary to use this App, but they Do))) make it more fun!" />
+              </div>
               <div className="relative">
                 <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 <Input

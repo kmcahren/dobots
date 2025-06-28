@@ -5,7 +5,7 @@ import { FloatingActionButton } from '@/components/layout/FloatingActionButton';
 
 export const metadata: Metadata = {
   title: 'DOBOTS Do))) App',
-  description: 'Group Event Payment App.',
+  description: 'Group Event Payment App - its FREE!',
 };
 
 export default function DashboardLayout({

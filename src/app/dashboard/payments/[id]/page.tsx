@@ -148,7 +148,7 @@ export default function PaymentDetailsPage() {
           <h3 className="text-xl font-semibold font-headline mb-4 text-foreground">Share This Payment</h3>
           <QRCodeCanvas
             value={fullPaymentUrl} // Use QRCodeCanvas here
-            size={256}
+            size={192}
             level="H" // High error correction level
           />
           {/* Copy Link Button */}
