@@ -53,6 +53,7 @@ const paymentFormSchema = z.object({
   isPublic: z.boolean().default(false).optional(),
   allowAnyoneToPurchase: z.boolean().default(false).optional(),
   paymentMethodInfo: z.boolean().default(true).optional(),
+  availableForPaymentGroups: z.boolean().default(false).optional(), // New field
   targetType: z.enum(["group", "contacts"], {
     required_error: "Please select who to send this request to.",
   }),
@@ -92,6 +93,7 @@ export function PaymentRequestForm() {
     paymentMethodInfo: true,
  isPublic: false,
     allowAnyoneToPurchase: false,
+    availableForPaymentGroups: false, // Default value
   imageUrl: "",
     selectedContactIds: [],
   };
@@ -116,6 +118,8 @@ export function PaymentRequestForm() {
     } else if (data.targetType === "contacts") {
         delete submissionData.targetGroupId;
     }
+    // Include the new field in submissionData
+    submissionData.availableForPaymentGroups = data.availableForPaymentGroups; // Include the new field
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
     console.log("Payment Request Submitted:", submissionData);
@@ -132,9 +136,7 @@ export function PaymentRequestForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="p-6 md:p-8 bg-card rounded-xl shadow-lg border">
-            <h2 className="text-2xl font-semibold font-headline mb-6 text-primary">
-                New Payment Request
-            </h2>
+            <h2 className="text-2xl font-semibold font-headline mb-6 text-primary">New Payment Request</h2>
             <div className="space-y-6">
             <FormField
                 control={form.control}
@@ -238,6 +240,30 @@ export function PaymentRequestForm() {
                 )}
             />
 
+            {/* Add the new checkbox for payment group availability */}
+            <FormField
+              control={form.control}
+              name="availableForPaymentGroups"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm bg-muted/20">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      id="availableForPaymentGroups"
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel htmlFor="availableForPaymentGroups" className="cursor-pointer">
+                      Available for Payment Groups
+                    </FormLabel>
+                    <FormDescription>
+                      Check this box to make this payment request available for inclusion in a payment group.
+                    </FormDescription>
+                  </div>
+                </FormItem>
+              )}
+            />
             
             <FormField
               control={form.control}

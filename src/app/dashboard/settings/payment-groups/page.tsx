@@ -6,22 +6,24 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-import HelpTooltip from "@/components/ui/HelpTooltip"; // Import the new HelpTooltip component
+import HelpTooltip from "@/components/ui/HelpTooltip";
 import Link from 'next/link';
-interface PaymentRequest {
+
+// Define a type for your Payment Group data (should match the one in [groupId]/page.tsx)
+interface PaymentGroup {
   id: string
-  amount: number;
-  description: string;
-  isAssigned?: boolean; // Add a field to track assignment status
-  // Add other relevant payment request fields
+  title: string;
+  imageUrl?: string;
+  description?: string;
 }
 
-const ManagePaymentGroupsPage: React.FC = () => {
-  const [groupImageUrl, setGroupImageUrl] = useState('');
-  const [paymentGroupTitle, setPaymentGroupTitle] = useState('');
-  const [paymentGroupDescription, setPaymentGroupDescription] = useState('');
-  const [openPaymentRequests, setOpenPaymentRequests] = useState<PaymentRequest[]>([]);
-
+// Define a type for your Payment Request data
+interface PaymentRequest {
+  id: string;
+  amount: number;
+  description: string;
+  isAssigned?: boolean; // Optional field
+}
   // Component for individual payment request item with assign button state
   const PaymentRequestItem: React.FC<{ request: PaymentRequest }> = ({ request }) => {
     const [isAssigned, setIsAssigned] = useState(request.isAssigned || false);
@@ -45,6 +47,19 @@ const ManagePaymentGroupsPage: React.FC = () => {
     );
   };
 
+  const ManagePaymentGroupsPage = () => {
+    // State for payment group details
+    const [selectedGroupId, setSelectedGroupId] = useState<string>('1');
+    // Add state to hold the currently managed group data
+    const [currentGroup, setCurrentGroup] = useState<PaymentGroup | null>(null);
+    const [isLoadingGroup, setIsLoadingGroup] = useState(true);
+
+    const [paymentGroupTitle, setPaymentGroupTitle] = useState('');
+    const [groupImageUrl, setGroupImageUrl] = useState('');
+    const [paymentGroupDescription, setPaymentGroupDescription] = useState('');
+    const [openPaymentRequests, setOpenPaymentRequests] = useState<PaymentRequest[]>([]);
+
+
   useEffect(() => {
     // TODO: Fetch open payment requests that are not assigned to a contact
     // This is a placeholder for the actual data fetching logic
@@ -58,7 +73,42 @@ const ManagePaymentGroupsPage: React.FC = () => {
     };
 
     fetchOpenPaymentRequests();
-  }, []);
+  }, []); // Fetch open requests only once on mount
+
+  // Effect to fetch or create the payment group when selectedGroupId changes
+  useEffect(() => {
+    const fetchOrCreateGroup = async () => {
+      setIsLoadingGroup(true);
+      // Simulate fetching group data
+      console.log(`Attempting to fetch group with ID: ${selectedGroupId}`);
+      const dummyGroups: PaymentGroup[] = [
+        { id: '1', title: 'Default Group', imageUrl: '', description: 'This is the default payment group.' },
+        { id: '2', title: 'Special Offer Group', imageUrl: 'https://example.com/special.png', description: 'Group for special promotions.' },
+        { id: '3', title: 'Membership Group', imageUrl: 'https://example.com/membership.jpg', description: 'Group for membership payments.' },
+      ];
+      const foundGroup = dummyGroups.find(group => group.id === selectedGroupId);
+
+      if (foundGroup) {
+        console.log('Group found:', foundGroup);
+        setCurrentGroup(foundGroup);
+        setPaymentGroupTitle(foundGroup.title);
+        setGroupImageUrl(foundGroup.imageUrl || '');
+        setPaymentGroupDescription(foundGroup.description || '');
+      } else {
+        // Simulate creating a new group if not found
+        console.log(`Group with ID ${selectedGroupId} not found. Simulating creation.`);
+        const newGroup: PaymentGroup = {
+          id: selectedGroupId,
+          title: `New Group ${selectedGroupId}`,
+          imageUrl: '',
+          description: '',
+        };
+        setCurrentGroup(newGroup);
+      }
+      setIsLoadingGroup(false);
+    };
+    fetchOrCreateGroup();
+  }, [selectedGroupId]); // Re-run when selectedGroupId changes
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentGroupTitle(e.target.value);
@@ -76,6 +126,34 @@ const ManagePaymentGroupsPage: React.FC = () => {
 
   return (
  <div className="container mx-auto py-8">
+        <div className="mb-6">
+    <Label>Select Payment Group Version:</Label>
+    <div className="flex space-x-2 mt-2"> {/* Use a div for layout */}
+        <Button
+            variant={selectedGroupId === '1' ? 'default' : 'outline'}
+            onClick={() => setSelectedGroupId('1')}
+        >
+            Group 1
+        </Button>
+        <Button
+            variant={selectedGroupId === '2' ? 'default' : 'outline'}
+            onClick={() => setSelectedGroupId('2')}
+        >
+            Group 2
+        </Button>
+        <Button
+            variant={selectedGroupId === '3' ? 'default' : 'outline'}
+            onClick={() => setSelectedGroupId('3')}
+        >
+            Group 3
+        </Button>
+    </div>
+</div>
+
+
+        {isLoadingGroup ? (
+            <p>Loading group...</p>
+        ) : (
       <Card>
        <CardHeader><CardTitle>Manage Payment Group</CardTitle></CardHeader>
         <CardContent>
@@ -127,11 +205,12 @@ const ManagePaymentGroupsPage: React.FC = () => {
             )}
           </div>
  </CardContent>
-      </Card>
+      </Card>)}
+
       <div className="mt-6">
- <Link href="/dashboard/settings/payment-groups/preview" passHref>
+ <Link href={`/dashboard/settings/payment-groups/${selectedGroupId}/preview`} passHref>
           <Button size="lg">Publish Group/Store - Share Link, QR & NFC</Button>
-        </Link>
+ </Link>
       </div>
     </div>
   );

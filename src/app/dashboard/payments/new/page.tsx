@@ -5,12 +5,17 @@ import { ChevronLeft } from 'lucide-react';
 import { default as dynamicImport } from 'next/dynamic'; // Keep the renamed import
 import { Suspense } from 'react'; // Import Suspense
 
+// Feature Flags
+const isPaymentGroupEnhancementEnabled = true; // Add the feature flag
+
 export const dynamic = 'force-dynamic'; // Keep this to prevent static generation for now
 
 export default function NewPaymentPage() {
   // Dynamically import the PaymentRequestForm component using the renamed dynamicImport
   const PaymentRequestForm = dynamicImport(() => import('@/components/payments/PaymentRequestForm').then(mod => mod.PaymentRequestForm), {
-    ssr: false, // Ensure client-side only
+    ssr: false, // Ensure client-side only,
+    // Changed loading to match the Suspense fallback
+
     loading: () => <p>Loading form...</p>, // Optional loading component (can be removed if using Suspense fallback)
   });
 
@@ -25,8 +30,11 @@ export default function NewPaymentPage() {
         </Button>
         {/* Title is inside PaymentRequestForm */}
       </div>
-      <Suspense fallback={<p>Loading form...</p>}> {/* Wrap with Suspense */}
-        <PaymentRequestForm /> {/* Dynamically imported component */}
+      {/* Wrap with Suspense, providing a fallback component */}
+
+ <Suspense fallback={<p>Loading form...</p>}>
+        {/* Pass the feature flag to the component */}
+        <PaymentRequestForm isPaymentGroupEnhancementEnabled={isPaymentGroupEnhancementEnabled} /> {/* Dynamically imported component */}
       </Suspense>
     </div>
   );

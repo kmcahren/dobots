@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { QRCodeCanvas } from 'qrcode.react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useParams, useRouter } from 'next/navigation'; // Import useParams
 
 interface PaymentRequest {
   id: string;
@@ -22,35 +22,71 @@ interface PaymentGroup {
   id: string;
   title: string;
   imageUrl?: string;
+  description?: string;
   paymentRequests: PaymentRequest[];
 }
 
+// Define a constant array of dummy payment group data
+const dummyPaymentGroups: PaymentGroup[] = [
+  {
+    id: '1',
+    title: 'Default Group Preview',
+    imageUrl: '/images/dashboard.png', // Payment group image URL
+    description: 'This is the default payment group description.',
+    paymentRequests: [
+      { id: 'req-1', amount: 10.00, description: 'Product A', imageUrl: '/images/bots/0000logo.png', deliveryMethod: 'Digital Download' },
+      { id: 'req-2', amount: 25.00, description: 'Service B' },
+    ],
+  },
+  {
+    id: '2',
+    title: 'Special Offer Group Preview',
+    imageUrl: '/images/special-banner.png', // Example image for Group 2
+    description: 'Check out our special offers in this group!',
+    paymentRequests: [
+      { id: 'req-3', amount: 5.00, description: 'Product C', deliveryMethod: 'Pickup' },
+      { id: 'req-4', amount: 50.00, description: 'Bundle Deal' },
+    ],
+  },
+  {
+    id: '3',
+    title: 'Membership Group Preview',
+    imageUrl: '/images/membership-banner.jpg', // Example image for Group 3
+    description: 'Exclusive items for members.',
+    paymentRequests: [
+      { id: 'req-5', amount: 100.00, description: 'Premium Access', deliveryMethod: 'Online' },
+    ],
+  },
+];
+
 import { useToast } from "@/hooks/use-toast";
 import NfcWriter from '@/components/NfcWriter';
+
 const PaymentGroupPreviewPage: React.FC = () => {
+  const params = useParams();
+  const groupId = Array.isArray(params.groupId) ? params.groupId[0] : params.groupId; // Get groupId from the URL dynamic parameter
+
   const [paymentGroup, setPaymentGroup] = useState<PaymentGroup | null>(null);
 
-  // In a real application, you would fetch the payment group data here
   useEffect(() => {
-    // Simulate fetching data
-    const dummyPaymentGroup: PaymentGroup = {
-      id: 'group-1',
-      title: 'My Awesome Payment Group',
-      imageUrl: '/images/dashboard.png', // Payment group image URL
- description: 'This is a sample payment group description. It provides more details about what this group is for.',
-      paymentRequests: [
-        { id: 'req-1', amount: 10.00, description: 'Product A', imageUrl: '/images/bots/0000logo.png', deliveryMethod: 'Digital Download' }, // Product A with image
-        { id: 'req-2', amount: 25.50, description: 'Service B' },
-        { id: 'req-3', amount: 5.00, description: 'Product C' },
-      ],
-    };
-    setPaymentGroup(dummyPaymentGroup);
-  }, []);
+    if (groupId) {
+      // Find the matching group in the dummy data based on groupId
+      const foundGroup = dummyPaymentGroups.find(group => group.id === groupId);
+  
+      if (foundGroup) {
+        setPaymentGroup(foundGroup); // Set the found group data
+      } else {
+        // Handle case where group is not found (e.g., display an error or redirect)
+        console.error(`Payment group with ID ${groupId} not found.`);
+        setPaymentGroup(null); // Or handle this case as needed
+      }
+    }
+  }, [groupId]); // Add groupId as a dependency
+  
 
   const pathname = usePathname();
-  const [showNfcWriter, setShowNfcWriter] = useState(false);
-  const fullPaymentGroupUrl = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}${pathname}` : '';
-
+ const [showNfcWriter, setShowNfcWriter] = useState(false);
+  const fullPaymentGroupUrl = typeof window !== 'undefined' && groupId ? `${window.location.protocol}//${window.location.host}${pathname}?groupId=${groupId}` : ''; // Include groupId in the URL
   if (!paymentGroup) {
     return <div>Loading...</div>;
   }
