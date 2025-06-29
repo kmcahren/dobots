@@ -83,7 +83,7 @@ const OptimizedCheckinPage: React.FC = () => {
       <div className="container mx-auto px-2 sm:px-4 py-8 mb-8">
  <Link href="/dashboard" passHref className="flex items-center text-2xl font-bold mb-4 text-foreground hover:text-muted-foreground">
           <span className="text-2xl font-bold mr-2">&lt;</span>
-          <h1>Optimized Checkin</h1>
+          <h1>Do))) Optimized Checkin</h1>
 
  </Link>
  <div className="space-y-6">

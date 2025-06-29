@@ -54,7 +54,7 @@ export function LoginForm() {
             <div className="space-y-2">
               <div className="flex items-center gap-1">
                 <Label htmlFor="phone" className="text-muted-foreground">Phone Number</Label>
-                <HelpTooltip helpText="This is a real-time OTP App which uses your phone number and SMS for multi-factor authentication. Go to dobots.co to learn more about DOBOTS. NFC enabled DOBOTS are not necessary to use this App, but they Do))) make it more fun!" />
+                <HelpTooltip helpText="This is a real-time OTP App which uses your phone number and SMS for multi-factor authentication. NFC enabled DOBOTS are not necessary to use this App, but they Do))) make it more fun! Go to dobots.co to learn more." />
               </div>
               <div className="relative">
                 <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
