@@ -53,6 +53,20 @@ export interface EventItem {
   currentUserRsvpStatus?: RsvpStatus; // RSVP status of the current viewing user
 }
 
+export interface PaymentGroup {
+  id: string;
+  title: string;
+  imageUrl?: string;
+  description?: string;
+}
+
+export interface PaymentRequest {
+  id: string;
+  amount: number;
+  description: string;
+  assignedGroupId?: string;
+  status: 'available' | 'assigned' | 'backorder';
+}
 export type NotificationUserChoice = 'yes' | 'no' | 'unconfirmed' | string[]; // string[] for multiple choice
 
 export interface NotificationItem {

@@ -13,11 +13,11 @@ interface PaymentRequest {
   id: string;
   amount: number;
   description: string;
+  status: 'assigned' | 'backorder'; // Add status field for preview
   deliveryMethod?: string; // Added placeholder for delivery method
   imageUrl?: string; // Added optional imageUrl field
   // Add other relevant payment request fields
 }
-
 interface PaymentGroup {
   id: string;
   title: string;
@@ -34,18 +34,18 @@ const dummyPaymentGroups: PaymentGroup[] = [
     imageUrl: '/images/dashboard.png', // Payment group image URL
     description: 'This is the default payment group description.',
     paymentRequests: [
-      { id: 'req-1', amount: 10.00, description: 'Product A', imageUrl: '/images/bots/0000logo.png', deliveryMethod: 'Digital Download' },
-      { id: 'req-2', amount: 25.00, description: 'Service B' },
+      { id: 'req-1', amount: 10.00, description: 'Product A', imageUrl: '/images/bots/0000logo.png', deliveryMethod: 'Digital Download', status: 'assigned' },
+      { id: 'req-2', amount: 25.00, description: 'Service B', status: 'backorder' }, // Example backordered item
     ],
   },
   {
     id: '2',
     title: 'Special Offer Group Preview',
-    imageUrl: '/images/special-banner.png', // Example image for Group 2
+    imageUrl: '/images/dashboard.png', // Example image for Group 2
     description: 'Check out our special offers in this group!',
     paymentRequests: [
-      { id: 'req-3', amount: 5.00, description: 'Product C', deliveryMethod: 'Pickup' },
-      { id: 'req-4', amount: 50.00, description: 'Bundle Deal' },
+      { id: 'req-3', amount: 5.00, description: 'Product C', deliveryMethod: 'Pickup', status: 'assigned' },
+      { id: 'req-4', amount: 50.00, description: 'Bundle Deal', status: 'assigned' },
     ],
   },
   {
@@ -54,7 +54,7 @@ const dummyPaymentGroups: PaymentGroup[] = [
     imageUrl: '/images/membership-banner.jpg', // Example image for Group 3
     description: 'Exclusive items for members.',
     paymentRequests: [
-      { id: 'req-5', amount: 100.00, description: 'Premium Access', deliveryMethod: 'Online' },
+      { id: 'req-5', amount: 100.00, description: 'Premium Access', deliveryMethod: 'Online', status: 'assigned' },
     ],
   },
 ];
@@ -140,7 +140,13 @@ const PaymentGroupPreviewPage: React.FC = () => {
               </div>
               <div className="flex flex-col items-center sm:items-end ml-0 sm:ml-auto"> {/* Price and Add to Cart Button */}
                 <p className="text-lg font-bold mb-2">${request.amount.toFixed(2)}</p> {/* Product Price */}
-                <Button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full sm:w-auto">Add to Cart</Button> {/* Add to Cart Button */}
+                {request.status === 'assigned' ? (
+ <Button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full sm:w-auto">Add to Cart</Button>
+                ) : request.status === 'backorder' ? (
+ <Button className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 w-full sm:w-auto">Send SMS when available</Button>
+ ) : (
+                  <span className="text-gray-500 text-sm">Status Unknown</span> // Handle other statuses if needed
+ )}
               </div>
             </CardContent>
           </Card>
