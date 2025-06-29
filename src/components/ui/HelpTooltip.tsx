@@ -7,17 +7,18 @@ interface HelpTooltipProps {
   helpText: string;
   icon?: React.ReactNode;
   placement?: "top" | "bottom" | "left" | "right";
+  iconClassName?: string;
 }
 
-const HelpTooltip: React.FC<HelpTooltipProps> = ({ helpText, icon, placement = "bottom" }) => {
+const HelpTooltip: React.FC<HelpTooltipProps> = ({ helpText, icon, placement = "bottom", iconClassName }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-4 w-4 text-muted-foreground cursor-help">
-          {icon || <HelpCircle className="h-4 w-4" />}
+        <Button variant="ghost" size="icon" className={`h-4 w-4 cursor-help ${iconClassName || 'text-muted-foreground'}`}>
+          {icon || <HelpCircle className="h-4 w-4" />} {/* Keep the default size classes */}
         </Button>
       </PopoverTrigger>
-      <PopoverContent side={placement} className="w-auto max-w-sm p-3 text-sm text-foreground bg-popover shadow-md rounded-md">
+      <PopoverContent side={placement} className="w-auto max-w-xs p-3 text-sm text-foreground bg-popover shadow-md rounded-md">
         {helpText}
       </PopoverContent>
     </Popover>
