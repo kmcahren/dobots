@@ -47,6 +47,13 @@ export default function EventDetailPage({ params }: { params: { id: string } }) 
         </div>
       )}
 
+      {/* Button to Send Link to a Contact (New Button) */}
+      {fullEventUrl && (
+        <div className="mt-4 flex justify-center">
+          <Button className="mt-4 bg-blue-500 hover:bg-blue-600 text-primary-foreground">Send Link to a Contact</Button>
+        </div>
+      )}
+
       {/* Button to Copy Link */}
       {fullEventUrl && (
         <div className="mt-4 flex justify-center">

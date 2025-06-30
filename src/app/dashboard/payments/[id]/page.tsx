@@ -151,6 +151,22 @@ export default function PaymentDetailsPage() {
             size={192}
             level="H" // High error correction level
           />
+          {/* Send Link to Contact Button */}
+          <Button
+            onClick={() => {
+              // Implement logic to send the link to a contact
+              // This might involve opening a modal, a contact picker, etc.
+              // For demonstration, just show a toast
+              toast({
+                title: "Feature Coming Soon!",
+                description: "Sending link to a contact is not yet implemented.",
+              });
+            }}
+            disabled={!fullPaymentUrl}
+            className="mt-4 bg-blue-500 hover:bg-blue-600 text-primary-foreground"
+          >
+            Send Link to a Contact
+          </Button>
           {/* Copy Link Button */}
           <Button
             onClick={() => {

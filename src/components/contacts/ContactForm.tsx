@@ -11,12 +11,19 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
+  FormLabel, 
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+} from "@/components/ui/dropdown-menu";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Loader2, UserPlus, Save } from "lucide-react";
@@ -44,6 +51,10 @@ const defaultValues: Partial<ContactFormValues> = {
 export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValues & { id?: string } }) {
 
   const [isLoading, setIsLoading] = useState(false);
+  // State for open events and dropdown visibility
+  const [openEvents, setOpenEvents] = useState<any[]>([]); // TODO: Fetch the list of open events and define a proper type
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const form = useForm<ContactFormValues>({
   });
 
@@ -151,13 +162,37 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
             />
           </div>
         </div>
-        
-        <div className="flex justify-start gap-3 pt-4">
-          <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground">
+
+      <div className="flex flex-col items-start gap-3 pt-4 w-auto"> {/* Main container for all buttons, stacked vertically and left-aligned */}
+          {/* New button for Save and Send a Payment Request */}
+          <Button type="button" variant="outline" className="bg-blue-500 hover:bg-blue-600 text-white w-auto" disabled={isLoading}> {/* Removed w-full */}
+            Save and Send a Payment Request
+          </Button>
+ {/* Button for Save and Invite */}
+        <DropdownMenu>
+ <DropdownMenuTrigger asChild>
+ <Button type="button" variant="outline" className="bg-blue-500 hover:bg-blue-600 text-white w-auto" disabled={isLoading}> {/* Removed w-full */}
+ Save and Invite to a Group/Event
+ </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-auto"> {/* Set dropdown content width to auto */}
+ <DropdownMenuLabel>Select an Event</DropdownMenuLabel>
+              {openEvents.map(event => (
+ <DropdownMenuItem
+ key={event.id} // Assuming your event object has an 'id' property
+ // TODO: Add onClick handler to handle the invitation logic for this event
+ >
+ {event.name} {/* Assuming your event object has a 'name' property */}
+ </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+ {/* Original Save Contact Button */}
+ <Button type="submit" disabled={isLoading} className="bg-accent hover:bg-accent/90 text-accent-foreground w-auto"> {/* Removed w-full */}
             {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
             {contactToEdit ? "Save Changes" : "Save Contact"}
-          </Button>
-          <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading}>
+            </Button>
+ <Button type="button" variant="outline" onClick={() => router.back()} disabled={isLoading} className="w-auto"> {/* Removed w-full */}
             Cancel
           </Button>
         </div>

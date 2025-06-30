@@ -169,13 +169,20 @@ const PaymentGroupPreviewPage: React.FC = () => {
         </div>
       )}
 
+      {/* Button to Send Link to a Contact */}
+      {fullPaymentGroupUrl && (
+ <div className="mt-4 flex justify-center">
+ <Button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white" onClick={() => { /* Implement functionality to send link to contact */ }}>Send Link to a Contact</Button>
+ </div>
+      )}
+
       {/* Button to Copy Link */}
       {fullPaymentGroupUrl && (
         <div className="mt-4 flex justify-center">
           <Button className="mt-4" onClick={() => { navigator.clipboard.writeText(fullPaymentGroupUrl); /*toast({ title: "Payment group link copied to clipboard!" });*/ }} disabled={!fullPaymentGroupUrl}>Copy Link to Clipboard</Button>
           </div>
       )}
-
+      
       {/* Button to Write on NFC Tag */}
       {fullPaymentGroupUrl && (
         <div className="mt-4 flex justify-center">

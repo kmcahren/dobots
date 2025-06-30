@@ -1,14 +1,28 @@
+"use client";
+
 import React from 'react';
 import { format } from 'date-fns';
 import { CheckCircle2, XCircle, HelpCircle } from 'lucide-react'; // Import icons
 
-import Link from 'next/link';
+import Link from 'next/link'; // Keep this import
+import HelpTooltip from '@/components/ui/HelpTooltip'; // Import the HelpTooltip component
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react'; // Import useState
+
 interface AttendanceData {
   groupEventName: string;
   dateTime: string;
-  fullName: string;
-  phoneNumber: string;
-  status: 'Confirmed' | 'Declined' | 'Unconfirmed';
+  fullName: string;  phoneNumber: string;
+  status: AttendanceStatus; // Use the new type
 }
 
 const sampleData: AttendanceData[] = [
@@ -17,44 +31,46 @@ const sampleData: AttendanceData[] = [
     dateTime: '2024-08-15 10:00 AM',
     fullName: 'John Doe',
     phoneNumber: '555-123-4567',
-    status: 'Confirmed',
+    status: 'confirmed',
   },
   {
     groupEventName: 'Group A - Team Meeting',
     dateTime: '2024-08-15 10:00 AM',
     fullName: 'Jane Smith',
     phoneNumber: '555-987-6543',
-    status: 'Declined',
+    status: 'declined',
   },
   {
     groupEventName: 'Group A - Team Meeting',
     dateTime: '2024-08-15 10:00 AM',
     fullName: 'Peter Jones',
     phoneNumber: '555-555-1212',
-    status: 'Unconfirmed',
+    status: 'unconfirmed',
   },
   {
     groupEventName: 'Event B - Workshop',
     dateTime: '2024-08-20 02:30 PM',
     fullName: 'Alice Brown',
     phoneNumber: '555-111-2222',
-    status: 'Confirmed',
+    status: 'confirmed',
   },
   {
     groupEventName: 'Event B - Workshop',
     dateTime: '2024-08-20 02:30 PM',
     fullName: 'Bob White',
     phoneNumber: '555-333-4444',
-    status: 'Confirmed',
+    status: 'confirmed',
   },
   {
     groupEventName: 'Group C - Study Session',
     dateTime: '2024-08-25 06:00 PM',
     fullName: 'Charlie Green',
     phoneNumber: '555-666-7777',
-    status: 'Unconfirmed',
+    status: 'unconfirmed',
   },
 ];
+
+type AttendanceStatus = 'confirmed' | 'declined' | 'unconfirmed' | 'disallowed';
 
 interface EventDetails {
   startDate: string; // Or Date type
@@ -69,6 +85,35 @@ const eventDetailsMap: Record<string, EventDetails> = {
 };
 
 const EventAttendanceSummaryPage = () => {
+  // State for the dialog
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedContact, setSelectedContact] = useState<AttendanceData | null>(null);
+  const [selectedNewStatus, setSelectedNewStatus] = useState<AttendanceStatus | null>(null);
+
+  // Add the handleStatusChange function
+  const handleStatusChange = async () => {
+    if (selectedContact && selectedNewStatus) {
+      try {
+        // TODO: Make API call to update status in the backend
+        console.log(`Updating status for ${selectedContact.fullName} to ${selectedNewStatus}`);
+        // Example: await fetch('/api/update-attendance-status', { method: 'POST', body: JSON.stringify({ contactId: selectedContact.contactId, eventId: '...', newStatus: selectedNewStatus }) });
+
+        // Update local state after successful backend update
+        // Note: This uses sampleData. In a real application, you'd update your fetched data state.
+        // setAttendanceData(attendanceData.map(item =>
+        //   item.fullName === selectedContact.fullName ? { ...item, status: selectedNewStatus } : item
+        // ));
+
+      } catch (error) {
+        console.error("Error updating attendance status:", error);
+        // TODO: Show an error message to the user
+      } finally {
+        setIsDialogOpen(false);
+        setSelectedContact(null);
+        setSelectedNewStatus(null);
+      }
+    }
+  };
 
   // Sort data by Group/Event Name for grouping
   // Then sort by date in descending order within each group
@@ -81,10 +126,10 @@ const EventAttendanceSummaryPage = () => {
   });
 
  return (
+    <>
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-4">Event Attendance Summary</h1>
       {/* This is the EventAttendanceSummaryPage component */}
-
 
       <h2 className="text-xl font-semibold mb-2">Current Month: {new Date().toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
       {/* Placeholder for the actual report content */}
@@ -138,13 +183,25 @@ const EventAttendanceSummaryPage = () => {
                       <Link href="/dashboard/shares/new" className="text-blue-600 hover:underline">{attendance.fullName}</Link>
                     </td>
                     <td className="px-4 py-2 whitespace-nowrap">{attendance.phoneNumber}</td>
-                      <td className="px-4 py-2 whitespace-nowrap text-center">
-                        {attendance.status === 'Confirmed' && <CheckCircle2 className="h-5 w-5 text-green-600 mx-auto" />}
-                        {attendance.status === 'Declined' && <XCircle className="h-5 w-5 text-red-600 mx-auto" />}
-                        {attendance.status === 'Unconfirmed' && <HelpCircle className="h-5 w-5 text-gray-400 mx-auto" />}
-                      </td>
-                    </tr>
-                  </React.Fragment>
+ <td className="px-4 py-2 whitespace-nowrap text-center">
+ {/* Wrap the DialogTrigger with a Dialog */}
+ <Dialog open={isDialogOpen && selectedContact?.fullName === attendance.fullName} onOpenChange={setIsDialogOpen}>
+ <DialogTrigger asChild>
+ <Button variant="ghost" size="icon" onClick={() => {
+ setSelectedContact(attendance);
+ setSelectedNewStatus(attendance.status); // Set initial status in dialog
+ }}>
+ {/* Render appropriate icon based on attendance.status */}
+ {attendance.status === 'confirmed' && <CheckCircle2 className="h-5 w-5 text-green-600 mx-auto" />}
+ {attendance.status === 'declined' && <XCircle className="h-5 w-5 text-red-600 mx-auto" />}
+ {attendance.status === 'unconfirmed' && <HelpCircle className="h-5 w-5 text-gray-400 mx-auto" />}
+ {attendance.status === 'disallowed' && <XCircle className="h-5 w-5 text-red-800 mx-auto" />} {/* TODO: Replace with a specific icon for 'disallowed' status */}
+ </Button>
+ </DialogTrigger>
+ {/* DialogContent is rendered outside the table */}
+ </Dialog> {/* <--- Close the Dialog component */}
+ </td>
+ </tr></React.Fragment>
                 );
               })}
             </tbody>
@@ -163,6 +220,41 @@ const EventAttendanceSummaryPage = () => {
         </a>
       </div>
     </div>
+
+
+ {/* Dialog for changing status */}
+ <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+ <DialogContent>
+ <DialogTitle>Change Attendance Status</DialogTitle>
+ <DialogDescription>
+           Select the new status for {selectedContact?.fullName || 'this contact'}.
+ </DialogDescription>
+ {/* Status selection options */}
+ <div className="flex flex-col space-y-2">
+ <Button variant={selectedNewStatus === 'confirmed' ? 'default' : 'outline'} onClick={() => setSelectedNewStatus('confirmed')}>
+ Confirmed
+ </Button>
+ <Button variant={selectedNewStatus === 'declined' ? 'default' : 'outline'} onClick={() => setSelectedNewStatus('declined')}>
+ Declined
+ </Button>
+ <Button variant={selectedNewStatus === 'unconfirmed' ? 'default' : 'outline'} onClick={() => setSelectedNewStatus('unconfirmed')}>
+ Unconfirmed
+ </Button>
+ <Button variant={selectedNewStatus === 'disallowed' ? 'default' : 'outline'} onClick={() => setSelectedNewStatus('disallowed')}>
+ Disallowed
+ </Button>
+ </div>
+ <DialogFooter>
+ <DialogClose asChild>
+ <Button variant="outline">Cancel</Button>
+ </DialogClose>
+ <Button onClick={handleStatusChange} disabled={!selectedNewStatus || selectedNewStatus === selectedContact?.status}>
+ Save
+ </Button>
+ </DialogFooter>
+ </DialogContent>
+ </Dialog>
+    </>
   );
 };
 
