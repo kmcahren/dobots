@@ -98,7 +98,7 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                 <FormItem>
  <div className="flex items-center gap-1">
  <FormLabel>Full Name</FormLabel>
- <HelpTooltip helpText="Enter the full name of the contact. NOTE: this is not a CMS so the phone number you enter below may be already taken by the owner." />
+ <HelpTooltip helpText="Enter the name of the Contact. NOTE: if this contact is a user or becomes a user with this phone number, the name and note you add will be just for you." />
  </div>
                   <FormControl>
                     <Input placeholder="e.g., Jane Doe" {...field} />
@@ -116,7 +116,7 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                   <FormItem>
  <div className="flex items-center gap-1">
  <FormLabel>Phone Number</FormLabel>
- <HelpTooltip helpText="Enter the phone number for this contact. This is an OTP App designed for active users on the go. The owner will be allowed to take ownership of this record, feel free to enter it first." />
+ <HelpTooltip helpText="Enter the phone number for this contact. This is an OTP App designed for active users. The owner will be allowed to take ownership of this record, feel free to enter it first." />
  </div>
                     <FormControl>
                       <Input type="tel" placeholder="+1 123-456-7890" {...field} value={field.value || ""} />
@@ -151,10 +151,10 @@ export function ContactForm({ contactToEdit }: { contactToEdit?: ContactFormValu
                 <FormItem>
  <div className="flex items-center gap-1">
  <FormLabel>Notes / Short Bio (Optional)</FormLabel>
- <HelpTooltip helpText="Add notes or a short bio for this contact. NOTE: this App is not a CMS and everything will be overwritten by the owner of this phone number if they sign in - they will not see your entries but your data will be lost. You were just inviting them anyway, right? I wonder what their real name is..." />
+ <HelpTooltip helpText="Add notes or a short bio for this contact. NOTE: the phone number owner can write their own Short Bio and these Notes will be just for you." />
  </div>
                   <FormControl>
-                    <Textarea placeholder="Add notes or a short bio for this contact. NOTE: This data could be overridden if the owner of this number signs in - read the tool tip for details." {...field} rows={4} value={field.value || ""} />
+                    <Textarea placeholder="Add notes or a short bio for this contact." {...field} rows={4} value={field.value || ""} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

@@ -105,7 +105,10 @@ const ManagePaymentGroupsPage = () => {
   return (
     <div className="container mx-auto py-8">
       <div className="mb-6">
-        <Label>Select Payment Group Version:</Label>
+ <div className="flex items-center gap-1">
+ <Label>Select Payment Group Version:</Label>
+ <HelpTooltip helpText="Select a version to manage its payment requests. This App and these groups are not intended to have more than 30 payment requests items assigned at any one time. If your payment requests exceed 50 items, then you should seek a more appropriate payment App." />
+ </div>
         <div className="flex space-x-2 mt-2">
           <Button
             variant={selectedGroupId === '1' ? 'default' : 'outline'}

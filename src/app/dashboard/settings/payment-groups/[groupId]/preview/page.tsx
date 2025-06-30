@@ -116,7 +116,7 @@ const PaymentGroupPreviewPage: React.FC = () => {
       </div>
 
       {/* Payment Requests Section */}
-      <h3 className="text-2xl font-semibold text-foreground mb-6 text-center">Available Items</h3>
+      <h3 className="text-2xl font-semibold text-foreground mb-6 text-center">Payable Items</h3>
 
       {/* Product List (Shopping Cart Design) */}
       <div className="grid grid-cols-1 gap-4 sm:px-0"> {/* Adjusted gap and removed small screen padding */}
