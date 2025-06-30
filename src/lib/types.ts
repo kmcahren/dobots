@@ -1,14 +1,27 @@
 
+// Consolidated User type (replaces the previous User definition if any)
 export interface User {
   id: string;
+  phoneNumber: string; // Primary key for the Person entity
   name: string;
   avatarUrl?: string;
-  phoneNumber: string; // Required for app users / login
-  email?: string; // Optional for app users
-  notes?: string; // Optional for app users
+  email?: string; // Optional email
+  bio?: string; // Optional bio or notes (used 'bio' to align with profile)
+  profilePictureUrl?: string; // Optional profile picture URL (used 'profilePictureUrl' to align with profile)
+  is_authenticated_user: boolean; // Flag to indicate if this is an authenticated app user
+  // Add other user-specific fields here if needed (e.g., passwordHash - though handle this securely)
+  // ...
 }
 
-export interface Contact {
+// Type for a contact within a user's contact list
+export interface ContactListItem {
+  id: string; // This could be the user's ID from the 'users' table
+  phoneNumber: string;
+  name: string;
+  profilePictureUrl?: string;
+  is_authenticated_user: boolean;
+  userSpecificNotes?: string; // Notes the authenticated user has about this contact
+  // Add other fields you want to display in the contact list
   id: string; // Auto-generated on save
   name: string;
   phoneNumber?: string;

@@ -111,7 +111,7 @@ const ManagePaymentGroupsPage = () => {
             variant={selectedGroupId === '1' ? 'default' : 'outline'}
             onClick={() => setSelectedGroupId('1')}
           >
-            Products/Services
+            Products
           </Button>
           <Button
             variant={selectedGroupId === '2' ? 'default' : 'outline'}
