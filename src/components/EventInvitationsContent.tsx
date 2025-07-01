@@ -1,19 +1,8 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-
-const EventInvitationsReportPage = () => {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 p-6">
-      {/* Wrap the content that uses useSearchParams with Suspense */}
-      <Suspense fallback={<div>Loading...</div>}>
-        <EventInvitationsContent />
-      </Suspense>
-    </div>
-  );
-};
 
 const EventInvitationsContent = () => {
   const searchParams = useSearchParams();
@@ -30,7 +19,7 @@ const EventInvitationsContent = () => {
       <p className="text-2xl text-center mb-8 text-yellow-200 font-semibold">{description}</p>
 
       {/* Placeholder Link to Event Details */}
-      {eventId && (
+      {eventId && ( // Conditionally render the link if eventId exists
         <Link href={`/dashboard/events/${eventId}`} className="text-white px-4 py-2 rounded-md bg-white bg-opacity-10 border border-white border-opacity-30 hover:bg-opacity-20 text-xl font-medium transition-colors duration-300">
           Go to the Event
         </Link>
@@ -39,4 +28,4 @@ const EventInvitationsContent = () => {
   );
 };
 
-export default EventInvitationsReportPage;
+export default EventInvitationsContent;
