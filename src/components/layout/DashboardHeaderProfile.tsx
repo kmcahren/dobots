@@ -28,7 +28,7 @@ export function DashboardHeaderProfile() {
  <h2 className="text-xl md:text-2xl font-bold font-headline text-white drop-shadow-md">
 Welcome to the Do))) App
           </h2>
- <HelpTooltip helpText="This is your dashboard and home navigation page. Tool tips on headings will help guide your experience. NFC enabled DOBOTS are not necessary to operate this App, but they Do))) automate many useful functions like event sharing, payment requests and many cool NFC applications!" iconClassName="text-white" />
+ <HelpTooltip helpText="This is your dashboard and home navigation page. Tool tips on headings will help guide your experience. NFC enabled DOBOTS are not necessary to operate this App, but they Do))) automate many useful functions like event sharing, payment requests and other cool NFC applications!" iconClassName="text-white" />
  </div>
           <div className="flex items-center space-x-3 md:space-x-4">
             <div className="flex items-center text-white text-xs md:text-sm px-2.5 py-1 md:px-3 md:py-1.5 rounded-lg">
