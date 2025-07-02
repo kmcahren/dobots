@@ -10,6 +10,7 @@ import { useState, useEffect } from "react"; // Import useState and useEffect
 import { usePathname, useRouter } from "next/navigation"; // Import usePathname
 import { Textarea } from "@/components/ui/textarea";
 
+import HelpTooltip from '@/components/ui/HelpTooltip';
 
 export default function NfcUtilitiesPage() {
   const [showNfcWriter, setShowNfcWriter] = useState(false);
@@ -93,11 +94,12 @@ export default function NfcUtilitiesPage() {
 
         {/* Event Invitations Section */}
         <div className="border rounded-lg p-6 mb-6 bg-card">
-          <h2 className="text-xl font-semibold font-headline mb-4">Event Invitations</h2>
+          <h2 className="text-xl font-semibold font-headline mb-4">Special Event Invitations</h2>
           <div className="space-y-4">
             {/* Title Field */}
             <div>
-              <Label htmlFor="eventInvitationTitle" className="font-medium">Title</Label>
+              <Label htmlFor="eventInvitationTitle" className="font-medium">Title </Label>
+              <HelpTooltip helpText="After entering your Special Event Details, Note that the Copy, Preview and Share button will copy the preview link to the clipboard for you to share wherever you like. The details entered here will remian in the link and on NFC Tag writes, but not on this page, allowing you to create as many invitations as you like." />
               <Input
                 id="eventInvitationTitle"
                 type="text"
@@ -145,7 +147,7 @@ export default function NfcUtilitiesPage() {
             <div className="flex flex-col space-y-4">
  <Button
  className="bg-blue-500 hover:bg-blue-600 text-white w-auto self-start"
- disabled={!invitationTitle || !invitationDescription || selectedEventId === null}
+ disabled={!invitationTitle || !invitationDescription || selectedEventId === null} // Corrected prop name
  >
  Preview and Send This Invitation
  </Button>
