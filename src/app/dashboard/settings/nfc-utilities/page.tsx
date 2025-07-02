@@ -91,39 +91,6 @@ export default function NfcUtilitiesPage() {
           <h1 className="text-2xl font-bold font-headline">Free NFC Utilities</h1>
         </div>
 
-        {/* Personal Link Section */}
-        <div className="border rounded-lg p-6 mb-6 bg-card">
-          
-          <div className="mt-6 space-y-4">
-            <div>
-              <Label htmlFor="linkToAnywhere" className="text-lg font-semibold">Personal Link</Label>
-              <Input
-                id="linkToAnywhere"
-                type="url"
-                placeholder="e.g., https://www.instagram.com/dobots.co/ << include the https://"
-                value={linkToAnywhere}
-                onChange={(e) => setLinkToAnywhere(e.target.value)}
-                className="mt-1"
-              />
-            </div>
-
-            <Button
- className="mt-4 bg-chart-3 hover:bg-chart-3/90 text-primary-foreground"
- onClick={() => setShowNfcWriter(true)} // Keep existing onClick for now
- disabled={!linkToAnywhere}
- >
- Write Link to NFC Tag
- </Button>
-
-            {showNfcWriter && (
-              <div className="mt-4 flex flex-col items-center">
-                <NfcWriter dataToWrite={linkToAnywhere} />
-              </div>
-            )}
-
-          </div>
-        </div>
-
         {/* Event Invitations Section */}
         <div className="border rounded-lg p-6 mb-6 bg-card">
           <h2 className="text-xl font-semibold font-headline mb-4">Event Invitations</h2>
@@ -196,6 +163,39 @@ export default function NfcUtilitiesPage() {
                 <NfcWriter dataToWrite={handleWriteInvitationLink()} />
               </div>
             )}
+          </div>
+        </div>
+
+        {/* Personal Link Section */}
+        <div className="border rounded-lg p-6 mb-6 bg-card">
+
+          <div className="mt-6 space-y-4">
+            <div>
+              <Label htmlFor="linkToAnywhere" className="text-lg font-semibold">Personal Link</Label>
+              <Input
+                id="linkToAnywhere"
+                type="url"
+                placeholder="e.g., https://www.instagram.com/dobots.co/ << include the https://"
+                value={linkToAnywhere}
+                onChange={(e) => setLinkToAnywhere(e.target.value)}
+                className="mt-1"
+              />
+            </div>
+
+            <Button
+              className="mt-4 bg-chart-3 hover:bg-chart-3/90 text-primary-foreground"
+              onClick={() => setShowNfcWriter(true)} // Keep existing onClick for now
+              disabled={!linkToAnywhere}
+            >
+              Write Link to NFC Tag
+            </Button>
+
+            {showNfcWriter && (
+              <div className="mt-4 flex flex-col items-center">
+                <NfcWriter dataToWrite={linkToAnywhere} />
+              </div>
+            )}
+
           </div>
         </div>
 
