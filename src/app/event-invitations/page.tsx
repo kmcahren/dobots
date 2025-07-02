@@ -36,8 +36,8 @@ const EventInvitationsContent = () => {
         </Link>
       )}
 
-      <div className="text-center text-sm text-gray-300 mt-8">
-        Invitation by: <a href="https://app.dobots.co" className="underline hover:text-gray-200">app.dobots.co</a>
+      <div className="text-center text-sm text-gray-300 mt-16">
+        Invitation by: <a href="https://app.dobots.co" className="underline hover:text-gray-200">app.dobots.co</a> &copy; {new Date().getFullYear()}
       </div>
     </div>
   );
