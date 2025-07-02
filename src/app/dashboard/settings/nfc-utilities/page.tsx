@@ -35,7 +35,7 @@ export default function NfcUtilitiesPage() {
       description: invitationDescription,
       eventId: selectedEventId?.toString() || '', // Ensure eventId is a string
     }).toString();
-    router.push(`/dashboard/reports/event-invitations?${queryParams}`);
+    router.push(`/event-invitations?${queryParams}`);
   };
 
   // Effect to fetch open events
@@ -144,7 +144,7 @@ export default function NfcUtilitiesPage() {
             </div>
             {/* Placeholder */}
             <div className="mt-4 relative"> {/* Added relative for potential absolute positioning of loading/error */}
-              <Label className="font-medium">Select Event</Label>
+              <Label className="font-medium mr-2 w-32">Select Event</Label>
               {isLoadingEvents && (
                 <div className="mt-1 text-sm text-muted-foreground">Loading events...</div>
               )}
