@@ -13,8 +13,8 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function NfcUtilitiesPage() {
   const [showNfcWriter, setShowNfcWriter] = useState(false);
+ const [showEventNfcWriter, setShowEventNfcWriter] = useState(false); // State for Event NFC Writer
   const pathname = usePathname();
-  const fullNfcUtilityUrl = typeof window !== 'undefined' ? `${window.location.protocol}//${window.location.host}${pathname}` : '';
 
   const [linkToAnywhere, setLinkToAnywhere] = useState('');
   // State variable for open events
@@ -36,6 +36,15 @@ export default function NfcUtilitiesPage() {
       eventId: selectedEventId?.toString() || '', // Ensure eventId is a string
     }).toString();
     router.push(`/event-invitations?${queryParams}`);
+  };
+
+  const handleWriteInvitationLink = () => {
+    const queryParams = new URLSearchParams({
+ title: invitationTitle,
+ description: invitationDescription,
+ eventId: selectedEventId?.toString() || '',
+    }).toString();
+    return `${window.location.protocol}//${window.location.host}/event-invitations?${queryParams}`;
   };
 
   // Effect to fetch open events
@@ -166,14 +175,27 @@ export default function NfcUtilitiesPage() {
               )}
               
             </div>
-            <Button
-  className="mt-4 bg-blue-500 hover:bg-blue-600 text-white w-auto"
-  onClick={handlePreviewAndSend}
-  disabled={!invitationTitle || !invitationDescription || selectedEventId === null}
->
-  Preview and Send This Invitation
-</Button>
+            <div className="flex flex-col space-y-4">
+ <Button
+ className="bg-blue-500 hover:bg-blue-600 text-white w-auto self-start"
+ disabled={!invitationTitle || !invitationDescription || selectedEventId === null}
+ >
+ Preview and Send This Invitation
+ </Button>
 
+ <Button 
+ className="bg-chart-3 hover:bg-chart-3/90 text-primary-foreground w-auto self-start"
+ onClick={() => setShowEventNfcWriter(true)}
+ disabled={!invitationTitle || !invitationDescription || selectedEventId === null}
+ >
+ Write Link to NFC Tag
+ </Button>
+            </div>
+ {showEventNfcWriter && (
+              <div className="mt-4 flex flex-col items-center">
+                <NfcWriter dataToWrite={handleWriteInvitationLink()} />
+              </div>
+            )}
           </div>
         </div>
 
