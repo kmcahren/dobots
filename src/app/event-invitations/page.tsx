@@ -6,11 +6,11 @@ import { useSearchParams } from 'next/navigation';
 
 const EventInvitationsReportPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-100px)] bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 p-6">
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-50px)] bg-gradient-to-br from-purple-600 via-pink-600 to-red-600 p-6">
       {/* Wrap the content that uses useSearchParams with Suspense */}
       <Suspense fallback={<div>Loading...</div>}>
         <EventInvitationsContent />
-      </Suspense>
+ </Suspense>
     </div>
   );
 };
@@ -35,6 +35,10 @@ const EventInvitationsContent = () => {
           Go to the Event
         </Link>
       )}
+
+      <div className="text-center text-sm text-gray-300 mt-8">
+        Invitation by: <a href="https://app.dobots.co" className="underline hover:text-gray-200">app.dobots.co</a>
+      </div>
     </div>
   );
 };
