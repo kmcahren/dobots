@@ -145,9 +145,20 @@ export default function NfcUtilitiesPage() {
               
             </div>
             <div className="flex flex-col space-y-4">
- <Button
- className="bg-blue-500 hover:bg-blue-600 text-white w-auto self-start"
- disabled={!invitationTitle || !invitationDescription || selectedEventId === null} // Corrected prop name
+              <Button
+                className="bg-blue-500 hover:bg-blue-600 text-white w-auto self-start"
+                disabled={!invitationTitle || !invitationDescription || selectedEventId === null} // Corrected prop name
+                onClick={() => { // Added onClick handler
+                  handlePreviewAndSend(); // Navigate to the preview page
+                  const invitationLink = handleWriteInvitationLink(); // Generate the link to copy
+        navigator.clipboard.writeText(invitationLink)
+                    .then(() => {
+                      console.log("Invitation link copied to clipboard!");
+          })
+ .catch((err) => {
+ console.error("Failed to copy invitation link:", err);
+          });
+ }}
  >
  Preview and Send This Invitation
  </Button>
